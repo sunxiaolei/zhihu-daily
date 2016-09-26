@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mcv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#77FFFFFF"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <EditText
+        android:id="@+id/et_register_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_edittext"
+        android:drawableLeft="@drawable/ic_login_user"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:hint="@string/register_login"
+        android:paddingLeft="5dp"
+        android:textColor="@color/text_primary"
+        android:textCursorDrawable="@null" />
+
+    <EditText
+        android:id="@+id/et_register_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_edittext"
+        android:drawableLeft="@drawable/ic_login_password"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:hint="@string/register_password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp"
+        android:textColor="@color/text_primary"
+        android:textCursorDrawable="@null" />
+
+    <com.rey.material.widget.Button
+        android:id="@+id/btn_register_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_edittext"
+        android:foreground="@drawable/card_foreground"
+        android:text="@string/login"
+        android:textColor="@color/colorWhiteText" />
+
+</LinearLayout>
+    

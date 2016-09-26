@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mcv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#77FFFFFF"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/cv_main_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mcv:mcv_arrowColor="#000000"
+        mcv:mcv_calendarMode="month"
+        mcv:mcv_selectionColor="@color/colorPrimaryDark"
+        mcv:mcv_tileHeight="?actionBarSize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_main_calendar_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="#66FFFFFF"
+            android:foreground="@drawable/card_foreground"
+            android:text="取消" />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_main_calendar_sure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="#66FFFFFF"
+            android:foreground="@drawable/card_foreground"
+            android:text="确定" />
+
+    </LinearLayout>
+
+</LinearLayout>
+    
