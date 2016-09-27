@@ -47,7 +47,7 @@
             android:name=".ui.story.StoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.story.BaseStoryActivity"
+            android:name=".ui.BaseOtherActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"

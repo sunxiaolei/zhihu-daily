@@ -122,7 +122,7 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(mContext, StoryActivity.class);
-            intent.putExtra("STORY_ID", listStories.get(getAdapterPosition() - 1).getId());
+            intent.putExtra("STORY_ID", listStories.get(getAdapterPosition() - 2).getId());
             mContext.startActivity(intent);
         }
     }

@@ -1,26 +1,15 @@
-package xiaolei.sun.zhihu_daily.ui.story;
+package xiaolei.sun.zhihu_daily.ui;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
-import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.customerview.swipebacklayout.SwipeBackActivity;
-import xiaolei.sun.zhihu_daily.ui.BaseView;
-import xiaolei.sun.zhihu_daily.ui.login.LoginPresenter;
-
-import static android.R.attr.id;
 
 
 /**
@@ -30,14 +19,14 @@ import static android.R.attr.id;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class BaseStoryActivity extends SwipeBackActivity implements BaseView {
+public abstract class BaseOtherActivity extends SwipeBackActivity {
 
-    private MaterialDialog.Builder mDialog;
-    private MaterialProgressBar mLoading;
+    private MaterialDialog mDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(setContentViewId());
         init();
     }
 
@@ -50,48 +39,38 @@ public class BaseStoryActivity extends SwipeBackActivity implements BaseView {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void init() {
+    public abstract void init();
 
-    }
+    public abstract int setContentViewId();
 
-    @Override
     public void showLoading() {
         if (mDialog == null) {
-            mDialog = new MaterialDialog.Builder(this);
-        }
-        mDialog.progress(true, 0)
-                .show();
-    }
-
-    @Override
-    public void dismissLoading() {
-        if (mDialog != null) {
-            mDialog.show().dismiss();
+            mDialog = new MaterialDialog.Builder(BaseOtherActivity.this)
+                    .content("Loading")
+                    .progress(true, 0)
+                    .theme(Theme.LIGHT)
+                    .show();
         }
     }
 
-    @Override
     public void showDialog(String title, String msg) {
         if (mDialog == null) {
-            mDialog = new MaterialDialog.Builder(this);
+            mDialog = new MaterialDialog.Builder(this)
+                    .theme(Theme.LIGHT)
+                    .title(title)
+                    .content(msg)
+                    .positiveText("确定")
+                    .show();
         }
-        mDialog.theme(Theme.LIGHT);
-        mDialog.title(title);
-        mDialog.content(msg);
-        mDialog.positiveText("确定");
-        mDialog.show();
-
     }
 
-    @Override
     public void dismissDialog() {
         if (mDialog != null) {
-            mDialog.show().dismiss();
+            mDialog.dismiss();
+            mDialog = null;
         }
     }
 
-    @Override
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
