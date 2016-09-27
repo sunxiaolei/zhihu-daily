@@ -2,7 +2,6 @@ package xiaolei.sun.zhihu_daily.customerview.rainrefresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
@@ -118,7 +117,6 @@ public class BeautifulRefreshLayout extends RefreshLayout {
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        Log.i("anim", "value--->" + (int) animation.getAnimatedValue());
                         waveView.setWaveHeight((int) animation.getAnimatedValue());
                         waveView.invalidate();
 

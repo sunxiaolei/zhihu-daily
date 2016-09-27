@@ -31,11 +31,4 @@ public class UserBean extends BmobObject{
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "UserBean{" +
-                "phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
