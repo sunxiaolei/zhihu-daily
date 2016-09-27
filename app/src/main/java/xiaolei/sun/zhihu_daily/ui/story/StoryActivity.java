@@ -1,22 +1,13 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.orhanobut.logger.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import rx.Subscriber;
-import xiaolei.sun.zhihu_daily.network.api.ApiNews;
-import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ui.BaseOtherActivity;
+import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
 
 /**
  * Description: <br>
@@ -70,7 +61,7 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
 
     @Override
     public void loadData(String string) {
-        dismissDialog();
+        dismissLoading();
         web.loadData(string, "text/html; charset=UTF-8", null);
     }
 }

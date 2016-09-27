@@ -1,8 +1,18 @@
 package xiaolei.sun.zhihu_daily.ui.login;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import xiaolei.sun.zhihu_daily.Constant;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.entity.UserBean;
+import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/26.
@@ -10,33 +20,82 @@ import xiaolei.sun.zhihu_daily.network.entity.UserBean;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-    private LoginContract.View view;
+    private LoginContract.View mView;
+    private Context mContext;
 
     public LoginPresenter(LoginContract.View view) {
-        this.view = view;
+        this.mView = view;
+        this.mContext = (Context) view;
     }
 
     @Override
-    public void login() {
-        if (true) {
-
-        }
-    }
-
-    @Override
-    public void register(String phone, String password) {
-        UserBean user = new UserBean();
-        user.setPassword(password);
-        user.setPhone(phone);
-        user.save(new SaveListener<String>() {
+    public void login(String phone, String password) {
+        BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
+        BmobQuery<UserBean> queryPassword = new BmobQuery<UserBean>();
+        queryPhone.addWhereEqualTo("phone", phone);
+        queryPassword.addWhereEqualTo("password", password);
+        List<BmobQuery<UserBean>> queryList = new ArrayList<>();
+        queryList.add(queryPhone);
+        queryList.add(queryPassword);
+        BmobQuery<UserBean> query = new BmobQuery<>();
+        query.and(queryList);
+        query.findObjects(new FindListener<UserBean>() {
             @Override
-            public void done(String objectId, BmobException e) {
+            public void done(List<UserBean> list, BmobException e) {
                 if (e == null) {
-                    view.showResult("提示", "注册成功");
+                    if (list.size() > 0) {
+                        System.out.println(list.get(0));
+                        ZhihuDailyApplication.isLogin = true;
+                        SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+                        sp.putString(Constant.SP_USER_NAME, list.get(0).getPhone());
+                        sp.putString(Constant.SP_USER_PASSWORD, list.get(0).getPassword());
+                        mView.gotoMain();
+                    } else {
+                        mView.showResult("提示", "登录失败：账号或密码不正确");
+                    }
                 } else {
-                    view.showResult("提示", "创建数据失败：" + e.getMessage());
+                    mView.showResult("提示", "登录失败：" + e.getMessage());
                 }
             }
         });
     }
+
+    @Override
+    public void register(final String phone, final String password) {
+        //先检测账号是否已注册
+        BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
+        queryPhone.addWhereEqualTo("phone", phone);
+        queryPhone.findObjects(new FindListener<UserBean>() {
+            @Override
+            public void done(List<UserBean> list, BmobException e) {
+                if (e == null) {
+                    if (list.size() > 0) {
+                        mView.showResult("提示", "账号已注册");
+                    } else {
+                        UserBean user = new UserBean();
+                        user.setPassword(password);
+                        user.setPhone(phone);
+                        user.save(new SaveListener<String>() {
+                            @Override
+                            public void done(String objectId, BmobException e) {
+                                if (e == null) {
+                                    ZhihuDailyApplication.isLogin = true;
+                                    SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+                                    sp.putString(Constant.SP_USER_NAME, phone);
+                                    sp.putString(Constant.SP_USER_PASSWORD, password);
+                                    mView.gotoMain();
+                                } else {
+                                    mView.showResult("提示", "创建数据失败：" + e.getMessage());
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    mView.showResult("提示", "注册失败：" + e.getMessage());
+                }
+            }
+        });
+
+    }
+
 }

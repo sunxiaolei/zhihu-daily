@@ -16,6 +16,8 @@ import com.orhanobut.logger.Logger;
 
 public class ZhihuDailyApplication extends Application {
 
+    public static boolean isLogin = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,10 +25,10 @@ public class ZhihuDailyApplication extends Application {
         Fresco.initialize(this);
 
         Logger
-                .init("ZhiHu")                 // default PRETTYLOGGER or use just init()
-                .methodCount(3)                 // default 2
-                .hideThreadInfo()               // default shown
-                .logLevel(LogLevel.FULL)        // default LogLevel.FULL
-                .methodOffset(2);                // default 0
+                .init("ZhiHu")
+                .methodCount(3)
+                .hideThreadInfo()
+                .logLevel(LogLevel.FULL)
+                .methodOffset(2);
     }
 }

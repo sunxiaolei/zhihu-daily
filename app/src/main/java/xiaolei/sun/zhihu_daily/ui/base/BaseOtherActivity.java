@@ -1,5 +1,6 @@
-package xiaolei.sun.zhihu_daily.ui;
+package xiaolei.sun.zhihu_daily.ui.base;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
@@ -8,7 +9,6 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import xiaolei.sun.zhihu_daily.customerview.swipebacklayout.SwipeBackActivity;
 
 
@@ -22,6 +22,7 @@ import xiaolei.sun.zhihu_daily.customerview.swipebacklayout.SwipeBackActivity;
 public abstract class BaseOtherActivity extends SwipeBackActivity {
 
     private MaterialDialog mDialog;
+    private MaterialDialog mLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,24 +45,34 @@ public abstract class BaseOtherActivity extends SwipeBackActivity {
     public abstract int setContentViewId();
 
     public void showLoading() {
-        if (mDialog == null) {
-            mDialog = new MaterialDialog.Builder(BaseOtherActivity.this)
-                    .content("Loading")
-                    .progress(true, 0)
-                    .theme(Theme.LIGHT)
-                    .show();
-        }
+        mLoading = new MaterialDialog.Builder(BaseOtherActivity.this)
+                .content("Loading")
+                .progress(true, 0)
+                .theme(Theme.LIGHT)
+                .cancelable(false)
+                .show();
+        mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mLoading = null;
+            }
+        });
     }
 
     public void showDialog(String title, String msg) {
-        if (mDialog == null) {
-            mDialog = new MaterialDialog.Builder(this)
-                    .theme(Theme.LIGHT)
-                    .title(title)
-                    .content(msg)
-                    .positiveText("确定")
-                    .show();
-        }
+        mDialog = new MaterialDialog.Builder(this)
+                .theme(Theme.LIGHT)
+                .title(title)
+                .content(msg)
+                .cancelable(false)
+                .positiveText("确定")
+                .show();
+        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mDialog = null;
+            }
+        });
     }
 
     public void dismissDialog() {
@@ -71,7 +82,21 @@ public abstract class BaseOtherActivity extends SwipeBackActivity {
         }
     }
 
+    public void dismissLoading() {
+        if (mLoading != null) {
+            mLoading.dismiss();
+            mLoading = null;
+        }
+    }
+
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dismissLoading();
+        dismissDialog();
     }
 }

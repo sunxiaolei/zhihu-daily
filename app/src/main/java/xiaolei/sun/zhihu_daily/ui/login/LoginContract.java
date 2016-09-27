@@ -12,11 +12,13 @@ public class LoginContract {
 
         void showResult(String title,String msg);
 
+        void gotoMain();
+
     }
 
     interface Presenter{
 
-        void login();
+        void login(String phone,String password);
 
         void register(String phone,String password);
 

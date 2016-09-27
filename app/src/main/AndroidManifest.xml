@@ -15,7 +15,7 @@
     <!-- 允许读取手机状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <!-- To auto-complete the email text field in the gotoMain form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -41,13 +41,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name=".ui.BaseActivity"
+            android:name=".ui.base.BaseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.story.StoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.BaseOtherActivity"
+            android:name=".ui.base.BaseOtherActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
