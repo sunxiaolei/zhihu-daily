@@ -22,18 +22,19 @@ import com.rey.material.widget.Button;
 import java.util.List;
 
 import rx.Subscriber;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurActionBarDrawerToggle;
 import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout;
 import xiaolei.sun.zhihu_daily.customerview.rainrefresh.BeautifulRefreshLayout;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
 import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
-import xiaolei.sun.zhihu_daily.ui.BaseActivity;
+import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.login.LoginActivity;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainContract.View {
 
     private BlurDrawerLayout drawerLayout;
     private BlurActionBarDrawerToggle toggle;
@@ -46,28 +47,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private SimpleDraweeView ivHead;
     private TextView tvName;
 
+    private BottomSheetDialog mBottomSheetDialog;
+
     private List<StoriesBean> listStories;
     private List<TopStoriesBean> listTop;
 
+    private MainPresenter mPresenter;
+
+    private TextView tvUsername;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void init() {
+        mPresenter = new MainPresenter(this);
 
-        initView();
-
-        NewsBean bean = (NewsBean) getIntent().getSerializableExtra("NEWS");
-        listStories = bean.getStories();
-        listTop = bean.getTop_stories();
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.addItemDecoration(new StoriesItemDecoration());
-
-        adapter = new StoriesRecyclerAdapter(MainActivity.this, listStories, listTop, bean.getDate());
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -101,16 +93,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         refreshLayout.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
             @Override
             public void onRefresh(BeautifulRefreshLayout refreshLayout) {
-//                Observable.timer(1, TimeUnit.MILLISECONDS)
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeOn(Schedulers.io())
-//                        .subscribe(new Action1<Long>() {
-//                            @Override
-//                            public void call(Long aLong) {
-//                                refreshLayout.finishRefreshing();
-//                            }
-//                        });
-                getNewsByDate(CalendarDay.today());
+                mPresenter.getNewsByDate(CalendarDay.today());
             }
         });
 
@@ -118,9 +101,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         tvName = (TextView) findViewById(R.id.tv_drawer_name);
         ivHead.setOnClickListener(this);
 
+        mPresenter.getNewsLasted();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.addItemDecoration(new StoriesItemDecoration());
+
+        //Drawer
+        tvUsername = (TextView) findViewById(R.id.tv_drawer_name);
+        mPresenter.getUserInfo();
     }
 
-    private BottomSheetDialog mBottomSheetDialog;
+    @Override
+    public int setContentViewId() {
+        return R.layout.activity_main;
+    }
+
 
     /**
      * 弹出日起选择
@@ -148,7 +143,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getNewsByDate(widget.getSelectedDate());
+                mPresenter.getNewsByDate(widget.getSelectedDate());
                 if (mBottomSheetDialog != null) {
                     mBottomSheetDialog.dismiss();
                 }
@@ -159,56 +154,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .show();
     }
 
-    /**
-     * 根据日期获取当日文章
-     *
-     * @param date
-     */
-    private void getNewsByDate(CalendarDay date) {
-        //20131119
-        int month = date.getMonth() + 1;
-        String strMonth = month + "";
-        if (month < 10) {
-            strMonth = "0" + month;
-        }
-        int day = date.getDay() + 1;
-        String dateFomat = date.getYear() + strMonth + day;
-        Logger.d("SelectedDate>>" + dateFomat);
-        ApiNewsDate api = new ApiNewsDate();
-        api.getNewsLasted(dateFomat, new Subscriber<NewsBean>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(NewsBean newsBean) {
-
-                if (newsBean.getStories() != null) {
-                    listStories = newsBean.getStories();
-//                listTop = newsBean.getTop_stories();
-                    adapter = new StoriesRecyclerAdapter(MainActivity.this, listStories, listTop, newsBean.getDate());
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-                if (refreshLayout != null) {
-                    refreshLayout.finishRefreshing();
-                }
-            }
-        });
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_drawer_head:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                if (!ZhihuDailyApplication.isLogin) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 break;
         }
+    }
+
+    @Override
+    public void setNews(NewsBean newsBean) {
+        if (newsBean.getStories() != null) {
+            listStories = newsBean.getStories();
+            if (newsBean.getTop_stories() != null) {
+                listTop = newsBean.getTop_stories();
+            }
+            adapter = new StoriesRecyclerAdapter(MainActivity.this, listStories, listTop, newsBean.getDate());
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+        if (refreshLayout != null) {
+            refreshLayout.finishRefreshing();
+        }
+    }
+
+    @Override
+    public void setDrawer(String name) {
+        tvUsername.setText(name);
     }
 }

@@ -2,6 +2,9 @@
     <string name="app_name">知乎日报</string>
     <string name="app_about">关于</string>
 
+    <!-- main -->
+    <string name="click_login">点击头像进行登录</string>
+
     <string name="register">马上去注册(≖ ‿ ≖)✧</string>
     <string name="login">登录</string>
     <string name="password">密码</string>

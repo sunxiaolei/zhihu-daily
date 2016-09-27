@@ -3,6 +3,7 @@ package xiaolei.sun.zhihu_daily.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -14,6 +15,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.Constant;
+import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
@@ -28,7 +30,7 @@ import xiaolei.sun.zhihu_daily.network.entity.StartImageBean;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private SimpleDraweeView img;
     private TextView tvCopyright;
@@ -47,7 +49,6 @@ public class SplashActivity extends BaseActivity {
         apiStartImage.getStartImage(new Subscriber<StartImageBean>() {
             @Override
             public void onCompleted() {
-                getNewsLasted();
             }
 
             @Override
@@ -58,32 +59,11 @@ public class SplashActivity extends BaseActivity {
             public void onNext(StartImageBean entityStartImage) {
                 img.setImageURI(entityStartImage.getImg());
                 tvCopyright.setText("@" + entityStartImage.getText());
-            }
-        });
-    }
-
-    /**
-     * 获取最新文章列表
-     */
-    private void getNewsLasted(){
-        ApiNewsLasted api = new ApiNewsLasted();
-        api.getNewsLasted(new Subscriber<NewsBean>() {
-            @Override
-            public void onCompleted() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-
-            @Override
-            public void onNext(final NewsBean newsLastedBean) {
-                Observable.timer(1, TimeUnit.SECONDS)
+                Observable.timer(2, TimeUnit.SECONDS)
                         .subscribe(new Action1<Long>() {
                             @Override
                             public void call(Long aLong) {
                                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                                intent.putExtra("NEWS", newsLastedBean);
                                 startActivity(intent);
                                 SplashActivity.this.finish();
                             }
