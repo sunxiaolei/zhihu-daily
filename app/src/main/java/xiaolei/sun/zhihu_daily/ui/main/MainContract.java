@@ -19,6 +19,8 @@ public class MainContract {
 
     interface Presenter{
 
+        void login();
+
         void getNewsLasted();
 
         void getNewsByDate(CalendarDay date);

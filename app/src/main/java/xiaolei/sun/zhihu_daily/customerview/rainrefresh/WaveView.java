@@ -12,7 +12,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import xiaolei.sun.zhihu_daily.R;
@@ -71,10 +70,6 @@ public class WaveView extends View {
 //        canvas.drawBitmap(bitmapDis, 0, 0, paint);
         RectF rectF = new RectF(0,0,getMeasuredWidth(),400);
         Rect rectF1= new Rect(0,0,bitmapDis.getWidth(),bitmapDis.getHeight());
-        Log.i("cjj","getMeasuredWidth---->"+getMeasuredWidth());
-        Log.i("cjj","getMeasuredHeight---->"+getMeasuredHeight());
-        Log.i("cjj","bitmapDis.getWidth()---->"+bitmapDis.getWidth());
-        Log.i("cjj","bitmapDis.getHeight()---->"+bitmapDis.getHeight());
         canvas.drawBitmap(bitmapDis,rectF1,rectF,paint);
         //重置画笔
         path.reset();

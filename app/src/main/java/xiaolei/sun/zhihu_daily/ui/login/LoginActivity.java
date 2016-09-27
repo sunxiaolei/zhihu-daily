@@ -13,6 +13,7 @@ import com.rey.material.widget.Button;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
+import xiaolei.sun.zhihu_daily.utils.RegexUtils;
 
 /**
  * Description: <br>
@@ -28,7 +29,7 @@ public class LoginActivity extends BaseOtherActivity implements LoginContract.Vi
     private TextView btnRegister;
 
     private View registerView;
-    private EditText etRegisterName;
+    private EditText etRegisterPhone;
     private EditText etRegisterPassword;
     private Button btnRegisterSubmit;
 
@@ -77,21 +78,25 @@ public class LoginActivity extends BaseOtherActivity implements LoginContract.Vi
         mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.Material_App_BottomSheetDialog);
         registerView = LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_register, null);
 
-        etRegisterName = (EditText) registerView.findViewById(R.id.et_register_name);
+        etRegisterPhone = (EditText) registerView.findViewById(R.id.et_register_phone);
         etRegisterPassword = (EditText) registerView.findViewById(R.id.et_register_password);
         btnRegisterSubmit = (Button) registerView.findViewById(R.id.btn_register_submit);
 
         btnRegisterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = etRegisterName.getText().toString();
+                String phone = etRegisterPhone.getText().toString();
                 String password = etRegisterPassword.getText().toString();
-                if (name == null || password == null || name.equals("") || password.equals("")) {
+                if (phone == null || password == null || phone.equals("") || password.equals("")) {
                     showToast("用户名或密码不能为空！");
                     return;
                 }
+                if (!RegexUtils.isMobileSimple(phone)){
+                    showToast("请输入正确手机号码！");
+                    return;
+                }
                 showLoading();
-                mPresenter.register(name, password);
+                mPresenter.register(phone, password);
             }
         });
 

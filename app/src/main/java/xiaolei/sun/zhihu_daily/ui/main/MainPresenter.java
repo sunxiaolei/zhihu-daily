@@ -12,9 +12,13 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.rey.material.app.BottomSheetDialog;
 import com.rey.material.widget.Button;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -26,6 +30,7 @@ import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
 import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
 import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
+import xiaolei.sun.zhihu_daily.network.entity.UserBean;
 import xiaolei.sun.zhihu_daily.ui.SplashActivity;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
@@ -33,7 +38,7 @@ import xiaolei.sun.zhihu_daily.utils.SPUtils;
  * Created by sunxl8 on 2016/9/27.
  */
 
-public class MainPresenter implements MainContract.Presenter{
+public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View mView;
     private Context mContext;
@@ -41,6 +46,36 @@ public class MainPresenter implements MainContract.Presenter{
     public MainPresenter(MainContract.View view) {
         this.mView = view;
         this.mContext = (Context) view;
+    }
+
+    @Override
+    public void login() {
+        SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+        final String username = sp.getString(Constant.SP_USER_NAME);
+        String password = sp.getString(Constant.SP_USER_PASSWORD);
+        if (username != null && password != null) {
+            BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
+            BmobQuery<UserBean> queryPassword = new BmobQuery<UserBean>();
+            queryPhone.addWhereEqualTo("phone", username);
+            queryPassword.addWhereEqualTo("password", password);
+            List<BmobQuery<UserBean>> queryList = new ArrayList<>();
+            queryList.add(queryPhone);
+            queryList.add(queryPassword);
+            BmobQuery<UserBean> query = new BmobQuery<>();
+            query.and(queryList);
+            query.findObjects(new FindListener<UserBean>() {
+                @Override
+                public void done(List<UserBean> list, BmobException e) {
+                    if (e == null) {
+                        if (list.size() > 0) {
+                            System.out.println(list.get(0));
+                            ZhihuDailyApplication.isLogin = true;
+                            mView.setDrawer(username);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -93,10 +128,10 @@ public class MainPresenter implements MainContract.Presenter{
 
     @Override
     public void getUserInfo() {
-        if (ZhihuDailyApplication.isLogin){
+        if (ZhihuDailyApplication.isLogin) {
             SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
             mView.setDrawer(sp.getString(Constant.SP_USER_NAME));
-        }else {
+        } else {
             mView.setDrawer(mContext.getResources().getString(R.string.click_login));
         }
     }

@@ -65,8 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         drawerLayout = (BlurDrawerLayout) findViewById(R.id.dl_activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.rv_activity_main);
-        toggle = new BlurActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar,
-                R.string.app_about, R.string.app_about);
+        toggle = new BlurActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
