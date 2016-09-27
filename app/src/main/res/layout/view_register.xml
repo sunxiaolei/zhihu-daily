@@ -19,6 +19,7 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="@string/register_login"
+        android:inputType="phone"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
         android:textCursorDrawable="@null" />
@@ -46,7 +47,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext"
         android:foreground="@drawable/card_foreground"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textColor="@color/colorWhiteText" />
 
 </LinearLayout>

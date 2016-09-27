@@ -12,7 +12,7 @@ import com.rey.material.app.BottomSheetDialog;
 import com.rey.material.widget.Button;
 
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ui.story.BaseStoryActivity;
+import xiaolei.sun.zhihu_daily.ui.BaseOtherActivity;
 
 /**
  * Description: <br>
@@ -20,7 +20,7 @@ import xiaolei.sun.zhihu_daily.ui.story.BaseStoryActivity;
  * date: 2016/9/25.<br>
  * Email：xiaoleisun92@gmail.com
  */
-public class LoginActivity extends BaseStoryActivity implements LoginContract.View {
+public class LoginActivity extends BaseOtherActivity implements LoginContract.View {
 
     private EditText etName;
     private EditText etPassword;
@@ -34,32 +34,12 @@ public class LoginActivity extends BaseStoryActivity implements LoginContract.Vi
 
     private LoginPresenter mPresenter;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.activity_login);
-        super.onCreate(savedInstanceState);
-        mPresenter = new LoginPresenter(this);
-//        initView();
-    }
-
-//    private void initView(){
-//        etName = (EditText) findViewById(R.id.et_login_name);
-//        etPassword = (EditText) findViewById(R.id.et_login_password);
-//        btnLogin = (Button) findViewById(R.id.btn_login_login);
-//        btnRegister = (TextView) findViewById(R.id.btn_login_register);
-//
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showRegisterSheet();
-//            }
-//        });
-//    }
-
     private BottomSheetDialog mBottomSheetDialog;
 
     @Override
     public void init() {
+        mPresenter = new LoginPresenter(this);
+
         etName = (EditText) findViewById(R.id.et_login_name);
         etPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login_login);
@@ -71,6 +51,11 @@ public class LoginActivity extends BaseStoryActivity implements LoginContract.Vi
                 showRegisterSheet();
             }
         });
+    }
+
+    @Override
+    public int setContentViewId() {
+        return R.layout.activity_login;
     }
 
     @Override
@@ -91,6 +76,7 @@ public class LoginActivity extends BaseStoryActivity implements LoginContract.Vi
                     showToast("用户名或密码不能为空！");
                     return;
                 }
+                showLoading();
                 mPresenter.register(name, password);
             }
         });
@@ -98,6 +84,12 @@ public class LoginActivity extends BaseStoryActivity implements LoginContract.Vi
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.WRAP_CONTENT);
         mBottomSheetDialog.contentView(registerView)
                 .show();
+    }
+
+    @Override
+    public void showResult(String title, String msg) {
+        dismissDialog();
+        showDialog(title, msg);
     }
 }
 

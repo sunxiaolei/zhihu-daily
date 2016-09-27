@@ -25,18 +25,16 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void register(String phone, String password) {
-        view.showLoading();
         UserBean user = new UserBean();
         user.setPassword(password);
         user.setPhone(phone);
         user.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
-                view.dismissLoading();
                 if (e == null) {
-                    view.showDialog("提示", "注册成功");
+                    view.showResult("提示", "注册成功");
                 } else {
-                    view.showDialog("提示", "创建数据失败：" + e.getMessage());
+                    view.showResult("提示", "创建数据失败：" + e.getMessage());
                 }
             }
         });

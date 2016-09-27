@@ -5,7 +5,7 @@
     <string name="register">马上去注册(≖ ‿ ≖)✧</string>
     <string name="login">登录</string>
     <string name="password">密码</string>
-    <string name="register_login">请设置名户名</string>
+    <string name="register_login">请输入手机号</string>
     <string name="register_password">请设置密码</string>
 
 </resources>

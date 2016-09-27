@@ -1,12 +1,16 @@
 package xiaolei.sun.zhihu_daily.ui;
 
 /**
- * Description: <br>
- * author: sun<br>
- * date: 2016/9/26.<br>
- * Email：xiaoleisun92@gmail.com
+ * Created by sunxl8 on 2016/9/27.
  */
 
-public interface BasePresenter {
+public class BasePresenter<T> {
+
+    protected T mView;
+
+    public BasePresenter(T view){
+        this.mView = view;
+    }
+
 
 }
