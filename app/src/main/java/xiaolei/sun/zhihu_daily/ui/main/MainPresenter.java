@@ -1,37 +1,23 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.rey.material.app.BottomSheetDialog;
-import com.rey.material.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
-import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
-import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
-import xiaolei.sun.zhihu_daily.network.entity.UserBean;
-import xiaolei.sun.zhihu_daily.ui.SplashActivity;
+import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
@@ -54,18 +40,18 @@ public class MainPresenter implements MainContract.Presenter {
         final String username = sp.getString(Constant.SP_USER_NAME);
         String password = sp.getString(Constant.SP_USER_PASSWORD);
         if (username != null && password != null) {
-            BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
-            BmobQuery<UserBean> queryPassword = new BmobQuery<UserBean>();
+            BmobQuery<BmobUserBean> queryPhone = new BmobQuery<BmobUserBean>();
+            BmobQuery<BmobUserBean> queryPassword = new BmobQuery<BmobUserBean>();
             queryPhone.addWhereEqualTo("phone", username);
             queryPassword.addWhereEqualTo("password", password);
-            List<BmobQuery<UserBean>> queryList = new ArrayList<>();
+            List<BmobQuery<BmobUserBean>> queryList = new ArrayList<>();
             queryList.add(queryPhone);
             queryList.add(queryPassword);
-            BmobQuery<UserBean> query = new BmobQuery<>();
+            BmobQuery<BmobUserBean> query = new BmobQuery<>();
             query.and(queryList);
-            query.findObjects(new FindListener<UserBean>() {
+            query.findObjects(new FindListener<BmobUserBean>() {
                 @Override
-                public void done(List<UserBean> list, BmobException e) {
+                public void done(List<BmobUserBean> list, BmobException e) {
                     if (e == null) {
                         if (list.size() > 0) {
                             System.out.println(list.get(0));
