@@ -11,7 +11,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.network.entity.UserBean;
+import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
@@ -30,18 +30,18 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String phone, String password) {
-        BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
-        BmobQuery<UserBean> queryPassword = new BmobQuery<UserBean>();
+        BmobQuery<BmobUserBean> queryPhone = new BmobQuery<BmobUserBean>();
+        BmobQuery<BmobUserBean> queryPassword = new BmobQuery<BmobUserBean>();
         queryPhone.addWhereEqualTo("phone", phone);
         queryPassword.addWhereEqualTo("password", password);
-        List<BmobQuery<UserBean>> queryList = new ArrayList<>();
+        List<BmobQuery<BmobUserBean>> queryList = new ArrayList<>();
         queryList.add(queryPhone);
         queryList.add(queryPassword);
-        BmobQuery<UserBean> query = new BmobQuery<>();
+        BmobQuery<BmobUserBean> query = new BmobQuery<>();
         query.and(queryList);
-        query.findObjects(new FindListener<UserBean>() {
+        query.findObjects(new FindListener<BmobUserBean>() {
             @Override
-            public void done(List<UserBean> list, BmobException e) {
+            public void done(List<BmobUserBean> list, BmobException e) {
                 if (e == null) {
                     if (list.size() > 0) {
                         System.out.println(list.get(0));
@@ -63,16 +63,16 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void register(final String phone, final String password) {
         //先检测账号是否已注册
-        BmobQuery<UserBean> queryPhone = new BmobQuery<UserBean>();
+        BmobQuery<BmobUserBean> queryPhone = new BmobQuery<BmobUserBean>();
         queryPhone.addWhereEqualTo("phone", phone);
-        queryPhone.findObjects(new FindListener<UserBean>() {
+        queryPhone.findObjects(new FindListener<BmobUserBean>() {
             @Override
-            public void done(List<UserBean> list, BmobException e) {
+            public void done(List<BmobUserBean> list, BmobException e) {
                 if (e == null) {
                     if (list.size() > 0) {
                         mView.showResult("提示", "账号已注册");
                     } else {
-                        UserBean user = new UserBean();
+                        BmobUserBean user = new BmobUserBean();
                         user.setPassword(password);
                         user.setPhone(phone);
                         user.save(new SaveListener<String>() {

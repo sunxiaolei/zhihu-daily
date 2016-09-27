@@ -1,5 +1,7 @@
 package xiaolei.sun.zhihu_daily.network.entity;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -9,11 +11,13 @@ import cn.bmob.v3.BmobObject;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class UserBean extends BmobObject{
+public class BmobUserBean extends BmobObject{
 
     private String phone;
 
     private String password;
+
+    private List<BmobStory> listFavorite;
 
     public String getPhone() {
         return phone;
@@ -31,4 +35,11 @@ public class UserBean extends BmobObject{
         this.password = password;
     }
 
+    public List<BmobStory> getListFavorite() {
+        return listFavorite;
+    }
+
+    public void setListFavorite(List<BmobStory> listFavorite) {
+        this.listFavorite = listFavorite;
+    }
 }
