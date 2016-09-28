@@ -17,8 +17,6 @@ public class BmobUserBean extends BmobObject{
 
     private String password;
 
-    private List<BmobStory> listFavorite;
-
     public String getPhone() {
         return phone;
     }
@@ -35,11 +33,4 @@ public class BmobUserBean extends BmobObject{
         this.password = password;
     }
 
-    public List<BmobStory> getListFavorite() {
-        return listFavorite;
-    }
-
-    public void setListFavorite(List<BmobStory> listFavorite) {
-        this.listFavorite = listFavorite;
-    }
 }

@@ -1,11 +1,14 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.webkit.WebView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import cn.bmob.v3.exception.BmobException;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
 
@@ -20,6 +23,7 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
 
     private int storyId;
 
+    private FloatingActionButton btnFavorite;
     private SimpleDraweeView image;
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -35,13 +39,21 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
         collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
+        storyId = getIntent().getIntExtra("STORY_ID", 0);
+        mPresenter = new StoryPresenter(this);
+
+        btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
         web = (WebView) findViewById(R.id.web_activity_story);
         image = (SimpleDraweeView) findViewById(R.id.img_activity_story);
-        storyId = getIntent().getIntExtra("STORY_ID", 0);
 
-        mPresenter = new StoryPresenter(this);
         showLoading();
         mPresenter.getNews(storyId);
+        btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.favorite();
+            }
+        });
     }
 
     @Override
@@ -63,5 +75,10 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
     public void loadData(String string) {
         dismissLoading();
         web.loadData(string, "text/html; charset=UTF-8", null);
+    }
+
+    @Override
+    public void favorite(String message) {
+        showToast(message);
     }
 }
