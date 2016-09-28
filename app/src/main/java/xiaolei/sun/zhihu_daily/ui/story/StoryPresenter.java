@@ -5,15 +5,25 @@ import com.orhanobut.logger.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import rx.Subscriber;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
+import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
+import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
+
+import static android.R.attr.id;
 
 /**
  * Created by sunxl8 on 2016/9/27.
  */
 
-public class StoryPresenter implements StoryContract.Presenter{
+public class StoryPresenter implements StoryContract.Presenter {
 
     private ApiNews api;
     private StoryBean bean;
@@ -49,6 +59,8 @@ public class StoryPresenter implements StoryContract.Presenter{
 
     }
 
+    private String adjustBody;
+
     @Override
     public void getCss() {
         String[] strs = bean.getCss().get(0).split("[?]");
@@ -67,15 +79,60 @@ public class StoryPresenter implements StoryContract.Presenter{
 
             @Override
             public void onNext(String string) {
-                mView.loadData(adjustCss(string));
-//                web.loadData(adjustCss(string), "text/html; charset=UTF-8", null);
+                adjustBody = adjustCss(string);
+                mView.loadData(adjustBody);
             }
         });
     }
 
+    private BmobStoryBean storyBean;
+    private BmobRelation relation;
+
+    @Override
+    public void favorite() {
+        if (!ZhihuDailyApplication.isLogin) {
+            mView.favorite("收藏失败：请先登录");
+            return;
+        }
+        BmobUserBean user = BmobUser.getCurrentUser(BmobUserBean.class);
+        relation = new BmobRelation();
+        relation.add(user);
+
+        storyBean = new BmobStoryBean();
+        storyBean.setId(bean.getId());
+        storyBean.setTitle(bean.getTitle());
+        storyBean.setImage(bean.getImage());
+        storyBean.setImage_source(bean.getImage_source());
+        storyBean.setShare_url(bean.getShare_url());
+        storyBean.setBody(adjustBody);
+        storyBean.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null){
+                    storyBean.setFavorite(relation);
+                    storyBean.setObjectId(s);
+                    storyBean.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                mView.favorite("收藏成功");
+                            } else {
+                                mView.favorite("收藏失败：" + e.getMessage());
+                            }
+                        }
+                    });
+                }else {
+                    mView.favorite("保存失败：" + e.getMessage());
+                }
+            }
+        });
+
+
+    }
+
     public String adjustCss(String string) {
-        String str = string.replace("height: 200px;","height: 0px;");
-        str = str.replace("margin: 20px 0;","margin: 50px 0 20px;");
+        String str = string.replace("height: 200px;", "height: 0px;");
+        str = str.replace("margin: 20px 0;", "margin: 50px 0 20px;");
         return "<style type=\"text/css\">" + str + "</style>" + bean.getBody();
     }
 }

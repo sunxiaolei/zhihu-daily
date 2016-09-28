@@ -44,8 +44,8 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void done(List<BmobUserBean> list, BmobException e) {
                 if (e == null) {
                     if (list.size() > 0) {
-                        System.out.println(list.get(0));
                         ZhihuDailyApplication.isLogin = true;
+                        ZhihuDailyApplication.userId = list.get(0).getObjectId();
                         SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
                         sp.putString(Constant.SP_USER_NAME, list.get(0).getPhone());
                         sp.putString(Constant.SP_USER_PASSWORD, list.get(0).getPassword());
@@ -80,6 +80,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                             public void done(String objectId, BmobException e) {
                                 if (e == null) {
                                     ZhihuDailyApplication.isLogin = true;
+                                    ZhihuDailyApplication.userId = objectId;
                                     SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
                                     sp.putString(Constant.SP_USER_NAME, phone);
                                     sp.putString(Constant.SP_USER_PASSWORD, password);

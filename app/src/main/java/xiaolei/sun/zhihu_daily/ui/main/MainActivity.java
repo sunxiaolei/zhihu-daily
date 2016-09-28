@@ -59,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void init() {
         mPresenter = new MainPresenter(this);
+        mPresenter.login();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
