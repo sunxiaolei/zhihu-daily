@@ -1,7 +1,6 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.orhanobut.logger.Logger;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.rey.material.app.BottomSheetDialog;
@@ -21,19 +19,18 @@ import com.rey.material.widget.Button;
 
 import java.util.List;
 
-import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurActionBarDrawerToggle;
 import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout;
 import xiaolei.sun.zhihu_daily.customerview.rainrefresh.BeautifulRefreshLayout;
-import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
 import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
 import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
+import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteActivity;
 import xiaolei.sun.zhihu_daily.ui.login.LoginActivity;
-import xiaolei.sun.zhihu_daily.ui.set.SetActivity;
+import xiaolei.sun.zhihu_daily.ui.settings.SettingsActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener, MainContract.View {
 
@@ -56,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private SimpleDraweeView ivHead;
     private TextView tvName;
     private TextView tvSet;
+    private TextView tvFavorite;
 
     @Override
     public void init() {
@@ -107,9 +105,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         ivHead = (SimpleDraweeView) findViewById(R.id.ic_drawer_head);
         tvName = (TextView) findViewById(R.id.tv_drawer_name);
         tvSet = (TextView) findViewById(R.id.tv_drawer_set);
+        tvFavorite = (TextView) findViewById(R.id.tv_drawer_favorite);
 
         ivHead.setOnClickListener(this);
         tvSet.setOnClickListener(this);
+        tvFavorite.setOnClickListener(this);
 
         mPresenter.getUserInfo();
 
@@ -167,7 +167,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }
                 break;
             case R.id.tv_drawer_set:
-                startActivity(new Intent(MainActivity.this, SetActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                break;
+            case R.id.tv_drawer_favorite:
+                startActivity(new Intent(MainActivity.this, FavoriteActivity.class));
                 break;
         }
     }
