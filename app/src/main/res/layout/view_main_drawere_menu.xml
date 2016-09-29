@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/click_login" />
+        android:text="@string/click_login"
+        android:textColor="@color/text_white" />
 
     <TextView
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:drawableLeft="@drawable/ic_my_favorite"
         android:drawablePadding="20dp"
         android:text="@string/my_favorite"
+        android:textColor="@color/text_white"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -40,12 +42,13 @@
         android:id="@+id/tv_drawer_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/md_item_selected"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/md_item_selected"
         android:drawableLeft="@drawable/ic_set"
         android:drawablePadding="20dp"
         android:text="@string/set"
+        android:textColor="@color/text_white"
         android:textSize="18sp"
         android:textStyle="bold" />
 

@@ -12,6 +12,7 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
 import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
 import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
@@ -89,43 +90,58 @@ public class StoryPresenter implements StoryContract.Presenter {
     private BmobRelation relation;
 
     @Override
-    public void favorite() {
-        if (!ZhihuDailyApplication.isLogin) {
-            mView.favorite("收藏失败：请先登录");
-            return;
-        }
-        BmobUserBean user = BmobUser.getCurrentUser(BmobUserBean.class);
-        relation = new BmobRelation();
-        relation.add(user);
+    public void favorite(String favoriteName) {
+//        if (!ZhihuDailyApplication.isLogin) {
+//            mView.favorite("收藏失败：请先登录");
+//            return;
+//        }
+//        BmobUserBean user = BmobUser.getCurrentUser(BmobUserBean.class);
+//        relation = new BmobRelation();
+//        relation.add(user);
+//
+//        storyBean = new BmobStoryBean();
+//        storyBean.setId(bean.getId());
+//        storyBean.setTitle(bean.getTitle());
+//        storyBean.setImage(bean.getImage());
+//        storyBean.setImage_source(bean.getImage_source());
+//        storyBean.setShare_url(bean.getShare_url());
+//        storyBean.setBody(adjustBody);
+//        storyBean.save(new SaveListener<String>() {
+//            @Override
+//            public void done(String s, BmobException e) {
+//                if (e == null){
+//                    storyBean.setFavorite(relation);
+//                    storyBean.setObjectId(s);
+//                    storyBean.update(new UpdateListener() {
+//                        @Override
+//                        public void done(BmobException e) {
+//                            if (e == null) {
+//                                mView.favorite("收藏成功");
+//                            } else {
+//                                mView.favorite("收藏失败：" + e.getMessage());
+//                            }
+//                        }
+//                    });
+//                }else {
+//                    mView.favorite("保存失败：" + e.getMessage());
+//                }
+//            }
+//        });
 
-        storyBean = new BmobStoryBean();
+        //本地保存到数据库
+        DbStory storyBean = new DbStory();
         storyBean.setId(bean.getId());
         storyBean.setTitle(bean.getTitle());
         storyBean.setImage(bean.getImage());
         storyBean.setImage_source(bean.getImage_source());
         storyBean.setShare_url(bean.getShare_url());
         storyBean.setBody(adjustBody);
-        storyBean.save(new SaveListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if (e == null){
-                    storyBean.setFavorite(relation);
-                    storyBean.setObjectId(s);
-                    storyBean.update(new UpdateListener() {
-                        @Override
-                        public void done(BmobException e) {
-                            if (e == null) {
-                                mView.favorite("收藏成功");
-                            } else {
-                                mView.favorite("收藏失败：" + e.getMessage());
-                            }
-                        }
-                    });
-                }else {
-                    mView.favorite("保存失败：" + e.getMessage());
-                }
-            }
-        });
+        storyBean.setFavoriteName(favoriteName);
+        if (storyBean.save()) {
+            mView.favorite("保存成功");
+        } else {
+            mView.favorite("保存失败");
+        }
 
 
     }

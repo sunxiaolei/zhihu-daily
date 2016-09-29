@@ -15,4 +15,8 @@
     <!-- set -->
     <string name="set_title">设置</string>
 
+    <!-- menu -->
+    <string name="action_share">分享</string>
+    <string name="action_set">设置</string>
+
 </resources>

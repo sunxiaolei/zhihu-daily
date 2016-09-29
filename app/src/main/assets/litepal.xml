@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="zh_db" ></dbname>
+
+    <version value="1" ></version>
+
+    <list>
+        <mapping class="xiaolei.sun.zhihu_daily.db.bean.DbStory"></mapping>
+    </list>
+</litepal>

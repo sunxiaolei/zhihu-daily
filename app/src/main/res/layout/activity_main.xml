@@ -15,7 +15,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:titleTextColor="@color/text_white"
+            app:titleTextColor="@color/text_white"/>
 
         <xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout
             android:id="@+id/dl_activity_main"
