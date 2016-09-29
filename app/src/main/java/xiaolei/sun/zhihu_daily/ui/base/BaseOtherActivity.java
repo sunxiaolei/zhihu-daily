@@ -40,9 +40,9 @@ public abstract class BaseOtherActivity extends SwipeBackActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public abstract void init();
-
     public abstract int setContentViewId();
+
+    public abstract void init();
 
     public void showLoading() {
         mLoading = new MaterialDialog.Builder(BaseOtherActivity.this)

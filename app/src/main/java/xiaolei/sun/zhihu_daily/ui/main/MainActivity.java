@@ -33,6 +33,7 @@ import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.login.LoginActivity;
+import xiaolei.sun.zhihu_daily.ui.set.SetActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener, MainContract.View {
 
@@ -44,9 +45,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private FloatingActionButton btnCalendar;
     private BeautifulRefreshLayout refreshLayout;
 
-    private SimpleDraweeView ivHead;
-    private TextView tvName;
-
     private BottomSheetDialog mBottomSheetDialog;
 
     private List<StoriesBean> listStories;
@@ -54,7 +52,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private MainPresenter mPresenter;
 
-    private TextView tvUsername;
+    //Drawer
+    private SimpleDraweeView ivHead;
+    private TextView tvName;
+    private TextView tvSet;
 
     @Override
     public void init() {
@@ -97,18 +98,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         });
 
-        ivHead = (SimpleDraweeView) findViewById(R.id.ic_drawer_head);
-        tvName = (TextView) findViewById(R.id.tv_drawer_name);
-        ivHead.setOnClickListener(this);
-
         mPresenter.getNewsLasted();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         recyclerView.addItemDecoration(new StoriesItemDecoration());
 
         //Drawer
-        tvUsername = (TextView) findViewById(R.id.tv_drawer_name);
+        ivHead = (SimpleDraweeView) findViewById(R.id.ic_drawer_head);
+        tvName = (TextView) findViewById(R.id.tv_drawer_name);
+        tvSet = (TextView) findViewById(R.id.tv_drawer_set);
+
+        ivHead.setOnClickListener(this);
+        tvSet.setOnClickListener(this);
+
         mPresenter.getUserInfo();
+
     }
 
     @Override
@@ -162,6 +166,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
                 break;
+            case R.id.tv_drawer_set:
+                startActivity(new Intent(MainActivity.this, SetActivity.class));
+                break;
         }
     }
 
@@ -183,6 +190,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void setDrawer(String name) {
-        tvUsername.setText(name);
+        tvName.setText(name);
     }
 }
