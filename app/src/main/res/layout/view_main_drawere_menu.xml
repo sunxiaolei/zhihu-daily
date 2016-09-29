@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="200dp"
         android:drawableLeft="@drawable/ic_my_favorite"
         android:drawablePadding="20dp"
         android:text="@string/my_favorite"
@@ -37,8 +37,10 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tv_drawer_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/md_item_selected"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/ic_set"
