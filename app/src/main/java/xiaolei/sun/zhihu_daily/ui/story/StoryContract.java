@@ -27,6 +27,6 @@ public class StoryContract {
 
         void getCss();
 
-        void favorite();
+        void favorite(String favoriteName);
     }
 }

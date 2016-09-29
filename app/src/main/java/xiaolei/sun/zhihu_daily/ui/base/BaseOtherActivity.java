@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 
+import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.customerview.swipebacklayout.SwipeBackActivity;
 
 
@@ -66,6 +67,28 @@ public abstract class BaseOtherActivity extends SwipeBackActivity {
                 .content(msg)
                 .cancelable(false)
                 .positiveText("确定")
+                .show();
+        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mDialog = null;
+            }
+        });
+    }
+
+    public void showEditDialog(String msg, MaterialDialog.InputCallback callback) {
+        mDialog = new MaterialDialog.Builder(this)
+                .theme(Theme.LIGHT)
+                .content(msg)
+                .inputRangeRes(2, 20, R.color.colorPrimary)
+                .input(null, null, callback)
+                .negativeText("取消")
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        mDialog.dismiss();
+                    }
+                })
                 .show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

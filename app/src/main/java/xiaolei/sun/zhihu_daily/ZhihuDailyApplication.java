@@ -8,6 +8,8 @@ import com.orhanobut.logger.LogAdapter;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
+import org.litepal.LitePalApplication;
+
 import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 
 /**
@@ -17,7 +19,7 @@ import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class ZhihuDailyApplication extends Application {
+public class ZhihuDailyApplication extends LitePalApplication {
 
     public static boolean isLogin = false;
     public static String userId;
