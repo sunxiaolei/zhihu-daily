@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -29,8 +30,8 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
     private int storyId;
 
     private FloatingActionButton btnFavorite;
-    private SimpleDraweeView image;
     private CollapsingToolbarLayout collapsingToolbar;
+    private SimpleDraweeView image;
     private AppBarLayout layoutTop;
 
     private WebView web;
@@ -73,6 +74,14 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
         btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
         web = (WebView) findViewById(R.id.web_activity_story);
         image = (SimpleDraweeView) findViewById(R.id.img_activity_story);
+//        web.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return false;
+//            }
+//        });
+        web.getSettings().setJavaScriptEnabled(true);
 
         showLoading();
         mPresenter.getNews(storyId);

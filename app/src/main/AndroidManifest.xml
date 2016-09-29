@@ -47,7 +47,10 @@
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.set.SetActivity"
+            android:name=".ui.settings.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.favorite.FavoriteActivity"
             android:screenOrientation="portrait" />
     </application>
 
