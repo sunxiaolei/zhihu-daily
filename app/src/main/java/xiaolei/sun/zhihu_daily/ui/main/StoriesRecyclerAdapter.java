@@ -2,18 +2,16 @@ package xiaolei.sun.zhihu_daily.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.wangjie.shadowviewhelper.ShadowProperty;
-import com.wangjie.shadowviewhelper.ShadowViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +57,8 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE.IMAGE_ITEM.ordinal()) {
-            ImageViewHolder holder =
-                    new ImageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_main_topimg, parent, false));
+            TopViewHolder holder =
+                    new TopViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_main_topview, parent, false));
             return holder;
         } else if (viewType == ITEM_TYPE.TITLE_ITEM.ordinal()) {
             TitleViewHolder holder =
@@ -79,13 +77,12 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             StoriesBean story = listStories.get(position - 2);
             ((StoriesViewHolder) holder).tvTitle.setText(story.getTitle());
             ((StoriesViewHolder) holder).ivImage.setImageURI(story.getImages().get(0));
-        } else if (holder instanceof ImageViewHolder) {
-//            ((ImageViewHolder)holder).
-//            ((ImageViewHolder)holder).
+        } else if (holder instanceof TopViewHolder) {
+//            ((TopViewHolder)holder).
+//            ((TopViewHolder)holder).
         } else if (holder instanceof TitleViewHolder) {
             ((TitleViewHolder) holder).tvTitle.setText(
                     date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日");
-//            ((ImageViewHolder)holder).
         }
     }
 
@@ -127,16 +124,24 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    class ImageViewHolder extends RecyclerView.ViewHolder {
+    class TopViewHolder extends RecyclerView.ViewHolder {
 
         ViewPager vpTop;
+        TextView tvTitle;
         CircleIndicator indicator;
 
-        public ImageViewHolder(View itemView) {
+        public TopViewHolder(View itemView) {
             super(itemView);
             vpTop = (ViewPager) itemView.findViewById(R.id.vp_main_top);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_main_top);
             indicator = (CircleIndicator) itemView.findViewById(R.id.indicator_main);
             vpTop.setAdapter(new PagerAdapter() {
+
+                @Override
+                public void setPrimaryItem(ViewGroup container, int position, Object object) {
+                    tvTitle.setText(listTop.get(position).getTitle());
+                    super.setPrimaryItem(container, position, object);
+                }
 
                 @Override
                 public int getCount() {
@@ -160,14 +165,16 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                     });
                     container.addView(view);
-                    return listImage.get(position);
+                    return view;
                 }
 
                 @Override
                 public void destroyItem(ViewGroup container, int position, Object object) {
                     container.removeView(listImage.get(position));
                 }
+
             });
+
             indicator.setViewPager(vpTop);
         }
 
