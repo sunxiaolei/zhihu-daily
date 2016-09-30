@@ -23,4 +23,43 @@
         <attr name="closeDescription" format="reference" />
         <attr name="toolbar" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="ProgressActivity">
+
+        <attr name="loadingProgressBarWidth" format="dimension"/>
+        <attr name="loadingProgressBarHeight" format="dimension"/>
+        <attr name="loadingBackgroundColor" format="color"/>
+
+        <attr name="emptyImageWidth" format="dimension"/>
+        <attr name="emptyImageHeight" format="dimension"/>
+        <attr name="emptyTitleTextSize" format="dimension"/>
+        <attr name="emptyContentTextSize" format="dimension"/>
+        <attr name="emptyTitleTextColor" format="color"/>
+        <attr name="emptyContentTextColor" format="color"/>
+        <attr name="emptyBackgroundColor" format="color"/>
+
+        <attr name="errorImageWidth" format="dimension"/>
+        <attr name="errorImageHeight" format="dimension"/>
+        <attr name="errorTitleTextSize" format="dimension"/>
+        <attr name="errorContentTextSize" format="dimension"/>
+        <attr name="errorTitleTextColor" format="color"/>
+        <attr name="errorContentTextColor" format="color"/>
+        <attr name="errorButtonTextColor" format="color"/>
+        <attr name="errorBackgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SpringView">
+        <attr name="type">
+            <enum name="overlap" value="0"/>
+            <enum name="follow" value="1"/>
+        </attr>
+        <attr name="give">
+            <enum name="both" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="none" value="3"/>
+        </attr>
+        <attr name="header" format="reference"/>
+        <attr name="footer" format="reference"/>
+    </declare-styleable>
 </resources>
