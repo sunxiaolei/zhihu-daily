@@ -29,6 +29,7 @@ import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteActivity;
+import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteListActivity;
 import xiaolei.sun.zhihu_daily.ui.login.LoginActivity;
 import xiaolei.sun.zhihu_daily.ui.settings.SettingsActivity;
 
@@ -170,7 +171,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.tv_drawer_favorite:
-                startActivity(new Intent(MainActivity.this, FavoriteActivity.class));
+                startActivity(new Intent(MainActivity.this, FavoriteListActivity.class));
                 break;
         }
     }
