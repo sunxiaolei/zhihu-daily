@@ -9,31 +9,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.rey.material.app.BottomSheetDialog;
-import com.rey.material.widget.Button;
 
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurActionBarDrawerToggle;
-import xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout;
-import xiaolei.sun.zhihu_daily.customerview.rainrefresh.BeautifulRefreshLayout;
+import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurActionBarDrawerToggle;
+import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout;
+import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
+import xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView;
+import xiaolei.sun.zhihu_daily.widget.quickadapter.container.DefaultHeader;
+import xiaolei.sun.zhihu_daily.widget.quickadapter.container.RotationFooter;
+import xiaolei.sun.zhihu_daily.widget.quickadapter.container.RotationHeader;
+import xiaolei.sun.zhihu_daily.widget.rainrefresh.BeautifulRefreshLayout;
 import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
 import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
 import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
-import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteActivity;
 import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteListActivity;
 import xiaolei.sun.zhihu_daily.ui.login.LoginActivity;
 import xiaolei.sun.zhihu_daily.ui.settings.SettingsActivity;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, MainContract.View {
+public class MainActivity extends BaseActivity<MainPresenter> implements View.OnClickListener, MainContract.View {
 
     private BlurDrawerLayout drawerLayout;
     private BlurActionBarDrawerToggle toggle;
@@ -41,14 +44,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private RecyclerView recyclerView;
     private StoriesRecyclerAdapter adapter;
     private FloatingActionButton btnCalendar;
-    private BeautifulRefreshLayout refreshLayout;
+    //    private BeautifulRefreshLayout refreshLayout;
+    private SpringView refreshLayout;
 
     private BottomSheetDialog mBottomSheetDialog;
 
     private List<StoriesBean> listStories;
     private List<TopStoriesBean> listTop;
-
-    private MainPresenter mPresenter;
 
     //Drawer
     private SimpleDraweeView ivHead;
@@ -57,8 +59,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView tvFavorite;
 
     @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter();
+    }
+
+    @Override
     public void init() {
-        mPresenter = new MainPresenter(this);
         mPresenter.login();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,11 +95,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         });
 
-        refreshLayout = (BeautifulRefreshLayout) findViewById(R.id.refresh_main);
-        refreshLayout.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
+        refreshLayout = (SpringView) findViewById(R.id.refresh_main);
+
+        refreshLayout.setHeader(new RotationHeader(this));
+        refreshLayout.setFooter(new RotationFooter(this));
+        refreshLayout.setListener(new SpringView.OnFreshListener() {
             @Override
-            public void onRefresh(BeautifulRefreshLayout refreshLayout) {
+            public void onRefresh() {
                 mPresenter.getNewsByDate(CalendarDay.today());
+            }
+
+            @Override
+            public void onLoadmore() {
+                showToast("no more");
             }
         });
 
@@ -126,7 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 弹出日起选择
      */
     private void showBottomSheet() {
-        mBottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.Material_App_BottomSheetDialog);
+        mBottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetDialog);
         View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.view_main_calendar, null);
         final MaterialCalendarView widget = (MaterialCalendarView) v.findViewById(R.id.cv_main_calendar);
         widget.setSelectedDate(CalendarDay.today());
@@ -188,7 +202,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             adapter.notifyDataSetChanged();
         }
         if (refreshLayout != null) {
-            refreshLayout.finishRefreshing();
+            refreshLayout.onFinishFreshAndLoad();
         }
     }
 

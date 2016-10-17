@@ -17,6 +17,7 @@ import xiaolei.sun.zhihu_daily.network.api.ApiNews;
 import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
 import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
+import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 
 import static android.R.attr.id;
 
@@ -24,12 +25,10 @@ import static android.R.attr.id;
  * Created by sunxl8 on 2016/9/27.
  */
 
-public class StoryPresenter implements StoryContract.Presenter {
+public class StoryPresenter extends RxPresenter<StoryContract.View> implements StoryContract.Presenter {
 
     private ApiNews api;
     private StoryBean bean;
-
-    private StoryContract.View mView;
 
     public StoryPresenter(StoryContract.View view) {
         this.mView = view;

@@ -18,25 +18,18 @@ import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
 import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
+import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/27.
  */
 
-public class MainPresenter implements MainContract.Presenter {
-
-    private MainContract.View mView;
-    private Context mContext;
-
-    public MainPresenter(MainContract.View view) {
-        this.mView = view;
-        this.mContext = (Context) view;
-    }
+public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
     @Override
     public void login() {
-        SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+        SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
         final String username = sp.getString(Constant.SP_USER_NAME);
         String password = sp.getString(Constant.SP_USER_PASSWORD);
         if (username != null && password != null) {
@@ -115,10 +108,10 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void getUserInfo() {
         if (ZhihuDailyApplication.isLogin) {
-            SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+            SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
             mView.setDrawer(sp.getString(Constant.SP_USER_NAME));
         } else {
-            mView.setDrawer(mContext.getResources().getString(R.string.click_login));
+            mView.setDrawer(ZhihuDailyApplication.getContext().getResources().getString(R.string.click_login));
         }
     }
 }

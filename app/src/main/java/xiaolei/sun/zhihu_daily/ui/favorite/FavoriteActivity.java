@@ -1,34 +1,32 @@
 package xiaolei.sun.zhihu_daily.ui.favorite;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
-import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
-import xiaolei.sun.zhihu_daily.ui.story.StoryPresenter;
+import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 
 /**
  * Created by sunxl8 on 2016/9/29.
  */
 
-public class FavoriteActivity extends BaseOtherActivity implements FavoriteContract.View {
+public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> implements FavoriteContract.View {
 
     private SimpleDraweeView image;
     private WebView web;
 
-    private FavoritPresenter mPresenter;
+    @Override
+    protected FavoritPresenter createPresenter() {
+        return new FavoritPresenter();
+    }
 
     @Override
     public int setContentViewId() {
@@ -37,7 +35,6 @@ public class FavoriteActivity extends BaseOtherActivity implements FavoriteContr
 
     @Override
     public void init() {
-        mPresenter = new FavoritPresenter(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

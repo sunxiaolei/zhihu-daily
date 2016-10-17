@@ -12,21 +12,14 @@ import cn.bmob.v3.listener.SaveListener;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
+import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/26.
  */
 
-public class LoginPresenter implements LoginContract.Presenter {
-
-    private LoginContract.View mView;
-    private Context mContext;
-
-    public LoginPresenter(LoginContract.View view) {
-        this.mView = view;
-        this.mContext = (Context) view;
-    }
+public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter {
 
     @Override
     public void login(String phone, String password) {
@@ -46,7 +39,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                     if (list.size() > 0) {
                         ZhihuDailyApplication.isLogin = true;
                         ZhihuDailyApplication.userId = list.get(0).getObjectId();
-                        SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+                        SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
                         sp.putString(Constant.SP_USER_NAME, list.get(0).getPhone());
                         sp.putString(Constant.SP_USER_PASSWORD, list.get(0).getPassword());
                         mView.gotoMain();
@@ -81,7 +74,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                 if (e == null) {
                                     ZhihuDailyApplication.isLogin = true;
                                     ZhihuDailyApplication.userId = objectId;
-                                    SPUtils sp = new SPUtils(mContext, Constant.SP_USER);
+                                    SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
                                     sp.putString(Constant.SP_USER_NAME, phone);
                                     sp.putString(Constant.SP_USER_PASSWORD, password);
                                     mView.gotoMain();

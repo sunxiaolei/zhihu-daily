@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.rey.material.app.BottomSheetDialog;
-import com.rey.material.widget.Button;
 
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
+import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
+import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
+import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.utils.RegexUtils;
 
@@ -21,7 +22,7 @@ import xiaolei.sun.zhihu_daily.utils.RegexUtils;
  * date: 2016/9/25.<br>
  * Email：xiaoleisun92@gmail.com
  */
-public class LoginActivity extends BaseOtherActivity implements LoginContract.View {
+public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> implements LoginContract.View {
 
     private EditText etName;
     private EditText etPassword;
@@ -33,14 +34,10 @@ public class LoginActivity extends BaseOtherActivity implements LoginContract.Vi
     private EditText etRegisterPassword;
     private Button btnRegisterSubmit;
 
-    private LoginPresenter mPresenter;
-
     private BottomSheetDialog mBottomSheetDialog;
 
     @Override
     public void init() {
-        mPresenter = new LoginPresenter(this);
-
         etName = (EditText) findViewById(R.id.et_login_name);
         etPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login_login);
@@ -69,13 +66,18 @@ public class LoginActivity extends BaseOtherActivity implements LoginContract.Vi
     }
 
     @Override
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter();
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.activity_login;
     }
 
     @Override
     public void showRegisterSheet() {
-        mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.Material_App_BottomSheetDialog);
+        mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.BottomSheetDialog);
         registerView = LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_register, null);
 
         etRegisterPhone = (EditText) registerView.findViewById(R.id.et_register_phone);
@@ -116,5 +118,6 @@ public class LoginActivity extends BaseOtherActivity implements LoginContract.Vi
         startActivity(new Intent(this, MainActivity.class));
         this.finish();
     }
+
 }
 

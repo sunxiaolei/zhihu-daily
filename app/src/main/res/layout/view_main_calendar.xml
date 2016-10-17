@@ -23,7 +23,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <com.rey.material.widget.Button
+        <Button
             android:id="@+id/btn_main_calendar_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:foreground="@drawable/card_foreground"
             android:text="取消" />
 
-        <com.rey.material.widget.Button
+        <Button
             android:id="@+id/btn_main_calendar_sure"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

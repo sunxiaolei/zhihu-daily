@@ -42,7 +42,7 @@
         android:textColor="@color/text_primary"
         android:textCursorDrawable="@null" />
 
-    <com.rey.material.widget.Button
+    <Button
         android:id="@+id/btn_login_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
