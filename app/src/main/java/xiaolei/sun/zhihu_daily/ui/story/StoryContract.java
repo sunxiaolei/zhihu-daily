@@ -2,6 +2,8 @@ package xiaolei.sun.zhihu_daily.ui.story;
 
 import cn.bmob.v3.exception.BmobException;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
+import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
+import xiaolei.sun.zhihu_daily.ui.base.IView;
 
 /**
  * Created by sunxl8 on 2016/9/27.
@@ -9,7 +11,7 @@ import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 
 public class StoryContract {
 
-    interface View{
+    interface View extends IView {
 
         void setImageUrl(String url);
 
@@ -21,7 +23,7 @@ public class StoryContract {
 
     }
 
-    interface Presenter {
+    interface Presenter extends IPresenter<View> {
 
         void getNews(int storyId);
 

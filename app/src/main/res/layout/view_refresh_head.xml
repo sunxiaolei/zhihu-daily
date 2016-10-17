@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <xiaolei.sun.zhihu_daily.customerview.rainrefresh.WaveView
+    <xiaolei.sun.zhihu_daily.widget.rainrefresh.WaveView
         android:id="@+id/draweeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,12 +22,12 @@
         android:textSize="14sp" />
 
 
-    <xiaolei.sun.zhihu_daily.customerview.rainrefresh.RainView
+    <xiaolei.sun.zhihu_daily.widget.rainrefresh.RainView
         android:id="@+id/rain"
         android:layout_width="match_parent"
         android:layout_height="250dp" />
 
-    <xiaolei.sun.zhihu_daily.customerview.rainrefresh.RippleView
+    <xiaolei.sun.zhihu_daily.widget.rainrefresh.RippleView
         android:id="@+id/ripple"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

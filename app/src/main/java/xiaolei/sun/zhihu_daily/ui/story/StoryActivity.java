@@ -9,14 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import cn.bmob.v3.exception.BmobException;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
+import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 
 /**
  * Description: <br>
@@ -25,7 +23,7 @@ import xiaolei.sun.zhihu_daily.ui.base.BaseOtherActivity;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class StoryActivity extends BaseOtherActivity implements StoryContract.View {
+public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> implements StoryContract.View {
 
     private int storyId;
 
@@ -35,8 +33,6 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
     private AppBarLayout layoutTop;
 
     private WebView web;
-
-    private StoryPresenter mPresenter;
 
     @Override
     public void init() {
@@ -69,7 +65,6 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
         });
 
         storyId = getIntent().getIntExtra("STORY_ID", 0);
-        mPresenter = new StoryPresenter(this);
 
         btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
         web = (WebView) findViewById(R.id.web_activity_story);
@@ -96,6 +91,11 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
                 });
             }
         });
+    }
+
+    @Override
+    protected StoryPresenter createPresenter() {
+        return new StoryPresenter(this);
     }
 
     @Override
@@ -129,4 +129,5 @@ public class StoryActivity extends BaseOtherActivity implements StoryContract.Vi
         getMenuInflater().inflate(R.menu.menu_story, menu);
         return true;
     }
+
 }

@@ -19,30 +19,31 @@
             android:titleTextColor="@color/text_white"
             app:titleTextColor="@color/text_white"/>
 
-        <xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout
+        <xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout
             android:id="@+id/dl_activity_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:blurRadius="3"
             app:downScaleFactor="5.0">
 
-            <xiaolei.sun.zhihu_daily.customerview.rainrefresh.BeautifulRefreshLayout
+            <xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView
                 android:id="@+id/refresh_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/colorWhiteBg">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_activity_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </xiaolei.sun.zhihu_daily.customerview.rainrefresh.BeautifulRefreshLayout>
+            </xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView>
 
             <include
                 android:id="@+id/left_drawer_main_menu"
                 layout="@layout/view_main_drawere_menu" />
 
-        </xiaolei.sun.zhihu_daily.customerview.blurdrawer.BlurDrawerLayout>
+        </xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout>
 
     </LinearLayout>
 
