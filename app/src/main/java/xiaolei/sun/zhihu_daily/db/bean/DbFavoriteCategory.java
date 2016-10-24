@@ -1,10 +1,12 @@
 package xiaolei.sun.zhihu_daily.db.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by sunxl8 on 2016/9/29.
  */
 
-public class DbFavoriteFolderName {
+public class DbFavoriteCategory extends DataSupport {
 
     private String name;
 

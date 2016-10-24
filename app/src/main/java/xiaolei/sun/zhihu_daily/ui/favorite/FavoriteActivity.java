@@ -79,4 +79,9 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
             image.setImageURI(list.get(0).getImage());
         }
     }
+
+    @Override
+    public void setFavorateCategory(List<String> list) {
+
+    }
 }

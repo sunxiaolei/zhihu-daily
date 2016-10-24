@@ -19,4 +19,10 @@
     <string name="action_share">分享</string>
     <string name="action_set">设置</string>
 
+    <!-- 收藏 -->
+    <string name="favorite_choose_category">选择或新建收藏分类</string>
+
+
+    <string name="sure">确定</string>
+
 </resources>

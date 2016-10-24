@@ -2,7 +2,11 @@ package xiaolei.sun.zhihu_daily.ui.story;
 
 import com.orhanobut.logger.Logger;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.bmob.v3.BmobUser;
@@ -12,6 +16,8 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.db.DbManager;
+import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
 import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
@@ -136,13 +142,28 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         storyBean.setShare_url(bean.getShare_url());
         storyBean.setBody(adjustBody);
         storyBean.setFavoriteName(favoriteName);
+
+
+        List<String> stringList = DbManager.getFavorateCategory();
+        if (!stringList.contains(favoriteName)) {
+            DbFavoriteCategory categoryBean = new DbFavoriteCategory();
+            categoryBean.setName(favoriteName);
+            categoryBean.save();
+        }
+
+
         if (storyBean.save()) {
             mView.favorite("保存成功");
         } else {
             mView.favorite("保存失败");
         }
 
+    }
 
+    @Override
+    public void getFavorateCategory() {
+        List<String> stringList = DbManager.getFavorateCategory();
+        mView.setFavorateCategory(stringList);
     }
 
     public String adjustCss(String string) {

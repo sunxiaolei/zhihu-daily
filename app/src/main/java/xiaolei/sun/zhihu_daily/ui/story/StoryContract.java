@@ -1,5 +1,7 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
+import java.util.List;
+
 import cn.bmob.v3.exception.BmobException;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
@@ -21,6 +23,8 @@ public class StoryContract {
 
         void favorite(String message);
 
+        void setFavorateCategory(List<String> list);
+
     }
 
     interface Presenter extends IPresenter<View> {
@@ -30,5 +34,7 @@ public class StoryContract {
         void getCss();
 
         void favorite(String favoriteName);
+
+        void getFavorateCategory();
     }
 }
