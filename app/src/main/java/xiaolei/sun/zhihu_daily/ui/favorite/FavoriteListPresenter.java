@@ -14,7 +14,7 @@ import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteContract.Presenter;
  * Created by sunxl8 on 2016/9/29.
  */
 
-public class FavoritPresenter extends RxPresenter<FavoriteContract.View> implements Presenter {
+public class FavoriteListPresenter extends RxPresenter<FavoriteListContract.View> implements FavoriteListContract.Presenter {
 
     @Override
     public void getStories() {

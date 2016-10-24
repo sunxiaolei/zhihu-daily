@@ -10,13 +10,13 @@ import xiaolei.sun.zhihu_daily.ui.base.IView;
  * Created by sunxl8 on 2016/9/29.
  */
 
-public class FavoriteContract {
+public class FavoriteListContract{
 
     interface View extends IView{
 
-        void setStories(List<DbStory> list);
-
         void setFavorateCategory(List<String> list);
+
+        void setStories(List<DbStory> listStories);
 
     }
 
