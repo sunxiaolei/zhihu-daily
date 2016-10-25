@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="200dp"
     android:layout_height="match_parent"
@@ -8,41 +8,32 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/ic_drawer_head"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/ic_user_head"
-        fresco:roundAsCircle="true" />
-
     <TextView
         android:id="@+id/tv_drawer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
         android:text="@string/click_login"
         android:textColor="@color/text_white" />
 
-    <TextView
-        android:id="@+id/tv_drawer_favorite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
-        android:drawableLeft="@drawable/ic_my_favorite"
-        android:drawablePadding="20dp"
-        android:text="@string/my_favorite"
-        android:textColor="@color/text_white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/ic_drawer_head"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/tv_drawer_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_user_head"
+        fresco:roundAsCircle="true" />
 
     <TextView
         android:id="@+id/tv_drawer_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/md_item_selected"
@@ -53,5 +44,19 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_drawer_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_drawer_set"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/ic_my_favorite"
+        android:drawablePadding="20dp"
+        android:text="@string/my_favorite"
+        android:textColor="@color/text_white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
     

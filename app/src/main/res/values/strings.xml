@@ -5,7 +5,7 @@
     <!-- main -->
     <string name="click_login">点击头像进行登录</string>
     <string name="my_favorite">我的收藏</string>
-    <string name="set">设置选项</string>
+    <string name="set">选项设置</string>
     <!-- login -->
     <string name="register">马上去注册(≖ ‿ ≖)✧</string>
     <string name="login">登录</string>
@@ -14,6 +14,14 @@
     <string name="register_password">请设置密码</string>
     <!-- set -->
     <string name="set_title">设置</string>
+    <string name="set_basic">基本设置</string>
+    <string name="set_account">账户设置</string>
+    <string name="set_help">关于与帮助</string>
+    <string name="set_clean_cache">清除缓存</string>
+    <string name="set_change_pwd">修改密码</string>
+    <string name="set_check_update">检查更新</string>
+    <string name="set_about">关于</string>
+    <string name="set_feedback">反馈</string>
 
     <!-- menu -->
     <string name="action_share">分享</string>

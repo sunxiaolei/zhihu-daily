@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -83,12 +84,9 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
         storyId = getIntent().getIntExtra("STORY_ID", 0);
 
         btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
-        //判断是否已收藏
-        if (DbManager.isFavorite(storyId)) {
-            isFavorite = true;
-        } else {
-            isFavorite = false;
-        }
+
+        checkIsFavorite();
+
 
         web = (WebView) findViewById(R.id.web_activity_story);
         image = (SimpleDraweeView) findViewById(R.id.img_activity_story);
@@ -113,6 +111,17 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
                 }
             }
         });
+    }
+
+    /**
+     * 判断是否已收藏
+     */
+    private void checkIsFavorite() {
+        if (DbManager.isFavorite(storyId)) {
+            isFavorite = true;
+        } else {
+            isFavorite = false;
+        }
     }
 
     @Override
@@ -145,12 +154,13 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     public void favorite(String message) {
         mBottomSheetDialog.dismiss();
         showToast(message);
+        checkIsFavorite();
     }
 
     @Override
     public void setFavorateCategory(List<String> list) {
         listCategory = list;
-        lvChooseCategory.setAdapter(new ArrayAdapter<String>(StoryActivity.this, android.R.layout.simple_list_item_1, list));
+        lvChooseCategory.setAdapter(new FavoriteCategoryAdapter());
         lvChooseCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -187,12 +197,37 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
                     return;
                 }
                 mPresenter.favorite(name);
-                mBottomSheetDialog.dismiss();
             }
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);
         mBottomSheetDialog.contentView(view)
                 .show();
+    }
+
+    class FavoriteCategoryAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return listCategory.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = LayoutInflater.from(StoryActivity.this).inflate(R.layout.item_textview, null, false);
+            TextView tv = (TextView) view.findViewById(R.id.tv_normal);
+            tv.setText(listCategory.get(i));
+            return view;
+        }
     }
 
 }

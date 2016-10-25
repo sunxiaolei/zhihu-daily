@@ -39,6 +39,16 @@ public class DbManager {
     }
 
     /**
+     * 根据标题获取收藏文章
+     * @param title
+     * @return
+     */
+    public static List<DbStory> getStoriesByTitle(String title) {
+        List<DbStory> list = DataSupport.where("title = ?", title).find(DbStory.class);
+        return list;
+    }
+
+    /**
      * 获取已收藏文章id列表
      * @return
      */

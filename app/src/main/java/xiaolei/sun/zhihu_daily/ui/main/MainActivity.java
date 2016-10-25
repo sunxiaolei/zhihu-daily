@@ -3,6 +3,7 @@ package xiaolei.sun.zhihu_daily.ui.main;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -188,6 +189,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 startActivity(new Intent(MainActivity.this, FavoriteListActivity.class));
                 break;
         }
+        drawerLayout.closeDrawers();
     }
 
     @Override
