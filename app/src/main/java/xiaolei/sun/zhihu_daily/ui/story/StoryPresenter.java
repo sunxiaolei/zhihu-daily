@@ -123,13 +123,13 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 //        });
 
         //本地保存到数据库
-        List<Integer> listIds = DbManager.getStoryIds();
+        List<Integer> listIds = DbManager.getFavoriteStoryIds();
         if (listIds.contains(bean.getId())) {
             mView.favorite("已经保存过了");
             return;
         } else {
             DbStory storyBean = new DbStory();
-            storyBean.setId(bean.getId());
+            storyBean.setStoryId(bean.getId());
             storyBean.setTitle(bean.getTitle());
             storyBean.setImage(bean.getImage());
             storyBean.setImage_source(bean.getImage_source());
