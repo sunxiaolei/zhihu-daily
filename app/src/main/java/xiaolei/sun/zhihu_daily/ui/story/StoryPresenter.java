@@ -123,21 +123,15 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 //        });
 
         //本地保存到数据库
-        List<Integer> listIds = DbManager.getFavoriteStoryIds();
-        if (listIds.contains(bean.getId())) {
-            mView.favorite("已经保存过了");
-            return;
-        } else {
-            DbStory storyBean = new DbStory();
-            storyBean.setStoryId(bean.getId());
-            storyBean.setTitle(bean.getTitle());
-            storyBean.setImage(bean.getImage());
-            storyBean.setImage_source(bean.getImage_source());
-            storyBean.setShare_url(bean.getShare_url());
-            storyBean.setBody(adjustBody);
-            storyBean.setFavoriteCategory(favoriteName);
-            storyBean.save();
-        }
+        DbStory storyBean = new DbStory();
+        storyBean.setStoryId(bean.getId());
+        storyBean.setTitle(bean.getTitle());
+        storyBean.setImage(bean.getImage());
+        storyBean.setImage_source(bean.getImage_source());
+        storyBean.setShare_url(bean.getShare_url());
+        storyBean.setBody(adjustBody);
+        storyBean.setFavoriteCategory(favoriteName);
+        storyBean.save();
 
         List<String> listCategory = DbManager.getFavorateCategory();
         if (!listCategory.contains(favoriteName)) {
@@ -145,6 +139,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
             categoryBean.setName(favoriteName);
             categoryBean.save();
         }
+        mView.favorite("保存成功");
     }
 
     @Override

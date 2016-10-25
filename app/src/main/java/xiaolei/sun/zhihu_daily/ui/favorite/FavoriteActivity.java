@@ -20,6 +20,8 @@ import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 
 public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> implements FavoriteContract.View {
 
+    private String storyTitle;
+
     private SimpleDraweeView image;
     private WebView web;
 
@@ -35,6 +37,9 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
 
     @Override
     public void init() {
+
+        storyTitle = getIntent().getStringExtra("STORY_TITLE");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -68,20 +73,15 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
         image = (SimpleDraweeView) findViewById(R.id.img_favorite);
 
         showLoading();
-        mPresenter.getStories();
+        mPresenter.getStory(storyTitle);
     }
 
     @Override
-    public void setStories(List<DbStory> list) {
+    public void setStory(DbStory story) {
         dismissLoading();
-        if (list != null && list.size() > 0) {
-            web.loadData(list.get(0).getBody(), "text/html; charset=UTF-8", null);
-            image.setImageURI(list.get(0).getImage());
+        if (story != null) {
+            web.loadData(story.getBody(), "text/html; charset=UTF-8", null);
+            image.setImageURI(story.getImage());
         }
-    }
-
-    @Override
-    public void setFavorateCategory(List<String> list) {
-
     }
 }

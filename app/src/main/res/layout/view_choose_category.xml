@@ -10,14 +10,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:text="@string/favorite_choose_category" />
+        android:text="@string/favorite_choose_category"
+        android:textColor="@color/text_secondary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
 
         <EditText
             android:id="@+id/et_choose_category"
@@ -28,17 +30,21 @@
         <TextView
             android:id="@+id/tv_choose_category_sure"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/selector_item"
             android:gravity="center"
-            android:text="@string/sure" />
+            android:text="@string/sure"
+            android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/lv_choose_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:divider="@color/text_secondary"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
 
 </LinearLayout>
