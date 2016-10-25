@@ -14,7 +14,16 @@ public class DbStory extends DataSupport {
     private String image;
     private String share_url;
     private int id;
+    private int storyId;
     private String favoriteCategory;
+
+    public int getStoryId() {
+        return storyId;
+    }
+
+    public void setStoryId(int storyId) {
+        this.storyId = storyId;
+    }
 
     public String getFavoriteCategory() {
         return favoriteCategory;

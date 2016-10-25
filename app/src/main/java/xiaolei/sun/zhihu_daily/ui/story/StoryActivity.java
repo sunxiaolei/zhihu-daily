@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.R;
+import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 
@@ -46,6 +47,8 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     private WebView web;
 
     private BottomSheetDialog mBottomSheetDialog;
+
+    private boolean isFavorite = false;
 
     @Override
     public void init() {
@@ -80,6 +83,13 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
         storyId = getIntent().getIntExtra("STORY_ID", 0);
 
         btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
+        //判断是否已收藏
+        if (DbManager.isFavorite(storyId)) {
+            isFavorite = true;
+        } else {
+            isFavorite = false;
+        }
+
         web = (WebView) findViewById(R.id.web_activity_story);
         image = (SimpleDraweeView) findViewById(R.id.img_activity_story);
 //        web.setWebViewClient(new WebViewClient(){
@@ -96,7 +106,11 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showBottomSheet();
+                if (isFavorite) {
+                    showToast("已收藏");
+                } else {
+                    showBottomSheet();
+                }
             }
         });
     }
