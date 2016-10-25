@@ -173,6 +173,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
                     return;
                 }
                 mPresenter.favorite(name);
+                mBottomSheetDialog.dismiss();
             }
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);

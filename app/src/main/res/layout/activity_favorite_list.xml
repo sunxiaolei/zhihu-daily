@@ -19,8 +19,8 @@
             android:titleTextColor="@color/text_white"
             app:titleTextColor="@color/text_white" />
 
-        <ListView
-            android:id="@+id/lv_favorate_category"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_favorate_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

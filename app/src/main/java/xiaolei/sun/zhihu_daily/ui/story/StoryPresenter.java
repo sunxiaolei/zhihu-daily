@@ -2,30 +2,19 @@ package xiaolei.sun.zhihu_daily.ui.story;
 
 import com.orhanobut.logger.Logger;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
 import rx.Subscriber;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
 import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
-import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
-
-import static android.R.attr.id;
 
 /**
  * Created by sunxl8 on 2016/9/27.
@@ -134,30 +123,28 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 //        });
 
         //本地保存到数据库
-        DbStory storyBean = new DbStory();
-        storyBean.setId(bean.getId());
-        storyBean.setTitle(bean.getTitle());
-        storyBean.setImage(bean.getImage());
-        storyBean.setImage_source(bean.getImage_source());
-        storyBean.setShare_url(bean.getShare_url());
-        storyBean.setBody(adjustBody);
-        storyBean.setFavoriteName(favoriteName);
+        List<Integer> listIds = DbManager.getStoryIds();
+        if (listIds.contains(bean.getId())) {
+            mView.favorite("已经保存过了");
+            return;
+        } else {
+            DbStory storyBean = new DbStory();
+            storyBean.setId(bean.getId());
+            storyBean.setTitle(bean.getTitle());
+            storyBean.setImage(bean.getImage());
+            storyBean.setImage_source(bean.getImage_source());
+            storyBean.setShare_url(bean.getShare_url());
+            storyBean.setBody(adjustBody);
+            storyBean.setFavoriteCategory(favoriteName);
+            storyBean.save();
+        }
 
-
-        List<String> stringList = DbManager.getFavorateCategory();
-        if (!stringList.contains(favoriteName)) {
+        List<String> listCategory = DbManager.getFavorateCategory();
+        if (!listCategory.contains(favoriteName)) {
             DbFavoriteCategory categoryBean = new DbFavoriteCategory();
             categoryBean.setName(favoriteName);
             categoryBean.save();
         }
-
-
-        if (storyBean.save()) {
-            mView.favorite("保存成功");
-        } else {
-            mView.favorite("保存失败");
-        }
-
     }
 
     @Override
