@@ -20,6 +20,7 @@
     <string name="action_set">设置</string>
 
     <!-- 收藏 -->
+    <string name="favorite_list">收藏列表</string>
     <string name="favorite_choose_category">选择或新建收藏分类</string>
 
 

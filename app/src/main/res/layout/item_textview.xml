@@ -7,6 +7,18 @@
     <TextView
         android:id="@+id/tv_normal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_item"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:textColor="#2A2A2A"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#333d3d3d" />
 
 </LinearLayout>

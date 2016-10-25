@@ -14,14 +14,14 @@ public class DbStory extends DataSupport {
     private String image;
     private String share_url;
     private int id;
-    private String favoriteName;
+    private String favoriteCategory;
 
-    public String getFavoriteName() {
-        return favoriteName;
+    public String getFavoriteCategory() {
+        return favoriteCategory;
     }
 
-    public void setFavoriteName(String favoriteName) {
-        this.favoriteName = favoriteName;
+    public void setFavoriteCategory(String favoriteCategory) {
+        this.favoriteCategory = favoriteCategory;
     }
 
     public String getBody() {
