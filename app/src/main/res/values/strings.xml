@@ -33,5 +33,7 @@
 
 
     <string name="sure">确定</string>
+    <string name="download">下载</string>
+    <string name="downloading">下载中...</string>
 
 </resources>

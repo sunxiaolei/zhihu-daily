@@ -1,8 +1,10 @@
 package xiaolei.sun.zhihu_daily.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -17,19 +19,38 @@ public class AndroidUtils {
 
     /**
      * 获取应用版本号
+     *
      * @param context
      * @return
      */
-    public static String getAppVersion(Context context){
+    public static String getAppVersion(Context context) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packInfo = null;
         try {
-            packInfo = packageManager.getPackageInfo(context.getPackageName(),0);
+            packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         String version = packInfo.versionName;
         return version;
+    }
+
+    /**
+     * 安装apk
+     *
+     * @param context
+     * @param apkPath
+     */
+    public static void installAPK(Context context, String apkPath) {
+        System.out.println(apkPath);
+        File apkFile = new File(apkPath);
+        if (apkFile.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse("file://" + apkPath),
+                    "application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }
+
     }
 
     /**
@@ -162,8 +183,6 @@ public class AndroidUtils {
     /**
      * 删除指定目录下文件及目录
      *
-     * @param deleteThisPath
-     * @param filepath
      * @return
      */
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {
