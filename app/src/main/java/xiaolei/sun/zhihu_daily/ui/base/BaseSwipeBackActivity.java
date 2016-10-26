@@ -3,6 +3,7 @@ package xiaolei.sun.zhihu_daily.ui.base;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -74,6 +75,24 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
                 .content(msg)
                 .cancelable(false)
                 .positiveText("确定")
+                .show();
+        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mDialog = null;
+            }
+        });
+    }
+
+    public void showDialog(String title, String msg, String positiveText,MaterialDialog.SingleButtonCallback listener) {
+        mDialog = new MaterialDialog.Builder(this)
+                .theme(Theme.LIGHT)
+                .title(title)
+                .content(msg)
+                .cancelable(false)
+                .positiveText(positiveText)
+                .negativeText("取消")
+                .onPositive(listener)
                 .show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
