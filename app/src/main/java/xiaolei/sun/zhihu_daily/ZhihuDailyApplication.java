@@ -29,7 +29,7 @@ public class ZhihuDailyApplication extends LitePalApplication {
         super.onCreate();
 
         Fresco.initialize(this);
-        AVOSCloud.initialize(this,"1easqLxsHBENYgL5NtmNDCjE-gzGzoHsz","w9D9S3qFO973qntytibgHec6");
+        AVOSCloud.initialize(this, Constant.LEAN_CLOUD_ID, Constant.LEAN_CLOUD_KEY);
 
         Logger
                 .init("ZhiHu")

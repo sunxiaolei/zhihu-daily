@@ -12,6 +12,12 @@ public class Constant {
     public static final String BMOB_ID = "773726525cac879d72176e4d9765ed3f";
 
 
+    public static final String LEAN_CLOUD_ID = "1easqLxsHBENYgL5NtmNDCjE-gzGzoHsz";
+    public static final String LEAN_CLOUD_KEY = "w9D9S3qFO973qntytibgHec6";
+
+    public static final String LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY = "NEWEST_VERSION";
+
+
     public static final String SP_USER = "USER";
     public static final String SP_USER_NAME = "USER_NAME";
     public static final String SP_USER_PASSWORD = "USER_PASSWORD";

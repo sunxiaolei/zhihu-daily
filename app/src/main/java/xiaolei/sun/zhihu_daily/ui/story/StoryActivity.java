@@ -1,6 +1,5 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,16 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.R;
@@ -40,6 +36,9 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
     private int storyId;
 
+    /**
+     * 收藏按钮
+     */
     private FloatingActionButton btnFavorite;
     private CollapsingToolbarLayout collapsingToolbar;
     private SimpleDraweeView image;
@@ -119,8 +118,10 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     private void checkIsFavorite() {
         if (DbManager.isFavorite(storyId)) {
             isFavorite = true;
+            btnFavorite.setImageResource(R.drawable.ic_action_favorite_yet);
         } else {
             isFavorite = false;
+            btnFavorite.setImageResource(R.drawable.ic_action_favorite);
         }
     }
 
