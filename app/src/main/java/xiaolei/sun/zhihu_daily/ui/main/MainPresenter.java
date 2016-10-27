@@ -7,9 +7,6 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
@@ -17,7 +14,6 @@ import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
 import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
-import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
@@ -32,29 +28,6 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
         SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
         final String username = sp.getString(Constant.SP_USER_NAME);
         String password = sp.getString(Constant.SP_USER_PASSWORD);
-        if (username != null && password != null) {
-            BmobQuery<BmobUserBean> queryPhone = new BmobQuery<BmobUserBean>();
-            BmobQuery<BmobUserBean> queryPassword = new BmobQuery<BmobUserBean>();
-            queryPhone.addWhereEqualTo("phone", username);
-            queryPassword.addWhereEqualTo("password", password);
-            List<BmobQuery<BmobUserBean>> queryList = new ArrayList<>();
-            queryList.add(queryPhone);
-            queryList.add(queryPassword);
-            BmobQuery<BmobUserBean> query = new BmobQuery<>();
-            query.and(queryList);
-            query.findObjects(new FindListener<BmobUserBean>() {
-                @Override
-                public void done(List<BmobUserBean> list, BmobException e) {
-                    if (e == null) {
-                        if (list.size() > 0) {
-                            System.out.println(list.get(0));
-                            ZhihuDailyApplication.isLogin = true;
-                            mView.setDrawer(username);
-                        }
-                    }
-                }
-            });
-        }
     }
 
     @Override

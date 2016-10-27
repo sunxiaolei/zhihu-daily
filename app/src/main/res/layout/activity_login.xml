@@ -17,30 +17,40 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="120dp"
-        android:background="@drawable/bg_edittext"
-        android:drawableLeft="@drawable/ic_login_user"
-        android:drawablePadding="10dp"
+        android:background="@null"
+        android:cursorVisible="false"
         android:gravity="center_vertical"
         android:hint="@string/register_login"
         android:inputType="phone"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@null" />
+        android:textCursorDrawable="@null"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/colorPrimaryDark" />
 
     <EditText
         android:id="@+id/et_login_password"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_edittext"
-        android:drawableLeft="@drawable/ic_login_password"
-        android:drawablePadding="10dp"
+        android:background="@null"
+        android:cursorVisible="false"
         android:gravity="center_vertical"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@null" />
+        android:textCursorDrawable="@null"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/btn_login_login"

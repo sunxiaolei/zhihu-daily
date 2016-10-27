@@ -10,8 +10,6 @@ import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePalApplication;
 
-import xiaolei.sun.zhihu_daily.network.entity.BmobUserBean;
-
 /**
  * Description: <br>
  * author: sun<br>
