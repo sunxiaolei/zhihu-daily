@@ -17,7 +17,14 @@ public class Constant {
     public static final String LEAN_CLOUD_ID = "1easqLxsHBENYgL5NtmNDCjE-gzGzoHsz";
     public static final String LEAN_CLOUD_KEY = "w9D9S3qFO973qntytibgHec6";
 
+    /**
+     * 服务器最新版本
+     */
     public static final String LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY = "NEWEST_VERSION";
+    /**
+     * 服务器数据库 用户表
+     */
+    public static final String LEAN_CLOUD_TABLE_USER = "_User";
 
 
     public static final String SP_USER = "USER";

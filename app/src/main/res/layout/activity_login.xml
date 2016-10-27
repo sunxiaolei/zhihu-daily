@@ -21,7 +21,7 @@
         android:cursorVisible="false"
         android:gravity="center_vertical"
         android:hint="@string/register_login"
-        android:inputType="phone"
+        android:inputType="text"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
         android:textCursorDrawable="@null"
