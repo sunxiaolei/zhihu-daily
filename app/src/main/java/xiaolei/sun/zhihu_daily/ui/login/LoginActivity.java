@@ -93,7 +93,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
                     showToast("用户名或密码不能为空！");
                     return;
                 }
-                if (!RegexUtils.isMobileSimple(phone)){
+                if (!RegexUtils.isMobileSimple(phone)) {
                     showToast("请输入正确手机号码！");
                     return;
                 }

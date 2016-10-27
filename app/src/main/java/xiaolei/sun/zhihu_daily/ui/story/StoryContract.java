@@ -2,8 +2,6 @@ package xiaolei.sun.zhihu_daily.ui.story;
 
 import java.util.List;
 
-import cn.bmob.v3.exception.BmobException;
-import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.ui.base.IView;
 

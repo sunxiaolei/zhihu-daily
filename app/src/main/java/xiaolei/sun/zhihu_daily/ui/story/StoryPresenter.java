@@ -6,13 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.bmob.v3.datatype.BmobRelation;
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
-import xiaolei.sun.zhihu_daily.network.entity.BmobStoryBean;
 import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 
@@ -79,9 +77,6 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
             }
         });
     }
-
-    private BmobStoryBean storyBean;
-    private BmobRelation relation;
 
     @Override
     public void favorite(String favoriteName) {

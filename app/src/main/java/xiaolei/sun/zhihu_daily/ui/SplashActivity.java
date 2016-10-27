@@ -14,7 +14,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.bmob.v3.Bmob;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -43,9 +42,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        initBmob();
-        testLeanCloud();
 
         img = (SimpleDraweeView) findViewById(R.id.img_activity_splash);
         tvCopyright = (TextView) findViewById(R.id.tv_activity_splash);
@@ -77,38 +73,4 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    private void initBmob(){
-
-        //提供以下两种方式进行初始化操作：
-
-        //第一：默认初始化
-        Bmob.initialize(this, Constant.BMOB_ID);
-
-        //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
-        //BmobConfig config =new BmobConfig.Builder(this)
-        ////设置appkey
-        //.setApplicationId("Your Application ID")
-        ////请求超时时间（单位为秒）：默认15s
-        //.setConnectTimeout(30)
-        ////文件分片上传时每片的大小（单位字节），默认512*1024
-        //.setUploadBlockSize(1024*1024)
-        ////文件的过期时间(单位为秒)：默认1800s
-        //.setFileExpiration(2500)
-        //.build();
-        //Bmob.initialize(config);
-    }
-
-    private void testLeanCloud(){
-        // 测试 SDK 是否正常工作的代码
-        AVObject testObject = new AVObject("TestObject");
-        testObject.put("words","Hello World!");
-        testObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if(e == null){
-                    Log.d("saved","success!");
-                }
-            }
-        });
-    }
 }
