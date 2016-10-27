@@ -202,7 +202,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                     break;
                 case DownloadManager.STATUS_SUCCESSFUL:
                     System.out.println("STATUS_SUCCESSFUL");
-                    AndroidUtils.installAPK(SettingsActivity.this, Constant.DOWNLOAD_PATH + appSaveName);
+                    AndroidUtils.installAPK(SettingsActivity.this, Constant.DOWNLOAD_PATH, appSaveName);
                     break;
             }
         }

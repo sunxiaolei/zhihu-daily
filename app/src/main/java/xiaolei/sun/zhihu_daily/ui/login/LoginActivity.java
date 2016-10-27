@@ -10,11 +10,9 @@ import android.widget.TextView;
 
 
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
-import xiaolei.sun.zhihu_daily.utils.RegexUtils;
 
 /**
  * Description: <br>
@@ -30,7 +28,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
     private TextView btnRegister;
 
     private View registerView;
-    private EditText etRegisterPhone;
+    private EditText etRegisterUsername;
     private EditText etRegisterPassword;
     private Button btnRegisterSubmit;
 
@@ -80,25 +78,21 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.BottomSheetDialog);
         registerView = LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_register, null);
 
-        etRegisterPhone = (EditText) registerView.findViewById(R.id.et_register_phone);
+        etRegisterUsername = (EditText) registerView.findViewById(R.id.et_register_phone);
         etRegisterPassword = (EditText) registerView.findViewById(R.id.et_register_password);
         btnRegisterSubmit = (Button) registerView.findViewById(R.id.btn_register_submit);
 
         btnRegisterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = etRegisterPhone.getText().toString();
+                String username = etRegisterUsername.getText().toString();
                 String password = etRegisterPassword.getText().toString();
-                if (phone == null || password == null || phone.equals("") || password.equals("")) {
+                if (username == null || password == null || username.equals("") || password.equals("")) {
                     showToast("用户名或密码不能为空！");
                     return;
                 }
-                if (!RegexUtils.isMobileSimple(phone)) {
-                    showToast("请输入正确手机号码！");
-                    return;
-                }
                 showLoading();
-                mPresenter.register(phone, password);
+                mPresenter.register(username, password);
             }
         });
 

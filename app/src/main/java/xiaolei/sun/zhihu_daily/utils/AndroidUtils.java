@@ -53,6 +53,18 @@ public class AndroidUtils {
 
     }
 
+    public static void installAPK(Context context, String apkPath,String apkName) {
+        System.out.println(apkPath);
+        File apkFile = new File(apkPath,apkName);
+        if (apkFile.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse("file://" + apkPath+apkName),
+                    "application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }
+
+    }
+
     /**
      * * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * *
      *
