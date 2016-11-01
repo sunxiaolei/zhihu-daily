@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -18,8 +17,8 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.network.entity.StoriesBean;
-import xiaolei.sun.zhihu_daily.network.entity.TopStoriesBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.StoriesBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.TopStoriesBean;
 import xiaolei.sun.zhihu_daily.ui.story.StoryActivity;
 
 /**

@@ -11,7 +11,7 @@ import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
-import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 
 /**
@@ -84,38 +84,6 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 //            mView.favorite("收藏失败：请先登录");
 //            return;
 //        }
-//        BmobUserBean user = BmobUser.getCurrentUser(BmobUserBean.class);
-//        relation = new BmobRelation();
-//        relation.add(user);
-//
-//        storyBean = new BmobStoryBean();
-//        storyBean.setId(bean.getId());
-//        storyBean.setTitle(bean.getTitle());
-//        storyBean.setImage(bean.getImage());
-//        storyBean.setImage_source(bean.getImage_source());
-//        storyBean.setShare_url(bean.getShare_url());
-//        storyBean.setBody(adjustBody);
-//        storyBean.save(new SaveListener<String>() {
-//            @Override
-//            public void done(String s, BmobException e) {
-//                if (e == null){
-//                    storyBean.setFavorite(relation);
-//                    storyBean.setObjectId(s);
-//                    storyBean.update(new UpdateListener() {
-//                        @Override
-//                        public void done(BmobException e) {
-//                            if (e == null) {
-//                                mView.favorite("收藏成功");
-//                            } else {
-//                                mView.favorite("收藏失败：" + e.getMessage());
-//                            }
-//                        }
-//                    });
-//                }else {
-//                    mView.favorite("保存失败：" + e.getMessage());
-//                }
-//            }
-//        });
 
         //本地保存到数据库
         DbStory storyBean = new DbStory();

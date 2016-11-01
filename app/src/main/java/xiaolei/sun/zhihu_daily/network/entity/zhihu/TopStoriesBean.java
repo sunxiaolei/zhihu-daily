@@ -1,4 +1,4 @@
-package xiaolei.sun.zhihu_daily.network.entity;
+package xiaolei.sun.zhihu_daily.network.entity.zhihu;
 
 import java.io.Serializable;
 

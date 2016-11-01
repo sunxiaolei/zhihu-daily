@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.SaveCallback;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.concurrent.TimeUnit;
@@ -17,14 +13,10 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
-import xiaolei.sun.zhihu_daily.Constant;
-import xiaolei.sun.zhihu_daily.ui.base.BaseActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
 import xiaolei.sun.zhihu_daily.network.api.ApiStartImage;
-import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
-import xiaolei.sun.zhihu_daily.network.entity.StartImageBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
 
 /**
  * Description: <br>

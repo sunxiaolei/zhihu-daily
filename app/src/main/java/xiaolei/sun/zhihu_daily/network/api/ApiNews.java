@@ -9,8 +9,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import xiaolei.sun.zhihu_daily.network.ApiRequest;
-import xiaolei.sun.zhihu_daily.network.entity.StoryBean;
+import xiaolei.sun.zhihu_daily.network.ZhihuManager;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.StoryBean;
 
 /**
  * Description: <br>
@@ -24,7 +24,7 @@ public class ApiNews {
     private News api;
 
     public ApiNews(){
-        api = ApiRequest.getInstance().create(News.class);
+        api = ZhihuManager.getInstance().create(News.class);
     }
 
     public void getNews(int id,Subscriber<StoryBean> subscriber){
@@ -35,7 +35,7 @@ public class ApiNews {
     }
 
     public void getCss(Map<String,String> params,Subscriber<String> subscriber){
-        Css apiCss = ApiRequest.getInstance(1).create(Css.class);
+        Css apiCss = ZhihuManager.getInstance(1).create(Css.class);
         apiCss.getCss(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

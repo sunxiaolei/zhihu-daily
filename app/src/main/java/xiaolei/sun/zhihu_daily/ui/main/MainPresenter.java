@@ -1,11 +1,6 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
-import android.content.Context;
-
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.Constant;
@@ -13,7 +8,7 @@ import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
-import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 

@@ -6,8 +6,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import xiaolei.sun.zhihu_daily.network.ApiRequest;
-import xiaolei.sun.zhihu_daily.network.entity.StartImageBean;
+import xiaolei.sun.zhihu_daily.network.ZhihuManager;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
 
 /**
  * Description: <br>
@@ -21,7 +21,7 @@ public class ApiStartImage {
     private StartImage api;
 
     public ApiStartImage(){
-        api = ApiRequest.getInstance().create(StartImage.class);
+        api = ZhihuManager.getInstance().create(StartImage.class);
     }
 
     public void getStartImage(Subscriber<StartImageBean> subscriber){
