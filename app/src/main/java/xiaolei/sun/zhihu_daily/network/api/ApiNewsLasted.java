@@ -5,8 +5,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import xiaolei.sun.zhihu_daily.network.ApiRequest;
-import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
+import xiaolei.sun.zhihu_daily.network.ZhihuManager;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
 
 /**
  * Description: <br>
@@ -20,7 +20,7 @@ public class ApiNewsLasted {
     private NewsLasted api;
 
     public ApiNewsLasted(){
-        api = ApiRequest.getInstance().create(NewsLasted.class);
+        api = ZhihuManager.getInstance().create(NewsLasted.class);
     }
 
     public void getNewsLasted(Subscriber<NewsBean> subscriber){

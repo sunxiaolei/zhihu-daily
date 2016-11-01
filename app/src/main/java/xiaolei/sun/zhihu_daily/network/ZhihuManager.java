@@ -1,7 +1,5 @@
 package xiaolei.sun.zhihu_daily.network;
 
-import android.util.Log;
-
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
@@ -17,8 +15,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Description: <br>
  * author: sun<br>
@@ -26,38 +22,38 @@ import static android.content.ContentValues.TAG;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class ApiRequest {
+public class ZhihuManager {
 
-    private static volatile ApiRequest instance;
+    private static volatile ZhihuManager instance;
 
     private Retrofit retrofit;
     private Retrofit.Builder builder;
 
-    public static ApiRequest getInstance(int i) {
+    public static ZhihuManager getInstance(int i) {
         if (instance == null) {
-            synchronized (ApiRequest.class) {
+            synchronized (ZhihuManager.class) {
                 if (instance == null) {
-                    instance = new ApiRequest(i);
+                    instance = new ZhihuManager(i);
                 }
             }
         }
-        instance = new ApiRequest(i);
+        instance = new ZhihuManager(i);
         return instance;
     }
 
-    public static ApiRequest getInstance() {
+    public static ZhihuManager getInstance() {
         if (instance == null) {
-            synchronized (ApiRequest.class) {
+            synchronized (ZhihuManager.class) {
                 if (instance == null) {
-                    instance = new ApiRequest(0);
+                    instance = new ZhihuManager(0);
                 }
             }
         }
-        instance = new ApiRequest(0);
+        instance = new ZhihuManager(0);
         return instance;
     }
 
-    private ApiRequest(int i) {
+    private ZhihuManager(int i) {
         init(i);
     }
 
@@ -97,7 +93,7 @@ public class ApiRequest {
 
         retrofit = builder
                 .client(client.build())
-                .baseUrl(NetWorkConstant.URL_BASE)
+                .baseUrl(NetWorkConstant.URL_BASE_ZHIHU)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

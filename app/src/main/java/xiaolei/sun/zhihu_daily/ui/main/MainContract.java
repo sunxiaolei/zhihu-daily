@@ -2,7 +2,7 @@ package xiaolei.sun.zhihu_daily.ui.main;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import xiaolei.sun.zhihu_daily.network.entity.NewsBean;
+import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.ui.base.IView;
 
