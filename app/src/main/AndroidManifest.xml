@@ -57,8 +57,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.avos.avoscloud.feedback.ThreadActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+        <service android:name=".ui.settings.UpdateService" />
     </application>
 
 </manifest>

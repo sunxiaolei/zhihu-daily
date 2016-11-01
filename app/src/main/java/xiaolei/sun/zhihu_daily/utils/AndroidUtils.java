@@ -42,7 +42,6 @@ public class AndroidUtils {
      * @param apkPath
      */
     public static void installAPK(Context context, String apkPath) {
-        System.out.println(apkPath);
         File apkFile = new File(apkPath);
         if (apkFile.exists()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -53,12 +52,12 @@ public class AndroidUtils {
 
     }
 
-    public static void installAPK(Context context, String apkPath,String apkName) {
-        System.out.println(apkPath);
-        File apkFile = new File(apkPath,apkName);
+    public static void installAPK(Context context, String apkPath, String apkName) {
+        File apkFile = context.getExternalFilesDir(apkPath + apkName);
         if (apkFile.exists()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse("file://" + apkPath+apkName),
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(apkFile),
                     "application/vnd.android.package-archive");
             context.startActivity(intent);
         }
