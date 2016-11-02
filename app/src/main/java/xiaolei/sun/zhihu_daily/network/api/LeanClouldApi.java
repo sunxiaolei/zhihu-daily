@@ -1,13 +1,20 @@
 package xiaolei.sun.zhihu_daily.network.api;
 
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 import xiaolei.sun.zhihu_daily.Constant;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteCategoryResponse;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.RegisterResponse;
+
+import static android.R.attr.filter;
 
 /**
  * Created by sunxl8 on 2016/11/1.
@@ -16,20 +23,37 @@ import xiaolei.sun.zhihu_daily.network.entity.leancloud.RegisterResponse;
 public interface LeanClouldApi {
 
     /***********************************************************************************************
-     * register
+     * 注册
      **********************************************************************************************/
     @Headers({"X-LC-Id:" + Constant.LEAN_CLOUD_ID,
             "X-LC-Key:" + Constant.LEAN_CLOUD_KEY,
             "Content-Type:application/json"})
-    @POST("/1.1/users")
+    @POST("users")
     Observable<RegisterResponse> doRegister(@Body LoginRequest register);
 
     /***********************************************************************************************
-     * login
+     * 登录
      **********************************************************************************************/
     @Headers({"X-LC-Id:" + Constant.LEAN_CLOUD_ID,
             "X-LC-Key:" + Constant.LEAN_CLOUD_KEY,
             "Content-Type:application/json"})
-    @POST("/1.1/login")
+    @POST("login")
     Observable<LoginResponse> doLogin(@Body LoginRequest login);
+
+    /***********************************************************************************************
+     * 收藏
+     **********************************************************************************************/
+    @Headers({"X-LC-Id:" + Constant.LEAN_CLOUD_ID,
+            "X-LC-Key:" + Constant.LEAN_CLOUD_KEY,
+            "Content-Type:application/json"})
+    @POST("classes/Favorite")
+    Observable<FavoriteResponse> doFavorite(@Body FavoriteRequest request);
+
+    /***********************************************************************************************
+     * 获取收藏类别列表
+     **********************************************************************************************/
+    @Headers({"X-LC-Id:" + Constant.LEAN_CLOUD_ID,
+            "X-LC-Key:" + Constant.LEAN_CLOUD_KEY})
+    @GET("classes/Favorite?where={filter}")
+    Observable<FavoriteCategoryResponse> getFavoriteCategory(@Path("filter") String filter);
 }

@@ -19,7 +19,7 @@ public class StoryContract {
 
         void loadData(String string);
 
-        void favorite(String message);
+        void favoriteResult(int result);
 
         void setFavorateCategory(List<String> list);
 
@@ -31,7 +31,7 @@ public class StoryContract {
 
         void getCss();
 
-        void favorite(String favoriteName);
+        void favorite(String category,String storyId);
 
         void getFavorateCategory();
     }
