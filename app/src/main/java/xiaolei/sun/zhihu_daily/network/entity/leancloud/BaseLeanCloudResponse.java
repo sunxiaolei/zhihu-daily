@@ -6,7 +6,6 @@ package xiaolei.sun.zhihu_daily.network.entity.leancloud;
 
 public class BaseLeanCloudResponse {
 
-
     /**
      * code : 217
      * error : Invalid username, it must be a non-blank string.

@@ -13,9 +13,7 @@ public class LoginContract {
 
         void showRegisterSheet();
 
-        void showResult(String title,String msg);
-
-        void gotoMain();
+        void showResult(int state);
 
     }
 

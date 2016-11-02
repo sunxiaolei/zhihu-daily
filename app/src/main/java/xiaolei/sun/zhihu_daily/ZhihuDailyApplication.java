@@ -10,6 +10,8 @@ import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePalApplication;
 
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
+
 /**
  * Description: <br>
  * author: sun<br>
@@ -21,6 +23,8 @@ public class ZhihuDailyApplication extends LitePalApplication {
 
     public static boolean isLogin = false;
     public static String userId;
+    public static String sessionToken;
+    public static LoginResponse user;
 
     @Override
     public void onCreate() {
