@@ -21,6 +21,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.R;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
@@ -84,7 +85,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
         btnFavorite = (FloatingActionButton) findViewById(R.id.btn_story_favorite);
 
-        checkIsFavorite();
+//        checkIsFavorite();
 
 
         web = (WebView) findViewById(R.id.web_activity_story);
@@ -103,10 +104,15 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isFavorite) {
-                    showToast("已收藏");
-                } else {
+//                if (isFavorite) {
+//                    showToast("已收藏");
+//                } else {
+//                    showBottomSheet();
+//                }
+                if (ZhihuDailyApplication.isLogin){
                     showBottomSheet();
+                }else {
+                    showToast("请先登录");
                 }
             }
         });
@@ -115,15 +121,15 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     /**
      * 判断是否已收藏
      */
-    private void checkIsFavorite() {
-        if (DbManager.isFavorite(storyId)) {
-            isFavorite = true;
-            btnFavorite.setImageResource(R.drawable.ic_action_favorite_yet);
-        } else {
-            isFavorite = false;
-            btnFavorite.setImageResource(R.drawable.ic_action_favorite);
-        }
-    }
+//    private void checkIsFavorite() {
+//        if (DbManager.isFavorite(storyId)) {
+//            isFavorite = true;
+//            btnFavorite.setImageResource(R.drawable.ic_action_favorite_yet);
+//        } else {
+//            isFavorite = false;
+//            btnFavorite.setImageResource(R.drawable.ic_action_favorite);
+//        }
+//    }
 
     @Override
     protected StoryPresenter createPresenter() {
@@ -152,10 +158,17 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     }
 
     @Override
-    public void favorite(String message) {
+    public void favoriteResult(int result) {
         mBottomSheetDialog.dismiss();
-        showToast(message);
-        checkIsFavorite();
+        switch (result){
+            case StoryPresenter.FAVORITE_SUCCESS:
+                showToast("收藏成功");
+                break;
+            case StoryPresenter.FAVORITE_FAILED:
+                showToast("收藏失败");
+                break;
+        }
+//        checkIsFavorite();
     }
 
     @Override
@@ -166,7 +179,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String str = listCategory.get(i);
-                mPresenter.favorite(str);
+                mPresenter.favorite(str,storyId+"");
             }
         });
     }
@@ -197,7 +210,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
                     showToast("null");
                     return;
                 }
-                mPresenter.favorite(name);
+                mPresenter.favorite(name,storyId+"");
             }
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);

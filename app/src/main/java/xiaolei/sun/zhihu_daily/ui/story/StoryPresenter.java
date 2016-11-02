@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Subscriber;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
+import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StoryBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 
@@ -19,6 +23,9 @@ import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
  */
 
 public class StoryPresenter extends RxPresenter<StoryContract.View> implements StoryContract.Presenter {
+
+    public static final int FAVORITE_SUCCESS = 0;
+    public static final int FAVORITE_FAILED = 1;
 
     private ApiNews api;
     private StoryBean bean;
@@ -79,36 +86,60 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
     }
 
     @Override
-    public void favorite(String favoriteName) {
-//        if (!ZhihuDailyApplication.isLogin) {
-//            mView.favorite("收藏失败：请先登录");
-//            return;
+    public void favorite(String category,String storyId) {
+
+        FavoriteRequest request = new FavoriteRequest();
+        request.setCategory(category);
+        request.setStoryId(storyId);
+        request.setUserId(ZhihuDailyApplication.user.getObjectId());
+        LeanCloudRequest.doFavorite(request)
+                .subscribe(new Subscriber<FavoriteResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.favoriteResult(FAVORITE_FAILED);
+                    }
+
+                    @Override
+                    public void onNext(FavoriteResponse favoriteResponse) {
+                        mView.favoriteResult(FAVORITE_SUCCESS);
+                    }
+                });
+
+        //本地保存到数据库---暂时不用本地数据库
+//        DbStory storyBean = new DbStory();
+//        storyBean.setStoryId(bean.getId());
+//        storyBean.setTitle(bean.getTitle());
+//        storyBean.setImage(bean.getImage());
+//        storyBean.setImage_source(bean.getImage_source());
+//        storyBean.setShare_url(bean.getShare_url());
+//        storyBean.setBody(adjustBody);
+//        storyBean.setFavoriteCategory(favoriteName);
+//        storyBean.save();
+//
+//        List<String> listCategory = DbManager.getFavorateCategory();
+//        if (!listCategory.contains(favoriteName)) {
+//            DbFavoriteCategory categoryBean = new DbFavoriteCategory();
+//            categoryBean.setName(favoriteName);
+//            categoryBean.save();
 //        }
-
-        //本地保存到数据库
-        DbStory storyBean = new DbStory();
-        storyBean.setStoryId(bean.getId());
-        storyBean.setTitle(bean.getTitle());
-        storyBean.setImage(bean.getImage());
-        storyBean.setImage_source(bean.getImage_source());
-        storyBean.setShare_url(bean.getShare_url());
-        storyBean.setBody(adjustBody);
-        storyBean.setFavoriteCategory(favoriteName);
-        storyBean.save();
-
-        List<String> listCategory = DbManager.getFavorateCategory();
-        if (!listCategory.contains(favoriteName)) {
-            DbFavoriteCategory categoryBean = new DbFavoriteCategory();
-            categoryBean.setName(favoriteName);
-            categoryBean.save();
-        }
-        mView.favorite("保存成功");
+//        mView.favorite("保存成功");
     }
 
     @Override
     public void getFavorateCategory() {
-        List<String> stringList = DbManager.getFavorateCategory();
-        mView.setFavorateCategory(stringList);
+
+        //符合查询
+        //{"$or":[{"pubUserCertificate":{"$gt":2}},{"pubUserCertificate":{"$lt":3}}]}
+//        LeanCloudRequest.getFavoriteCategory()
+
+        //获取数据库数据
+//        List<String> stringList = DbManager.getFavorateCategory();
+//        mView.setFavorateCategory(stringList);
     }
 
     public String adjustCss(String string) {
