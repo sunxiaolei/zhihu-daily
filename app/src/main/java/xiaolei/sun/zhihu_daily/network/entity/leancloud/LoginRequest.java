@@ -4,7 +4,7 @@ package xiaolei.sun.zhihu_daily.network.entity.leancloud;
  * Created by sunxl8 on 2016/11/1.
  */
 
-public class RegisterRequest {
+public class LoginRequest {
 
 
     /**

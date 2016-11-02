@@ -102,15 +102,21 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
     }
 
     @Override
-    public void showResult(String title, String msg) {
+    public void showResult(int state) {
         dismissLoading();
-        showDialog(title, msg);
-    }
-
-    @Override
-    public void gotoMain() {
-        startActivity(new Intent(this, MainActivity.class));
-        this.finish();
+        switch (state) {
+            case LoginPresenter.LOGIN_STATE_SUCCESS:
+            case LoginPresenter.REGISTER_STATE_SUCCESS:
+                startActivity(new Intent(this, MainActivity.class));
+                this.finish();
+                break;
+            case LoginPresenter.LOGIN_STATE_FAILED:
+                showDialog("登录失败", null);
+                break;
+            case LoginPresenter.REGISTER_STATE_FAILED:
+                showDialog("注册失败", null);
+                break;
+        }
     }
 
 }
