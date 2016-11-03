@@ -10,7 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
@@ -91,6 +94,8 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         });
     }
 
+    FavoriteRequest request;
+
     @Override
     public void favorite(final String category, final String storyId) {
 
@@ -107,8 +112,45 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         arr.add(obj2);
         obj.add("$and", arr);
         map.put("where", obj.toString());
+//        LeanCloudRequest.getFavoriteRelation(map)
+//                .subscribe(new Subscriber<FavoriteRelationResponse>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mView.favoriteResult(FAVORITE_FAILED);
+//                    }
+//
+//                    @Override
+//                    public void onNext(FavoriteRelationResponse response) {
+//                        if (response.getResults() != null && response.getResults().size() > 0) {
+//                            mView.favoriteResult(FAVORITE_YET);
+//                        } else {
+//                            doFavorite(category, storyId);
+//                        }
+//                    }
+//                });
+
+        request = new FavoriteRequest();
+        request.setCategory(category);
+        request.setStoryId(storyId);
+        request.setUserId(ZhihuDailyApplication.user.getObjectId());
         LeanCloudRequest.getFavoriteRelation(map)
-                .subscribe(new Subscriber<FavoriteRelationResponse>() {
+                .flatMap(new Func1<FavoriteRelationResponse, Observable<FavoriteResponse>>() {
+                    @Override
+                    public Observable<FavoriteResponse> call(FavoriteRelationResponse response) {
+                        if (response.getResults() != null && response.getResults().size() > 0) {
+                            mView.favoriteResult(FAVORITE_YET);
+                            return null;
+                        } else {
+                            return LeanCloudRequest.doFavorite(request);
+                        }
+                    }
+                })
+                .subscribe(new Subscriber<FavoriteResponse>() {
                     @Override
                     public void onCompleted() {
 
@@ -120,12 +162,8 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
                     }
 
                     @Override
-                    public void onNext(FavoriteRelationResponse response) {
-                        if (response.getResults() != null && response.getResults().size() > 0) {
-                            mView.favoriteResult(FAVORITE_YET);
-                        } else {
-                            doFavorite(category, storyId);
-                        }
+                    public void onNext(FavoriteResponse favoriteResponse) {
+                        mView.favoriteResult(FAVORITE_SUCCESS);
                     }
                 });
 
@@ -197,7 +235,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
                         if (response.getResults() != null && response.getResults().size() > 0) {
                             List<String> listCategory = new ArrayList<String>();
                             HashSet set = new HashSet();
-                            for (FavoriteRelationResponse.ResultsBean item:response.getResults()){
+                            for (FavoriteRelationResponse.ResultsBean item : response.getResults()) {
                                 set.add(item.getCategory());
                             }
                             listCategory.addAll(set);

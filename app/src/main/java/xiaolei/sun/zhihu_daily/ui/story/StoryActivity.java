@@ -161,6 +161,9 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     public void favoriteResult(int result) {
         mBottomSheetDialog.dismiss();
         switch (result){
+            case StoryPresenter.FAVORITE_YET:
+                showToast("已收藏过");
+                break;
             case StoryPresenter.FAVORITE_SUCCESS:
                 showToast("收藏成功");
                 break;
