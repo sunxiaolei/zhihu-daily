@@ -1,8 +1,12 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +17,7 @@ import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.api.ApiNews;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StoryBean;
@@ -26,6 +31,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 
     public static final int FAVORITE_SUCCESS = 0;
     public static final int FAVORITE_FAILED = 1;
+    public static final int FAVORITE_YET = 2;//已收藏
 
     private ApiNews api;
     private StoryBean bean;
@@ -86,14 +92,23 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
     }
 
     @Override
-    public void favorite(String category,String storyId) {
+    public void favorite(final String category, final String storyId) {
 
-        FavoriteRequest request = new FavoriteRequest();
-        request.setCategory(category);
-        request.setStoryId(storyId);
-        request.setUserId(ZhihuDailyApplication.user.getObjectId());
-        LeanCloudRequest.doFavorite(request)
-                .subscribe(new Subscriber<FavoriteResponse>() {
+        //判断是否已收藏
+        //{'$or':[{'pubUserCertificate':{'$gt':2}},{'pubUserCertificate':{'$lt':3}}]}
+        Map<String, String> map = new HashMap<>();
+        JsonObject obj = new JsonObject();
+        JsonObject obj1 = new JsonObject();
+        JsonObject obj2 = new JsonObject();
+        JsonArray arr = new JsonArray();
+        obj1.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        obj2.addProperty("storyId", storyId + "");
+        arr.add(obj1);
+        arr.add(obj2);
+        obj.add("$and", arr);
+        map.put("where", obj.toString());
+        LeanCloudRequest.getFavoriteRelation(map)
+                .subscribe(new Subscriber<FavoriteRelationResponse>() {
                     @Override
                     public void onCompleted() {
 
@@ -105,8 +120,12 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
                     }
 
                     @Override
-                    public void onNext(FavoriteResponse favoriteResponse) {
-                        mView.favoriteResult(FAVORITE_SUCCESS);
+                    public void onNext(FavoriteRelationResponse response) {
+                        if (response.getResults() != null && response.getResults().size() > 0) {
+                            mView.favoriteResult(FAVORITE_YET);
+                        } else {
+                            doFavorite(category, storyId);
+                        }
                     }
                 });
 
@@ -130,12 +149,63 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 //        mView.favorite("保存成功");
     }
 
+    private void doFavorite(String category, String storyId) {
+        FavoriteRequest request = new FavoriteRequest();
+        request.setCategory(category);
+        request.setStoryId(storyId);
+        request.setUserId(ZhihuDailyApplication.user.getObjectId());
+        LeanCloudRequest.doFavorite(request)
+                .subscribe(new Subscriber<FavoriteResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.favoriteResult(FAVORITE_FAILED);
+                    }
+
+                    @Override
+                    public void onNext(FavoriteResponse favoriteResponse) {
+                        mView.favoriteResult(FAVORITE_SUCCESS);
+                    }
+                });
+    }
+
     @Override
     public void getFavorateCategory() {
 
         //符合查询
-        //{"$or":[{"pubUserCertificate":{"$gt":2}},{"pubUserCertificate":{"$lt":3}}]}
-//        LeanCloudRequest.getFavoriteCategory()
+        Map<String, String> map = new HashMap<>();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        map.put("where", obj.toString());
+        LeanCloudRequest.getFavoriteRelation(map)
+                .subscribe(new Subscriber<FavoriteRelationResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(FavoriteRelationResponse response) {
+                        if (response.getResults() != null && response.getResults().size() > 0) {
+                            List<String> listCategory = new ArrayList<String>();
+                            HashSet set = new HashSet();
+                            for (FavoriteRelationResponse.ResultsBean item:response.getResults()){
+                                set.add(item.getCategory());
+                            }
+                            listCategory.addAll(set);
+                            mView.setFavorateCategory(listCategory);
+                        } else {
+                        }
+                    }
+                });
 
         //获取数据库数据
 //        List<String> stringList = DbManager.getFavorateCategory();
