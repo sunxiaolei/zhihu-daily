@@ -1,20 +1,22 @@
 package xiaolei.sun.zhihu_daily.network.api;
 
+import java.util.Map;
+
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 import xiaolei.sun.zhihu_daily.Constant;
-import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteCategoryResponse;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.RegisterResponse;
-
-import static android.R.attr.filter;
 
 /**
  * Created by sunxl8 on 2016/11/1.
@@ -50,10 +52,10 @@ public interface LeanClouldApi {
     Observable<FavoriteResponse> doFavorite(@Body FavoriteRequest request);
 
     /***********************************************************************************************
-     * 获取收藏类别列表
+     * 获取收藏列表
      **********************************************************************************************/
     @Headers({"X-LC-Id:" + Constant.LEAN_CLOUD_ID,
             "X-LC-Key:" + Constant.LEAN_CLOUD_KEY})
-    @GET("classes/Favorite?where={filter}")
-    Observable<FavoriteCategoryResponse> getFavoriteCategory(@Path("filter") String filter);
+    @GET("classes/Favorite")
+    Observable<FavoriteRelationResponse> getFavoriteCategory(@QueryMap Map<String,String> map);
 }

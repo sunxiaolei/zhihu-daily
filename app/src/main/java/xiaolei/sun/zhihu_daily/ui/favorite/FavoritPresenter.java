@@ -16,7 +16,10 @@ public class FavoritPresenter extends RxPresenter<FavoriteContract.View> impleme
 
     @Override
     public void getStory(String title) {
-        List<DbStory> list = DbManager.getStoriesByTitle(title);
-        mView.setStory(list.get(0));
+
+
+        //数据库获取收藏列表
+//        List<DbStory> list = DbManager.getStoriesByTitle(title);
+//        mView.setStory(list.get(0));
     }
 }

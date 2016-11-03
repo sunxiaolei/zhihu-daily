@@ -9,7 +9,7 @@ import java.util.List;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class FavoriteCategoryResponse {
+public class FavoriteRelationResponse {
 
 
     /**

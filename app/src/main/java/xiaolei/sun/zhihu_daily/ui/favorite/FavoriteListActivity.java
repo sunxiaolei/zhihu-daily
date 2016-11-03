@@ -47,10 +47,18 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
         setTitle(getString(R.string.favorite_list));
         rvCategory = (RecyclerView) findViewById(R.id.rv_favorate_category);
         rvCategory.setLayoutManager(new LinearLayoutManager(FavoriteListActivity.this));
+
+    }
+
+    private void getCategory(){
+
         listCategory = DbManager.getFavorateCategory();
         rvCategory.setAdapter(new Eadapter());
     }
 
+    /**
+     * 条目
+     */
     class Madapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<DbStory> listStories;
@@ -96,6 +104,9 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
     }
 
 
+    /**
+     * 类别
+     */
     class Eadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override

@@ -1,12 +1,12 @@
 package xiaolei.sun.zhihu_daily.network;
 
-import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xiaolei.sun.zhihu_daily.network.api.LeanClouldApi;
-import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteCategoryResponse;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
@@ -64,13 +64,13 @@ public class LeanCloudRequest {
     /**
      * 获取收藏列表
      *
-     * @param filter
+     * @param map
      * @return
      */
-    public static Observable<FavoriteCategoryResponse> getFavoriteCategory(String filter) {
+    public static Observable<FavoriteRelationResponse> getFavoriteRelation(Map<String,String> map) {
         return LeanCloudManager.getCommonClient()
                 .create(LeanClouldApi.class)
-                .getFavoriteCategory(filter)
+                .getFavoriteCategory(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
