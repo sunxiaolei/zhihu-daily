@@ -1,11 +1,13 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,10 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import rx.Observable;
+import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurActionBarDrawerToggle;
 import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout;
@@ -208,5 +213,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     @Override
     public void setDrawer(String name) {
         tvName.setText(name);
+    }
+
+    private boolean isBack = false;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!isBack) {
+                showToast("再次点击退出");
+                isBack = true;
+                Observable.timer(2, TimeUnit.SECONDS)
+                        .subscribe(new Action1<Long>() {
+                            @Override
+                            public void call(Long aLong) {
+                                isBack = false;
+                            }
+                        });
+                return true;
+            } else {
+                MainActivity.this.finish();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
