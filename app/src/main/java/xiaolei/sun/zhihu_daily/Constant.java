@@ -1,7 +1,5 @@
 package xiaolei.sun.zhihu_daily;
 
-import android.os.Environment;
-
 /**
  * Description: <br>
  * author: sun<br>
@@ -18,9 +16,10 @@ public class Constant {
     public static final String LEAN_CLOUD_KEY = "w9D9S3qFO973qntytibgHec6";
 
     /**
-     * 服务器最新版本
+     * 服务器参数
      */
-    public static final String LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY = "NEWEST_VERSION";
+    public static final String LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY = "NEWEST_VERSION";//最新版本
+    public static final String LEAN_CLOUD_PARAMS_UPDATEINFO_KEY = "UPDATE_INFO";//升级内容
     /**
      * 服务器数据库 用户表
      */

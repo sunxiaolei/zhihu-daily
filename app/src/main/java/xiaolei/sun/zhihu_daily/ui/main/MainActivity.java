@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         tvSet.setOnClickListener(this);
         tvFavorite.setOnClickListener(this);
 
-        mPresenter.getUserInfo();
+//        mPresenter.getUserInfo();
 
     }
 
@@ -237,5 +237,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getUserInfo();
     }
 }

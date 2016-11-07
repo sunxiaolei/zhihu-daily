@@ -20,9 +20,11 @@ import java.util.List;
 
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
+import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/29.
@@ -54,6 +56,10 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
      * 检查更新
      */
     private RelativeLayout layoutCheckUpdate;
+    /**
+     * 退出登录
+     */
+    private RelativeLayout layoutLogout;
 
     @Override
     protected IPresenter createPresenter() {
@@ -88,6 +94,8 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
 
         layoutCheckUpdate = (RelativeLayout) findViewById(R.id.layout_setting_check_update);
         layoutCheckUpdate.setOnClickListener(this);
+        layoutLogout = (RelativeLayout) findViewById(R.id.rl_setting_logout);
+        layoutLogout.setOnClickListener(this);
     }
 
     /**
@@ -123,15 +131,28 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 break;
             case R.id.layout_setting_check_update:
                 String newestVersion = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY);
+                String updateInfo = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_UPDATEINFO_KEY);
                 if (!AndroidUtils.getAppVersion(getApplicationContext()).equals(newestVersion)) {
-                    showDialog("提示", "有更新\n最新版本:" + newestVersion, getString(R.string.download),
+                    showDialog("提示", "有更新\n最新版本:" + newestVersion + "\n" + updateInfo, getString(R.string.download),
                             new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     getApkUrl();
                                 }
                             });
+                } else {
+                    showDialog("提示", "当前已是最新版本");
                 }
+                break;
+            case R.id.rl_setting_logout:
+                showDialog("确认退出", null, "确定", new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        SPUtils sp = new SPUtils(SettingsActivity.this, Constant.SP_USER);
+                        sp.clear();
+                        ZhihuDailyApplication.isLogin = false;
+                    }
+                });
                 break;
         }
     }

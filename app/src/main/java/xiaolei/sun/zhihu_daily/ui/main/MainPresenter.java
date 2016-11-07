@@ -26,8 +26,8 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     @Override
     public void login() {
         SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
-        String username = sp.getString(Constant.SP_USER_NAME);
-        String password = sp.getString(Constant.SP_USER_PASSWORD);
+        final String username = sp.getString(Constant.SP_USER_NAME);
+        final String password = sp.getString(Constant.SP_USER_PASSWORD);
         LoginRequest request = new LoginRequest();
         request.setUsername(username);
         request.setPassword(password);
@@ -40,12 +40,14 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
                     @Override
                     public void onError(Throwable e) {
+                        mView.setDrawer(ZhihuDailyApplication.getContext().getResources().getString(R.string.click_login));
                     }
 
                     @Override
                     public void onNext(LoginResponse loginResponse) {
                         ZhihuDailyApplication.isLogin = true;
                         ZhihuDailyApplication.user = loginResponse;
+                        mView.setDrawer(username);
                     }
                 });
     }
