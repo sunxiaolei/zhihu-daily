@@ -1,7 +1,10 @@
 package xiaolei.sun.zhihu_daily.ui.login;
 
 
+import android.content.Context;
+
 import rx.Subscriber;
+import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.LeanCloudManager;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
@@ -9,6 +12,7 @@ import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.RegisterResponse;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
+import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/26.
@@ -22,7 +26,7 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
     public static final int REGISTER_STATE_FAILED = 4;
 
     @Override
-    public void login(String username, String password) {
+    public void login(final String username, final String password) {
 //        AVQuery<AVObject> queryUsername = new AVQuery<>(Constant.LEAN_CLOUD_TABLE_USER);
 //        queryUsername.whereEqualTo("username", username);
 //        AVQuery<AVObject> queryPassword = new AVQuery<>(Constant.LEAN_CLOUD_TABLE_USER);
@@ -62,6 +66,9 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
                     public void onNext(LoginResponse loginResponse) {
                         ZhihuDailyApplication.isLogin = true;
                         ZhihuDailyApplication.user = loginResponse;
+                        SPUtils sp = new SPUtils((Context) mView, Constant.SP_USER);
+                        sp.putString(Constant.SP_USER_NAME, username);
+                        sp.putString(Constant.SP_USER_PASSWORD, password);
                         mView.showResult(LOGIN_STATE_SUCCESS);
                     }
                 });
@@ -69,7 +76,7 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
     }
 
     @Override
-    public void register(String username, String password) {
+    public void register(final String username, final String password) {
 //        AVObject todoFolder = new AVObject(Constant.LEAN_CLOUD_TABLE_USER);
 //        todoFolder.put("username", username);
 //        todoFolder.put("password", password);
@@ -88,24 +95,27 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
         request.setUsername(username);
         request.setPassword(password);
         LeanCloudRequest.doRegister(request)
-        .subscribe(new Subscriber<RegisterResponse>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new Subscriber<RegisterResponse>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                mView.showResult(REGISTER_STATE_FAILED);
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showResult(REGISTER_STATE_FAILED);
+                    }
 
-            @Override
-            public void onNext(RegisterResponse response) {
-                ZhihuDailyApplication.isLogin = true;
-                ZhihuDailyApplication.sessionToken = response.getSessionToken();
-                mView.showResult(REGISTER_STATE_SUCCESS);
-            }
-        });
+                    @Override
+                    public void onNext(RegisterResponse response) {
+                        ZhihuDailyApplication.isLogin = true;
+                        ZhihuDailyApplication.sessionToken = response.getSessionToken();
+                        SPUtils sp = new SPUtils((Context) mView, Constant.SP_USER);
+                        sp.putString(Constant.SP_USER_NAME, username);
+                        sp.putString(Constant.SP_USER_PASSWORD, password);
+                        mView.showResult(REGISTER_STATE_SUCCESS);
+                    }
+                });
 
     }
 

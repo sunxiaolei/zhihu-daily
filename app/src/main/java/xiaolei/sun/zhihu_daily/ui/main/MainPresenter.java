@@ -1,13 +1,18 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
+import android.content.Context;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import rx.Subscriber;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
 import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
@@ -21,8 +26,28 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     @Override
     public void login() {
         SPUtils sp = new SPUtils(ZhihuDailyApplication.getContext(), Constant.SP_USER);
-        final String username = sp.getString(Constant.SP_USER_NAME);
+        String username = sp.getString(Constant.SP_USER_NAME);
         String password = sp.getString(Constant.SP_USER_PASSWORD);
+        LoginRequest request = new LoginRequest();
+        request.setUsername(username);
+        request.setPassword(password);
+        LeanCloudRequest.doLogin(request)
+                .subscribe(new Subscriber<LoginResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(LoginResponse loginResponse) {
+                        ZhihuDailyApplication.isLogin = true;
+                        ZhihuDailyApplication.user = loginResponse;
+                    }
+                });
     }
 
     @Override

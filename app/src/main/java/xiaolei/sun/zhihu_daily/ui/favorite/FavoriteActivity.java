@@ -20,7 +20,7 @@ import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 
 public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> implements FavoriteContract.View {
 
-    private String storyTitle;
+    private String storyId;
 
     private SimpleDraweeView image;
     private WebView web;
@@ -38,7 +38,7 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
     @Override
     public void init() {
 
-        storyTitle = getIntent().getStringExtra("STORY_TITLE");
+        storyId = getIntent().getStringExtra("STORY_ID");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,7 +73,7 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
         image = (SimpleDraweeView) findViewById(R.id.img_favorite);
 
         showLoading();
-        mPresenter.getStory(storyTitle);
+        mPresenter.getStory(storyId);
     }
 
     @Override

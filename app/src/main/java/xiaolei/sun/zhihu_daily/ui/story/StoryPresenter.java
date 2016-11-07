@@ -136,8 +136,9 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 
         request = new FavoriteRequest();
         request.setCategory(category);
-        request.setStoryId(storyId);
+        request.setStoryId(bean.getTitle());
         request.setUserId(ZhihuDailyApplication.user.getObjectId());
+        request.setStoryTitle(bean.getTitle());
         LeanCloudRequest.getFavoriteRelation(map)
                 .flatMap(new Func1<FavoriteRelationResponse, Observable<FavoriteResponse>>() {
                     @Override

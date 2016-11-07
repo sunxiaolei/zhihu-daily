@@ -10,14 +10,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.expandable.view.ExpandableView;
+import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.R;
+import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
+import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
+import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
+import xiaolei.sun.zhihu_daily.ui.story.StoryActivity;
 
 /**
  * Created by sunxl8 on 2016/9/30.
@@ -28,6 +37,8 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
     private RecyclerView rvCategory;
 
     private List<String> listCategory;
+
+    private List<FavoriteRelationResponse.ResultsBean> listResult;
 
     @Override
     protected IPresenter createPresenter() {
@@ -45,15 +56,38 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.favorite_list));
+
+        listCategory = new ArrayList<>();
         rvCategory = (RecyclerView) findViewById(R.id.rv_favorate_category);
         rvCategory.setLayoutManager(new LinearLayoutManager(FavoriteListActivity.this));
-
+        getCategory();
     }
 
-    private void getCategory(){
+    private void getCategory() {
+        showLoading();
+        Map<String, String> map = new HashMap<>();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        map.put("where", obj.toString());
+        LeanCloudRequest.getFavoriteRelation(map)
+                .subscribe(new Action1<FavoriteRelationResponse>() {
+                    @Override
+                    public void call(FavoriteRelationResponse response) {
+                        listResult = response.getResults();
+                        if (listResult != null && listResult.size() > 0) {
+                            for (FavoriteRelationResponse.ResultsBean bean : listResult) {
+                                if (!listCategory.contains(bean.getCategory())) {
+                                    listCategory.add(bean.getCategory());
+                                }
+                            }
+                            dismissLoading();
+                            rvCategory.setAdapter(new Eadapter());
+                        }
+                    }
+                });
 
-        listCategory = DbManager.getFavorateCategory();
-        rvCategory.setAdapter(new Eadapter());
+//        listCategory = DbManager.getFavorateCategory();
+//        rvCategory.setAdapter(new Eadapter());
     }
 
     /**
@@ -61,9 +95,9 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
      */
     class Madapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<DbStory> listStories;
+        List<FavoriteRelationResponse.ResultsBean> listStories;
 
-        public Madapter(List<DbStory> listStories) {
+        public Madapter(List<FavoriteRelationResponse.ResultsBean> listStories) {
             this.listStories = listStories;
         }
 
@@ -75,7 +109,7 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof Mholder) {
-                ((Mholder) holder).tv.setText(listStories.get(position).getTitle());
+                ((Mholder) holder).tv.setText(listStories.get(position).getStoryTitle());
             }
         }
 
@@ -94,8 +128,8 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(FavoriteListActivity.this, FavoriteActivity.class);
-                        intent.putExtra("STORY_TITLE", listStories.get(getAdapterPosition()).getTitle());
+                        Intent intent = new Intent(FavoriteListActivity.this, StoryActivity.class);
+                        intent.putExtra("STORY_ID", listStories.get(getAdapterPosition()).getStoryId());
                         FavoriteListActivity.this.startActivity(intent);
                     }
                 });
@@ -121,7 +155,14 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
                 View v = LayoutInflater.from(FavoriteListActivity.this).inflate(R.layout.item_recyclerview, null, false);
                 RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_normal);
                 rv.setLayoutManager(new LinearLayoutManager(FavoriteListActivity.this));
-                List<DbStory> list = DbManager.getStoriesByFavorateCategory(listCategory.get(position));
+//                List<DbStory> list = DbManager.getStoriesByFavorateCategory(listCategory.get(position));
+//                rv.setAdapter(new Madapter(list));
+                List<FavoriteRelationResponse.ResultsBean> list = new ArrayList<>();
+                for (FavoriteRelationResponse.ResultsBean bean : listResult) {
+                    if(listCategory.get(position).equals(bean.getCategory())) {
+                        list.add(bean);
+                    }
+                }
                 rv.setAdapter(new Madapter(list));
                 ((Eholder) holder).ev.addContentView(v);
             }
