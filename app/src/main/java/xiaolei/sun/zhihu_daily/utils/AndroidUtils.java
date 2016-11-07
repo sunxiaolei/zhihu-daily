@@ -7,6 +7,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ListAdapter;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -262,5 +266,33 @@ public class AndroidUtils {
 
     public static String getCacheSize(File file) throws Exception {
         return getFormatSize(getFolderSize(file));
+    }
+
+    public static int measureContentWidth(ListAdapter listAdapter,Context context) {
+        ViewGroup mMeasureParent = null;
+        int maxWidth = 0;
+        View itemView = null;
+        int itemType = 0;
+        final ListAdapter adapter = listAdapter;
+        final int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        final int count = adapter.getCount();
+        for (int i = 0; i < count; i++) {
+            final int positionType = adapter.getItemViewType(i);
+            if (positionType != itemType) {
+                itemType = positionType;
+                itemView = null;
+            }
+            if (mMeasureParent == null) {
+                mMeasureParent = new FrameLayout(context);
+            }
+            itemView = adapter.getView(i, itemView, mMeasureParent);
+            itemView.measure(widthMeasureSpec, heightMeasureSpec);
+            final int itemWidth = itemView.getMeasuredWidth();
+            if (itemWidth > maxWidth) {
+                maxWidth = itemWidth;
+            }
+        }
+        return maxWidth;
     }
 }
