@@ -20,7 +20,6 @@
         android:inputType="text"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@color/colorPrimary"
         android:textSize="15sp" />
 
     <View
@@ -39,7 +38,6 @@
         android:inputType="textPassword"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@null"
         android:textSize="15sp" />
 
     <View

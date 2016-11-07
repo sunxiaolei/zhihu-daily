@@ -73,6 +73,7 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
                 .subscribe(new Action1<FavoriteRelationResponse>() {
                     @Override
                     public void call(FavoriteRelationResponse response) {
+                        dismissLoading();
                         listResult = response.getResults();
                         if (listResult != null && listResult.size() > 0) {
                             for (FavoriteRelationResponse.ResultsBean bean : listResult) {
@@ -80,7 +81,6 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
                                     listCategory.add(bean.getCategory());
                                 }
                             }
-                            dismissLoading();
                             rvCategory.setAdapter(new Eadapter());
                         }
                     }
@@ -159,7 +159,7 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
 //                rv.setAdapter(new Madapter(list));
                 List<FavoriteRelationResponse.ResultsBean> list = new ArrayList<>();
                 for (FavoriteRelationResponse.ResultsBean bean : listResult) {
-                    if(listCategory.get(position).equals(bean.getCategory())) {
+                    if (listCategory.get(position).equals(bean.getCategory())) {
                         list.add(bean);
                     }
                 }
