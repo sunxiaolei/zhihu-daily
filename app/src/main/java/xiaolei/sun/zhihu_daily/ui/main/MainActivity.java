@@ -188,7 +188,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.tv_drawer_favorite:
-                startActivity(new Intent(MainActivity.this, FavoriteListActivity.class));
+                if (ZhihuDailyApplication.isLogin) {
+                    startActivity(new Intent(MainActivity.this, FavoriteListActivity.class));
+                } else {
+                    showToast("请先登录");
+                }
                 break;
         }
         drawerLayout.closeDrawers();

@@ -18,13 +18,11 @@
         android:layout_height="45dp"
         android:layout_marginTop="120dp"
         android:background="@null"
-        android:cursorVisible="false"
         android:gravity="center_vertical"
         android:hint="@string/register_login"
         android:inputType="text"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@null"
         android:textSize="15sp" />
 
     <View
@@ -38,13 +36,11 @@
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:cursorVisible="false"
         android:gravity="center_vertical"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
         android:textColor="@color/text_primary"
-        android:textCursorDrawable="@color/colorPrimary"
         android:textSize="15sp" />
 
     <View
