@@ -38,6 +38,15 @@ public class FavoriteRelationResponse {
         private String createdAt;
         private String updatedAt;
         private String objectId;
+        private String storyTitle;
+
+        public String getStoryTitle() {
+            return storyTitle;
+        }
+
+        public void setStoryTitle(String storyTitle) {
+            this.storyTitle = storyTitle;
+        }
 
         public String getCategory() {
             return category;

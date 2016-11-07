@@ -36,6 +36,7 @@ import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> implements StoryContract.View {
 
     private int storyId;
+    private String storyTitle;
 
     /**
      * 收藏按钮
@@ -109,9 +110,9 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 //                } else {
 //                    showBottomSheet();
 //                }
-                if (ZhihuDailyApplication.isLogin){
+                if (ZhihuDailyApplication.isLogin) {
                     showBottomSheet();
-                }else {
+                } else {
                     showToast("请先登录");
                 }
             }
@@ -130,7 +131,6 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 //            btnFavorite.setImageResource(R.drawable.ic_action_favorite);
 //        }
 //    }
-
     @Override
     protected StoryPresenter createPresenter() {
         return new StoryPresenter(this);
@@ -148,6 +148,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
     @Override
     public void setTitle(String string) {
+        storyTitle = string;
         collapsingToolbar.setTitle(string);
     }
 
@@ -160,7 +161,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     @Override
     public void favoriteResult(int result) {
         mBottomSheetDialog.dismiss();
-        switch (result){
+        switch (result) {
             case StoryPresenter.FAVORITE_YET:
                 showToast("已收藏过");
                 break;
@@ -182,7 +183,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String str = listCategory.get(i);
-                mPresenter.favorite(str,storyId+"");
+                mPresenter.favorite(str, storyId + "");
             }
         });
     }
@@ -213,7 +214,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
                     showToast("null");
                     return;
                 }
-                mPresenter.favorite(name,storyId+"");
+                mPresenter.favorite(name, storyId + "");
             }
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);

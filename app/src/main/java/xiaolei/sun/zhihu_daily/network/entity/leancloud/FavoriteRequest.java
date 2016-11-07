@@ -12,6 +12,15 @@ public class FavoriteRequest {
     private String userId;
     private String storyId;
     private String category;
+    private String storyTitle;
+
+    public String getStoryTitle() {
+        return storyTitle;
+    }
+
+    public void setStoryTitle(String storyTitle) {
+        this.storyTitle = storyTitle;
+    }
 
     public String getUserId() {
         return userId;
