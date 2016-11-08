@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import xiaolei.sun.zhihu_daily.R;
+import xiaolei.sun.zhihu_daily.utils.RegexUtils;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
@@ -24,7 +25,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
 
     private EditText etName;
     private EditText etPassword;
-    private Button btnLogin;
+    private TextView btnLogin;
     private TextView btnRegister;
 
     private View registerView;
@@ -38,8 +39,8 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
     public void init() {
         etName = (EditText) findViewById(R.id.et_login_name);
         etPassword = (EditText) findViewById(R.id.et_login_password);
-        btnLogin = (Button) findViewById(R.id.btn_login_login);
-        btnRegister = (TextView) findViewById(R.id.btn_login_register);
+        btnLogin = (TextView) findViewById(R.id.tv_login_login);
+        btnRegister = (TextView) findViewById(R.id.tv_login_register);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,10 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
                 String password = etRegisterPassword.getText().toString();
                 if (username == null || password == null || username.equals("") || password.equals("")) {
                     showToast("用户名或密码不能为空！");
+                    return;
+                }
+                if (!RegexUtils.isUsername(username)) {
+                    showToast("用户名只能是6-20位字母数字汉字下划线");
                     return;
                 }
                 showLoading();

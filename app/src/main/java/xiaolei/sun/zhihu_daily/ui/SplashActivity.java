@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -17,6 +18,7 @@ import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.api.ApiStartImage;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
+import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
 
 /**
  * Description: <br>
@@ -34,6 +36,17 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        if (!AndroidUtils.isConnected(this)) {
+            Toast.makeText(this, "请检查网络", Toast.LENGTH_SHORT).show();
+            Observable.timer(1, TimeUnit.SECONDS)
+                    .subscribe(new Action1<Long>() {
+                        @Override
+                        public void call(Long aLong) {
+                            SplashActivity.this.finish();
+                        }
+                    });
+        }
 
         img = (SimpleDraweeView) findViewById(R.id.img_activity_splash);
         tvCopyright = (TextView) findViewById(R.id.tv_activity_splash);
@@ -56,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
                         .subscribe(new Action1<Long>() {
                             @Override
                             public void call(Long aLong) {
-                                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 SplashActivity.this.finish();
                             }

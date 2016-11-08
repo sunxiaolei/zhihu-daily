@@ -14,8 +14,8 @@ public class NetWorkConstant {
 
     public static final int TIME_OUT = 5;
 
-    public static final int HTTP_CONNECT_TIMEOUT = 30000;
-    public static final int HTTP_WRITE_TIMEOUT = 6000;
-    public static final int HTTP_READ_TIMEOUT = 8000;
+    public static final int HTTP_CONNECT_TIMEOUT = 5000;
+    public static final int HTTP_WRITE_TIMEOUT = 5000;
+    public static final int HTTP_READ_TIMEOUT = 5000;
 
 }

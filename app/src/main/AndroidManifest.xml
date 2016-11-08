@@ -29,7 +29,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/NotitleTheme">
+            android:theme="@style/NoTitleTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,7 +45,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitleTheme" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:screenOrientation="portrait" />

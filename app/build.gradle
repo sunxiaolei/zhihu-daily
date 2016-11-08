@@ -17,9 +17,9 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("zhdaily.jks")
+            storeFile file("keystore.jks")
             storePassword "zhihudaily"
-            keyAlias "a"
+            keyAlias "aaa"
             keyPassword "zhihudaily"
         }
     }
