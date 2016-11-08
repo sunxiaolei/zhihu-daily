@@ -58,7 +58,8 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
                 .content("Loading")
                 .progress(true, 0)
                 .theme(Theme.LIGHT)
-                .cancelable(false)
+                .cancelable(true)
+                .canceledOnTouchOutside(false)
                 .show();
         mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

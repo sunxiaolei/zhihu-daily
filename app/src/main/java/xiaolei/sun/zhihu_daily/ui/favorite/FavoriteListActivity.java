@@ -129,7 +129,7 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(FavoriteListActivity.this, StoryActivity.class);
-                        intent.putExtra("STORY_ID", listStories.get(getAdapterPosition()).getStoryId());
+                        intent.putExtra("STORY_ID", Integer.parseInt(listStories.get(getAdapterPosition()).getStoryId()));
                         FavoriteListActivity.this.startActivity(intent);
                     }
                 });

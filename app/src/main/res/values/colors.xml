@@ -10,6 +10,9 @@
     <color name="colorGrayBg">#757575</color>
     <color name="colorWhiteItemBg">#FFFFFF</color>
 
+    <color name="textWhite">#FFFAF0</color>
+    <color name="lineWhite">#FFFAF0</color>
+
 
     <color name="text_white">#FCFCFC</color>
     <color name="text_primary">#212121</color>
