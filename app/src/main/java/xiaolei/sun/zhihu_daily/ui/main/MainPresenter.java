@@ -15,6 +15,7 @@ import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
+import xiaolei.sun.zhihu_daily.utils.DateUtils;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
@@ -74,13 +75,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     @Override
     public void getNewsByDate(CalendarDay date) {
         //20131119
-        int month = date.getMonth() + 1;
-        String strMonth = month + "";
-        if (month < 10) {
-            strMonth = "0" + month;
-        }
-        int day = date.getDay() + 1;
-        String dateFomat = date.getYear() + strMonth + day;
+        String dateFomat = DateUtils.getFormatDate(date.getDate(),"yyyyMMdd");
         ApiNewsDate api = new ApiNewsDate();
         api.getNewsLasted(dateFomat, new Subscriber<NewsBean>() {
             @Override
