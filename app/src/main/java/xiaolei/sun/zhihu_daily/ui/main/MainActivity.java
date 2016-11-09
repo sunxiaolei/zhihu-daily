@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         refreshLayout.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getNewsByDate(CalendarDay.today());
+                mPresenter.getNewsLasted();
             }
 
             @Override
