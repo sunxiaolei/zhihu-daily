@@ -93,7 +93,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
                     return;
                 }
                 if (!RegexUtils.isUsername(username)) {
-                    showToast("用户名只能是6-20位字母数字汉字下划线");
+                    showToast("用户名只能是2-10位字母数字汉字下划线");
                     return;
                 }
                 showLoading();
