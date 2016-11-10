@@ -18,7 +18,7 @@ import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
  * Email：xiaoleisun92@gmail.com
  */
 
-public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeBackActivity implements IView{
+public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeBackActivity implements IView {
 
     protected T mPresenter;
 
@@ -83,6 +83,7 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
                 .setMessage(msg)
                 .setCancelable(true)
                 .setPositiveButton(positiveText, listener)
+                .setNegativeButton("取消", null)
                 .create();
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
