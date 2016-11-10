@@ -125,7 +125,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 agent.startDefaultThreadActivity();
                 break;
             case R.id.tv_setting_about:
-                showDialog(getString(R.string.set_about), "Zhihu-Daily\n\nsunxiaolei92@gmail.com");
+                showDialog(getString(R.string.set_about), "zhihu-daily\n\nxiaoleisun92@gmail.com");
                 break;
             case R.id.layout_setting_check_update:
                 String newestVersion = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY);
