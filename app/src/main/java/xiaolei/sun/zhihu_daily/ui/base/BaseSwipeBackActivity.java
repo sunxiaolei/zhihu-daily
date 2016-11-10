@@ -1,17 +1,13 @@
 package xiaolei.sun.zhihu_daily.ui.base;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
-
-import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
 
 
@@ -26,8 +22,8 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
 
     protected T mPresenter;
 
-    private MaterialDialog mDialog;
-    private MaterialDialog mLoading;
+    private AlertDialog mDialog;
+    private ProgressDialog mLoading;
 
     protected abstract T createPresenter();
 
@@ -54,13 +50,8 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     public abstract void init();
 
     public void showLoading() {
-        mLoading = new MaterialDialog.Builder(BaseSwipeBackActivity.this)
-                .content("Loading")
-                .progress(true, 0)
-                .theme(Theme.LIGHT)
-                .cancelable(true)
-                .canceledOnTouchOutside(false)
-                .show();
+        mLoading = new ProgressDialog(this);
+        mLoading.show();
         mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -70,13 +61,13 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     }
 
     public void showDialog(String title, String msg) {
-        mDialog = new MaterialDialog.Builder(this)
-                .theme(Theme.LIGHT)
-                .title(title)
-                .content(msg)
-                .cancelable(false)
-                .positiveText("确定")
-                .show();
+        mDialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton("确定", null)
+                .create();
+        mDialog.show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -85,38 +76,14 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
         });
     }
 
-    public void showDialog(String title, String msg, String positiveText,MaterialDialog.SingleButtonCallback listener) {
-        mDialog = new MaterialDialog.Builder(this)
-                .theme(Theme.LIGHT)
-                .title(title)
-                .content(msg)
-                .cancelable(false)
-                .positiveText(positiveText)
-                .negativeText("取消")
-                .onPositive(listener)
-                .show();
-        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mDialog = null;
-            }
-        });
-    }
-
-    public void showEditDialog(String msg, MaterialDialog.InputCallback callback) {
-        mDialog = new MaterialDialog.Builder(this)
-                .theme(Theme.LIGHT)
-                .content(msg)
-                .inputRangeRes(2, 20, R.color.colorPrimary)
-                .input(null, null, callback)
-                .negativeText("取消")
-                .cancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        mDialog.dismiss();
-                    }
-                })
-                .show();
+    public void showDialog(String title, String msg, String positiveText, DialogInterface.OnClickListener listener) {
+        mDialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton(positiveText, listener)
+                .create();
+        mDialog.show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {

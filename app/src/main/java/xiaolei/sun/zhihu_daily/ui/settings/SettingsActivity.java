@@ -1,14 +1,12 @@
 package xiaolei.sun.zhihu_daily.ui.settings;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -134,9 +132,9 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 String updateInfo = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_UPDATEINFO_KEY);
                 if (!AndroidUtils.getAppVersion(getApplicationContext()).equals(newestVersion)) {
                     showDialog("提示", "有更新\n最新版本:" + newestVersion + "\n" + updateInfo, getString(R.string.download),
-                            new MaterialDialog.SingleButtonCallback() {
+                            new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                public void onClick(DialogInterface dialogInterface, int i) {
                                     getApkUrl();
                                 }
                             });
@@ -145,9 +143,9 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 }
                 break;
             case R.id.rl_setting_logout:
-                showDialog("确认退出", null, "确定", new MaterialDialog.SingleButtonCallback() {
+                showDialog("确认退出", null, "确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         SPUtils sp = new SPUtils(SettingsActivity.this, Constant.SP_USER);
                         sp.clear();
                         ZhihuDailyApplication.isLogin = false;

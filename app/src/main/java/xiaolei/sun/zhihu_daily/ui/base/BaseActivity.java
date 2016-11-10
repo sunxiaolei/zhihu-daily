@@ -1,16 +1,13 @@
 package xiaolei.sun.zhihu_daily.ui.base;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
-
 
 /**
  * Description: <br>
@@ -19,12 +16,12 @@ import com.afollestad.materialdialogs.Theme;
  * Email：xiaoleisun92@gmail.com
  */
 
-public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity implements IView,View.OnClickListener{
+public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity implements IView, View.OnClickListener {
 
     protected T mPresenter;
 
-    private MaterialDialog mDialog;
-    private MaterialDialog mLoading;
+    private AlertDialog mDialog;
+    private ProgressDialog mLoading;
 
     protected abstract T createPresenter();
 
@@ -51,12 +48,8 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
     public abstract int setContentViewId();
 
     public void showLoading() {
-        mLoading = new MaterialDialog.Builder(BaseActivity.this)
-                .content("Loading")
-                .progress(true, 0)
-                .theme(Theme.LIGHT)
-                .cancelable(false)
-                .show();
+        mLoading = new ProgressDialog(this);
+        mLoading.show();
         mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -66,13 +59,13 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
     }
 
     public void showDialog(String title, String msg) {
-        mDialog = new MaterialDialog.Builder(this)
-                .theme(Theme.LIGHT)
-                .title(title)
-                .content(msg)
-                .cancelable(false)
-                .positiveText("确定")
-                .show();
+        mDialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton("确定", null)
+                .create();
+        mDialog.show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
