@@ -64,9 +64,10 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
         mDialog = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(msg)
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("确定", null)
                 .create();
+        mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -80,9 +81,10 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
         mDialog = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(msg)
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton(positiveText, listener)
                 .create();
+        mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
