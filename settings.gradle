@@ -1,1 +1,1 @@
-include ':app', ':expandableview', ':mddialog_commons', ':mddialog_core'
+include ':app', ':expandableview'

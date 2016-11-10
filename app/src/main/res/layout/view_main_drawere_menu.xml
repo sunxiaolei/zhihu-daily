@@ -36,7 +36,6 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/md_item_selected"
         android:drawableLeft="@drawable/ic_set"
         android:drawablePadding="20dp"
         android:text="@string/set"
