@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
 
 
@@ -21,6 +23,7 @@ import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
 public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeBackActivity implements IView {
 
     protected T mPresenter;
+    protected CompositeSubscription mCompositeSubscription;
 
     private AlertDialog mDialog;
     private ProgressDialog mLoading;
@@ -118,5 +121,24 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
         super.onDestroy();
         dismissLoading();
         dismissDialog();
+        unSubscribe();
+    }
+
+    /**
+     * 添加到订阅集合
+     */
+    public void addSubscribe(Subscription subscription) {
+        if (mCompositeSubscription == null) {
+            mCompositeSubscription = new CompositeSubscription();
+        }
+        mCompositeSubscription.add(subscription);
+    }
+    /**
+     * 取消订阅
+     */
+    public void unSubscribe() {
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription.unsubscribe();
+        }
     }
 }

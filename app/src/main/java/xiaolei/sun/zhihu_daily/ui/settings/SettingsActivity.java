@@ -160,7 +160,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                String url = (String) list.get(0).get("url");
+                String url = (String) list.get(list.size()).get("url");
                 if (url != null) {
                     Intent intent = new Intent(SettingsActivity.this, UpdateService.class);
                     intent.putExtra("DOWNLOAD_URL", url);
