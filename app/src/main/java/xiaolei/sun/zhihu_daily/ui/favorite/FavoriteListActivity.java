@@ -70,19 +70,16 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
         obj.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
         map.put("where", obj.toString());
         LeanCloudRequest.getFavoriteRelation(map)
-                .subscribe(new Action1<FavoriteRelationResponse>() {
-                    @Override
-                    public void call(FavoriteRelationResponse response) {
-                        dismissLoading();
-                        listResult = response.getResults();
-                        if (listResult != null && listResult.size() > 0) {
-                            for (FavoriteRelationResponse.ResultsBean bean : listResult) {
-                                if (!listCategory.contains(bean.getCategory())) {
-                                    listCategory.add(bean.getCategory());
-                                }
+                .subscribe(response -> {
+                    dismissLoading();
+                    listResult = response.getResults();
+                    if (listResult != null && listResult.size() > 0) {
+                        for (FavoriteRelationResponse.ResultsBean bean : listResult) {
+                            if (!listCategory.contains(bean.getCategory())) {
+                                listCategory.add(bean.getCategory());
                             }
-                            rvCategory.setAdapter(new Eadapter());
                         }
+                        rvCategory.setAdapter(new Eadapter());
                     }
                 });
 
@@ -125,13 +122,10 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
             public Mholder(View itemView) {
                 super(itemView);
                 tv = (TextView) itemView.findViewById(R.id.tv_normal);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(FavoriteListActivity.this, StoryActivity.class);
-                        intent.putExtra("STORY_ID", Integer.parseInt(listStories.get(getAdapterPosition()).getStoryId()));
-                        FavoriteListActivity.this.startActivity(intent);
-                    }
+                tv.setOnClickListener(view -> {
+                    Intent intent = new Intent(FavoriteListActivity.this, StoryActivity.class);
+                    intent.putExtra("STORY_ID", Integer.parseInt(listStories.get(getAdapterPosition()).getStoryId()));
+                    FavoriteListActivity.this.startActivity(intent);
                 });
             }
         }

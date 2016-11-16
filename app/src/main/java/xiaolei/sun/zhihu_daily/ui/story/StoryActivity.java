@@ -56,29 +56,23 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_share:
-                        break;
-                    case R.id.action_settings:
-                        break;
-                }
-                return true;
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_share:
+                    break;
+                case R.id.action_settings:
+                    break;
             }
+            return true;
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         layoutTop = (AppBarLayout) findViewById(R.id.appbar);
         collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        layoutTop.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+        layoutTop.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
 
-                }
             }
         });
 
@@ -102,19 +96,16 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
         showLoading();
         mPresenter.getNews(storyId);
-        btnFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnFavorite.setOnClickListener(view -> {
 //                if (isFavorite) {
 //                    showToast("已收藏");
 //                } else {
 //                    showBottomSheet();
 //                }
-                if (ZhihuDailyApplication.isLogin) {
-                    showBottomSheet();
-                } else {
-                    showToast("请先登录");
-                }
+            if (ZhihuDailyApplication.isLogin) {
+                showBottomSheet();
+            } else {
+                showToast("请先登录");
             }
         });
     }
@@ -179,12 +170,9 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     public void setFavorateCategory(List<String> list) {
         listCategory = list;
         lvChooseCategory.setAdapter(new FavoriteCategoryAdapter());
-        lvChooseCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String str = listCategory.get(i);
-                mPresenter.favorite(str, storyId + "");
-            }
+        lvChooseCategory.setOnItemClickListener((adapterView, view, i, l) -> {
+            String str = listCategory.get(i);
+            mPresenter.favorite(str, storyId + "");
         });
     }
 
@@ -206,16 +194,13 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
         btnChooseCategorySure = (TextView) view.findViewById(R.id.tv_choose_category_sure);
         lvChooseCategory = (ListView) view.findViewById(R.id.lv_choose_category);
         mPresenter.getFavorateCategory();
-        btnChooseCategorySure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = etChooseCategory.getText().toString();
-                if (name.equals("")) {
-                    showToast("null");
-                    return;
-                }
-                mPresenter.favorite(name, storyId + "");
+        btnChooseCategorySure.setOnClickListener(view1 -> {
+            String name = etChooseCategory.getText().toString();
+            if (name.equals("")) {
+                showToast("null");
+                return;
             }
+            mPresenter.favorite(name, storyId + "");
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);
         mBottomSheetDialog.contentView(view)

@@ -42,26 +42,18 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         btnLogin = (TextView) findViewById(R.id.tv_login_login);
         btnRegister = (TextView) findViewById(R.id.tv_login_register);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = etName.getText().toString();
-                String password = etPassword.getText().toString();
-                if (name == null || password == null || name.equals("") || password.equals("")) {
-                    showToast("用户名或密码不能为空！");
-                    return;
-                }
-                showLoading();
-                mPresenter.login(name, password);
+        btnLogin.setOnClickListener(view -> {
+            String name = etName.getText().toString();
+            String password = etPassword.getText().toString();
+            if (name == null || password == null || name.equals("") || password.equals("")) {
+                showToast("用户名或密码不能为空！");
+                return;
             }
+            showLoading();
+            mPresenter.login(name, password);
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showRegisterSheet();
-            }
-        });
+        btnRegister.setOnClickListener(view -> showRegisterSheet());
     }
 
     @Override
@@ -83,22 +75,19 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         etRegisterPassword = (EditText) registerView.findViewById(R.id.et_register_password);
         btnRegisterSubmit = (Button) registerView.findViewById(R.id.btn_register_submit);
 
-        btnRegisterSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = etRegisterUsername.getText().toString();
-                String password = etRegisterPassword.getText().toString();
-                if (username == null || password == null || username.equals("") || password.equals("")) {
-                    showToast("用户名或密码不能为空！");
-                    return;
-                }
-                if (!RegexUtils.isUsername(username)) {
-                    showToast("用户名只能是2-10位字母数字汉字下划线");
-                    return;
-                }
-                showLoading();
-                mPresenter.register(username, password);
+        btnRegisterSubmit.setOnClickListener(view -> {
+            String username = etRegisterUsername.getText().toString();
+            String password = etRegisterPassword.getText().toString();
+            if (username == null || password == null || username.equals("") || password.equals("")) {
+                showToast("用户名或密码不能为空！");
+                return;
             }
+            if (!RegexUtils.isUsername(username)) {
+                showToast("用户名只能是2-10位字母数字汉字下划线");
+                return;
+            }
+            showLoading();
+            mPresenter.register(username, password);
         });
 
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -155,13 +155,10 @@ public class StoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public Object instantiateItem(ViewGroup container, final int position) {
                     SimpleDraweeView view = listImage.get(position);
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(mContext, StoryActivity.class);
-                            intent.putExtra("STORY_ID", listTop.get(position).getId());
-                            mContext.startActivity(intent);
-                        }
+                    view.setOnClickListener(view1 -> {
+                        Intent intent = new Intent(mContext, StoryActivity.class);
+                        intent.putExtra("STORY_ID", listTop.get(position).getId());
+                        mContext.startActivity(intent);
                     });
                     container.addView(view);
                     return view;

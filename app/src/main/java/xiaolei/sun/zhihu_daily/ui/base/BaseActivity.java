@@ -50,12 +50,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
     public void showLoading() {
         mLoading = new ProgressDialog(this);
         mLoading.show();
-        mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mLoading = null;
-            }
-        });
+        mLoading.setOnDismissListener(dialogInterface -> mLoading = null);
     }
 
     public void showDialog(String title, String msg) {
@@ -66,12 +61,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
                 .setPositiveButton("确定", null)
                 .create();
         mDialog.show();
-        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mDialog = null;
-            }
-        });
+        mDialog.setOnDismissListener(dialogInterface -> mDialog = null);
     }
 
     public void dismissDialog() {

@@ -52,12 +52,7 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     public void showLoading() {
         mLoading = new ProgressDialog(this);
         mLoading.show();
-        mLoading.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mLoading = null;
-            }
-        });
+        mLoading.setOnDismissListener(dialogInterface -> mLoading = null);
     }
 
     public void showDialog(String title, String msg) {
@@ -69,12 +64,7 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
                 .create();
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
-        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mDialog = null;
-            }
-        });
+        mDialog.setOnDismissListener(dialogInterface -> mDialog = null);
     }
 
     public void showDialog(String title, String msg, String positiveText, DialogInterface.OnClickListener listener) {
@@ -87,12 +77,7 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
                 .create();
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
-        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mDialog = null;
-            }
-        });
+        mDialog.setOnDismissListener(dialogInterface -> mDialog = null);
     }
 
     public void dismissDialog() {

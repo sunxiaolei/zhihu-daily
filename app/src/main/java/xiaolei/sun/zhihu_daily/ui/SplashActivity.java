@@ -40,11 +40,8 @@ public class SplashActivity extends AppCompatActivity {
         if (!AndroidUtils.isConnected(this)) {
             Toast.makeText(this, "请检查网络", Toast.LENGTH_SHORT).show();
             Observable.timer(1, TimeUnit.SECONDS)
-                    .subscribe(new Action1<Long>() {
-                        @Override
-                        public void call(Long aLong) {
-                            SplashActivity.this.finish();
-                        }
+                    .subscribe(aLong -> {
+                        SplashActivity.this.finish();
                     });
         }
 
@@ -66,13 +63,10 @@ public class SplashActivity extends AppCompatActivity {
                 img.setImageURI(entityStartImage.getImg());
                 tvCopyright.setText("@" + entityStartImage.getText());
                 Observable.timer(2, TimeUnit.SECONDS)
-                        .subscribe(new Action1<Long>() {
-                            @Override
-                            public void call(Long aLong) {
-                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                SplashActivity.this.finish();
-                            }
+                        .subscribe(aLong -> {
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            SplashActivity.this.finish();
                         });
             }
         });
