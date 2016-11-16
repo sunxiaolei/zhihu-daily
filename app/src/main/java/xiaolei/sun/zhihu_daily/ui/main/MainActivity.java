@@ -78,25 +78,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         toggle = new BlurActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        toolbar.setNavigationOnClickListener(v -> {
 
-                if (drawerLayout.isDrawerOpen(GravityCompat.START))
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                else
-                    drawerLayout.openDrawer(GravityCompat.START);
-            }
+            if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                drawerLayout.closeDrawer(GravityCompat.START);
+            else
+                drawerLayout.openDrawer(GravityCompat.START);
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnCalendar = (FloatingActionButton) findViewById(R.id.btn_main_calendar);
-        btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBottomSheet();
-            }
-        });
+        btnCalendar.setOnClickListener(view -> showBottomSheet());
 
         refreshLayout = (SpringView) findViewById(R.id.refresh_main);
 
@@ -153,22 +145,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 .setMinimumDate(CalendarDay.from(2013, 4, 20)).commit();
 
         Button btnCancel = (Button) v.findViewById(R.id.btn_main_calendar_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mBottomSheetDialog != null) {
-                    mBottomSheetDialog.dismiss();
-                }
+        btnCancel.setOnClickListener(view -> {
+            if (mBottomSheetDialog != null) {
+                mBottomSheetDialog.dismiss();
             }
         });
         Button btnSure = (Button) v.findViewById(R.id.btn_main_calendar_sure);
-        btnSure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.getNewsByDate(widget.getSelectedDate());
-                if (mBottomSheetDialog != null) {
-                    mBottomSheetDialog.dismiss();
-                }
+        btnSure.setOnClickListener(view -> {
+            mPresenter.getNewsByDate(widget.getSelectedDate());
+            if (mBottomSheetDialog != null) {
+                mBottomSheetDialog.dismiss();
             }
         });
         mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -228,11 +214,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 showToast("再次点击退出");
                 isBack = true;
                 Observable.timer(2, TimeUnit.SECONDS)
-                        .subscribe(new Action1<Long>() {
-                            @Override
-                            public void call(Long aLong) {
-                                isBack = false;
-                            }
+                        .subscribe(aLong -> {
+                            isBack = false;
                         });
                 return true;
             } else {

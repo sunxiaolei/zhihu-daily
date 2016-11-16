@@ -132,24 +132,16 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 String updateInfo = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_UPDATEINFO_KEY);
                 if (!AndroidUtils.getAppVersion(getApplicationContext()).equals(newestVersion)) {
                     showDialog("提示", "有更新\n最新版本:" + newestVersion + "\n" + updateInfo, getString(R.string.download),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    getApkUrl();
-                                }
-                            });
+                            (dialogInterface, i) -> getApkUrl());
                 } else {
                     showDialog("提示", "当前已是最新版本");
                 }
                 break;
             case R.id.rl_setting_logout:
-                showDialog("确认退出", null, "确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        SPUtils sp = new SPUtils(SettingsActivity.this, Constant.SP_USER);
-                        sp.clear();
-                        ZhihuDailyApplication.isLogin = false;
-                    }
+                showDialog("确认退出", null, "确定", (dialogInterface, i) -> {
+                    SPUtils sp = new SPUtils(SettingsActivity.this, Constant.SP_USER);
+                    sp.clear();
+                    ZhihuDailyApplication.isLogin = false;
                 });
                 break;
         }

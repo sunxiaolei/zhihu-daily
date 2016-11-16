@@ -42,29 +42,23 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_share:
-                        break;
-                    case R.id.action_settings:
-                        break;
-                }
-                return true;
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_share:
+                    break;
+                case R.id.action_settings:
+                    break;
             }
+            return true;
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         AppBarLayout layoutTop = (AppBarLayout) findViewById(R.id.appbar);
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        layoutTop.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+        layoutTop.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
 
-                }
             }
         });
 
