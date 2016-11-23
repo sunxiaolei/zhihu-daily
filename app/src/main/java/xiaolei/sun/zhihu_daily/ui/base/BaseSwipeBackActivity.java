@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import xiaolei.sun.zhihu_daily.widget.dialog.LoadingDialog;
 import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
 
 
@@ -23,7 +24,7 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     protected T mPresenter;
 
     private AlertDialog mDialog;
-    private ProgressDialog mLoading;
+    private LoadingDialog mLoading;
 
     protected abstract T createPresenter();
 
@@ -50,9 +51,8 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     public abstract void init();
 
     public void showLoading() {
-        mLoading = new ProgressDialog(this);
+        mLoading = new LoadingDialog(this);
         mLoading.show();
-        mLoading.setOnDismissListener(dialogInterface -> mLoading = null);
     }
 
     public void showDialog(String title, String msg) {

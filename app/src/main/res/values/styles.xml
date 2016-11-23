@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,6 +17,10 @@
     <style name="AppBaseTheme"  parent="AppTheme">
         <item name="android:windowIsTranslucent">false</item>
         <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+    
+    <style name="DialogNoBackground" parent="AlertDialog.AppCompat.Light">
+        <item name="android:background">#00FFFFFF</item>
     </style>
 
     <style name="SwipeBackLayout">
