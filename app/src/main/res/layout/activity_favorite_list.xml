@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:titleTextColor="@color/text_white"
-            app:titleTextColor="@color/text_white" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_favorate_category"
