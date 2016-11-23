@@ -8,14 +8,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhiteBg"
+        android:background="@color/background_day"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDay"
             android:titleTextColor="@color/text_white"
             app:titleTextColor="@color/text_white"/>
 
@@ -30,13 +30,13 @@
                 android:id="@+id/refresh_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorWhiteBg">
+                android:background="@color/background_day">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_activity_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhiteBg"/>
+                    android:background="@color/background_day"/>
 
             </xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView>
 
@@ -56,5 +56,5 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_calendar"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimaryDay" />
 </android.support.design.widget.CoordinatorLayout>

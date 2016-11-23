@@ -24,6 +24,7 @@ import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.db.DbManager;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
+import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 
 /**
@@ -130,6 +131,11 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     @Override
     public int setContentViewId() {
         return R.layout.activity_story;
+    }
+
+    @Override
+    public Colorful initColorful() {
+        return null;
     }
 
     @Override

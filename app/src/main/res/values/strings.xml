@@ -21,6 +21,7 @@
     <string name="set_account">账户设置</string>
     <string name="set_help">关于与帮助</string>
     <string name="set_clean_cache">清除缓存</string>
+    <string name="set_change_theme">夜间模式</string>
     <string name="set_change_pwd">修改密码</string>
     <string name="set_check_update">检查更新</string>
     <string name="set_about">关于</string>

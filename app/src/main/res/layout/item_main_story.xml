@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/iv_item_story"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/text_primary_day"
             android:textSize="18sp"
             android:textStyle="bold" />
     </RelativeLayout>

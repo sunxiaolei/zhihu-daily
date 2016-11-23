@@ -30,4 +30,8 @@ public class Constant {
     public static final String SP_USER_NAME = "USER_NAME";
     public static final String SP_USER_PASSWORD = "USER_PASSWORD";
 
+
+    public static final String SP_THEME = "THEME";
+    public static final String SP_THEME_NIGHT = "THEME_NIGHT";
+
 }

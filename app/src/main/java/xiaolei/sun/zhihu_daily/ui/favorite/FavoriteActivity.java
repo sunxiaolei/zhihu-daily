@@ -13,6 +13,7 @@ import java.util.List;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
+import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 
 /**
  * Created by sunxl8 on 2016/9/29.
@@ -33,6 +34,11 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
     @Override
     public int setContentViewId() {
         return R.layout.activity_favorite;
+    }
+
+    @Override
+    public Colorful initColorful() {
+        return null;
     }
 
     @Override
