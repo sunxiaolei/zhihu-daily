@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhiteBg"
+    android:background="@color/background_day"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +14,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:text="@string/favorite_choose_category"
-        android:textColor="@color/text_secondary" />
+        android:textColor="@color/text_secondary_day" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary_day" />
 
         <TextView
             android:id="@+id/tv_choose_category_sure"
@@ -37,7 +37,7 @@
             android:background="@drawable/selector_item"
             android:gravity="center"
             android:text="@string/sure"
-            android:textColor="@color/text_secondary" />
+            android:textColor="@color/text_secondary_day" />
 
     </LinearLayout>
 
@@ -45,7 +45,7 @@
         android:id="@+id/lv_choose_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/text_secondary"
+        android:divider="@color/text_secondary_day"
         android:paddingLeft="15dp"
         android:paddingRight="15dp" />
 

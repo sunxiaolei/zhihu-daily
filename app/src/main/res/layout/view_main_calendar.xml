@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         mcv:mcv_arrowColor="#000000"
         mcv:mcv_calendarMode="month"
-        mcv:mcv_selectionColor="@color/colorPrimaryDark"
+        mcv:mcv_selectionColor="@color/colorPrimaryDarkDay"
         mcv:mcv_tileHeight="?actionBarSize" />
 
     <LinearLayout

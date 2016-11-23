@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SwipeBackLayout">
-        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_size" format="dimension" />
         <attr name="edge_flag">
             <enum name="left" value="0" />
             <enum name="right" value="1" />
             <enum name="bottom" value="2" />
             <enum name="all" value="3" />
         </attr>
-        <attr name="shadow_left" format="reference"/>
-        <attr name="shadow_right" format="reference"/>
-        <attr name="shadow_bottom" format="reference"/>
+        <attr name="shadow_left" format="reference" />
+        <attr name="shadow_right" format="reference" />
+        <attr name="shadow_bottom" format="reference" />
     </declare-styleable>
 
-    <attr name="SwipeBackLayoutStyle" format="reference"/>
+    <attr name="SwipeBackLayoutStyle" format="reference" />
 
     <declare-styleable name="BlurDrawerLayout">
         <attr name="blurRadius" format="integer" />
@@ -26,51 +26,56 @@
 
     <declare-styleable name="ProgressActivity">
 
-        <attr name="loadingProgressBarWidth" format="dimension"/>
-        <attr name="loadingProgressBarHeight" format="dimension"/>
-        <attr name="loadingBackgroundColor" format="color"/>
+        <attr name="loadingProgressBarWidth" format="dimension" />
+        <attr name="loadingProgressBarHeight" format="dimension" />
+        <attr name="loadingBackgroundColor" format="color" />
 
-        <attr name="emptyImageWidth" format="dimension"/>
-        <attr name="emptyImageHeight" format="dimension"/>
-        <attr name="emptyTitleTextSize" format="dimension"/>
-        <attr name="emptyContentTextSize" format="dimension"/>
-        <attr name="emptyTitleTextColor" format="color"/>
-        <attr name="emptyContentTextColor" format="color"/>
-        <attr name="emptyBackgroundColor" format="color"/>
+        <attr name="emptyImageWidth" format="dimension" />
+        <attr name="emptyImageHeight" format="dimension" />
+        <attr name="emptyTitleTextSize" format="dimension" />
+        <attr name="emptyContentTextSize" format="dimension" />
+        <attr name="emptyTitleTextColor" format="color" />
+        <attr name="emptyContentTextColor" format="color" />
+        <attr name="emptyBackgroundColor" format="color" />
 
-        <attr name="errorImageWidth" format="dimension"/>
-        <attr name="errorImageHeight" format="dimension"/>
-        <attr name="errorTitleTextSize" format="dimension"/>
-        <attr name="errorContentTextSize" format="dimension"/>
-        <attr name="errorTitleTextColor" format="color"/>
-        <attr name="errorContentTextColor" format="color"/>
-        <attr name="errorButtonTextColor" format="color"/>
-        <attr name="errorBackgroundColor" format="color"/>
+        <attr name="errorImageWidth" format="dimension" />
+        <attr name="errorImageHeight" format="dimension" />
+        <attr name="errorTitleTextSize" format="dimension" />
+        <attr name="errorContentTextSize" format="dimension" />
+        <attr name="errorTitleTextColor" format="color" />
+        <attr name="errorContentTextColor" format="color" />
+        <attr name="errorButtonTextColor" format="color" />
+        <attr name="errorBackgroundColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="SpringView">
         <attr name="type">
-            <enum name="overlap" value="0"/>
-            <enum name="follow" value="1"/>
+            <enum name="overlap" value="0" />
+            <enum name="follow" value="1" />
         </attr>
         <attr name="give">
-            <enum name="both" value="0"/>
-            <enum name="top" value="1"/>
-            <enum name="bottom" value="2"/>
-            <enum name="none" value="3"/>
+            <enum name="both" value="0" />
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="none" value="3" />
         </attr>
-        <attr name="header" format="reference"/>
-        <attr name="footer" format="reference"/>
+        <attr name="header" format="reference" />
+        <attr name="footer" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="BottomSheetDialog">
-        <attr name="bsd_inDuration" format="reference|integer"/>
-        <attr name="bsd_inInterpolator" format="reference"/>
-        <attr name="bsd_outDuration" format="reference|integer"/>
-        <attr name="bsd_outInterpolator" format="reference"/>
-        <attr name="bsd_cancelable" format="reference|boolean"/>
-        <attr name="bsd_canceledOnTouchOutside" format="reference|boolean"/>
-        <attr name="bsd_dimAmount" format="reference|float"/>
+        <attr name="bsd_inDuration" format="reference|integer" />
+        <attr name="bsd_inInterpolator" format="reference" />
+        <attr name="bsd_outDuration" format="reference|integer" />
+        <attr name="bsd_outInterpolator" format="reference" />
+        <attr name="bsd_cancelable" format="reference|boolean" />
+        <attr name="bsd_canceledOnTouchOutside" format="reference|boolean" />
+        <attr name="bsd_dimAmount" format="reference|float" />
         <attr name="android:layout_height" />
     </declare-styleable>
+
+    <!-- 自定义属性 主题 -->
+    <attr name="text_color" format="reference|color" />
+    <attr name="background_color" format="reference|color" />
+
 </resources>

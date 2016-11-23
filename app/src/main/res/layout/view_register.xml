@@ -19,13 +19,13 @@
         android:hint="@string/register_login"
         android:inputType="text"
         android:paddingLeft="5dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text_primary_day"
         android:textSize="15sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimaryDarkDay" />
 
     <EditText
         android:id="@+id/et_register_password"
@@ -37,13 +37,13 @@
         android:hint="@string/register_password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text_primary_day"
         android:textSize="15sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimaryDarkDay" />
 
     <Button
         android:id="@+id/btn_register_submit"

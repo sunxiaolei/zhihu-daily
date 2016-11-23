@@ -1,12 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeDay" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimaryDay</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDay</item>
+        <item name="colorAccent">@color/colorAccentDay</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="text_color">@color/text_primary_day</item>
+        <item name="background_color">@color/background_day</item>
+    </style>
+
+    <style name="AppThemeNight" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="text_color">@color/text_primary_night</item>
+        <item name="background_color">@color/background_night</item>
     </style>
 
     <style name="NoTitleTheme" parent="Theme.AppCompat.NoActionBar">
@@ -14,7 +26,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="AppBaseTheme"  parent="AppTheme">
+    <style name="AppBaseTheme"  parent="AppThemeDay">
         <item name="android:windowIsTranslucent">false</item>
         <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
     </style>

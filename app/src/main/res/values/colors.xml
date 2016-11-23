@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03A9F4</color>
-    <color name="colorPrimaryDark">#039BE5</color>
-    <color name="colorAccent">#039BE5</color>
 
 
-    <color name="colorWhiteBg">#F0F0F0</color>
     <color name="colorWhiteLightBg">#D0D0D0</color>
     <color name="colorGrayBg">#757575</color>
     <color name="colorWhiteItemBg">#FFFFFF</color>
@@ -15,8 +11,22 @@
 
 
     <color name="text_white">#FCFCFC</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
+
+    <!-- day -->
+    <color name="colorPrimaryDay">#03A9F4</color>
+    <color name="colorPrimaryDarkDay">#039BE5</color>
+    <color name="colorAccentDay">#039BE5</color>
+    <color name="background_day">#F0F0F0</color>
+    <color name="text_primary_day">#212121</color>
+    <color name="text_secondary_day">#757575</color>
+
+    <!-- night -->
+    <color name="colorPrimaryNight">#202020</color>
+    <color name="colorPrimaryDarkNight">#000000</color>
+    <color name="colorAccentNight">#FCFCFC</color>
+    <color name="background_night">#37474F</color>
+    <color name="text_primary_night">#FFFAF0</color>
+    <color name="text_secondary_night">#AAFAF0</color>
 
 
 </resources>

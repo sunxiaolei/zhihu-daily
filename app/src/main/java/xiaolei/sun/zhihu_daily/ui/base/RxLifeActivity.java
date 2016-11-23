@@ -27,21 +27,21 @@ public class RxLifeActivity extends AppCompatActivity implements LifecycleProvid
     @Override
     @NonNull
     @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
+    public Observable<ActivityEvent> lifecycle() {
         return lifecycleSubject.asObservable();
     }
 
     @Override
     @NonNull
     @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
+    public <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
         return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
     }
 
     @Override
     @NonNull
     @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+    public <T> LifecycleTransformer<T> bindToLifecycle() {
         return RxLifecycleAndroid.bindActivity(lifecycleSubject);
     }
 
