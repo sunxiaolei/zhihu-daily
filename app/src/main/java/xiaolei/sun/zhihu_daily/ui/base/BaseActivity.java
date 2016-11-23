@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import xiaolei.sun.zhihu_daily.widget.dialog.LoadingDialog;
+
 /**
  * Description: <br>
  * author: sun<br>
@@ -21,7 +23,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
     protected T mPresenter;
 
     private AlertDialog mDialog;
-    private ProgressDialog mLoading;
+    private LoadingDialog mLoading;
 
     protected abstract T createPresenter();
 
@@ -48,9 +50,8 @@ public abstract class BaseActivity<T extends IPresenter> extends RxLifeActivity 
     public abstract int setContentViewId();
 
     public void showLoading() {
-        mLoading = new ProgressDialog(this);
+        mLoading = new LoadingDialog(this);
         mLoading.show();
-        mLoading.setOnDismissListener(dialogInterface -> mLoading = null);
     }
 
     public void showDialog(String title, String msg) {
