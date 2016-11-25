@@ -135,7 +135,8 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
     @Override
     public Colorful initColorful() {
-        return null;
+        return new Colorful.Builder(this)
+                .create();
     }
 
     @Override

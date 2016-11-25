@@ -254,6 +254,12 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
     public String adjustCss(String string) {
         String str = string.replace("height: 200px;", "height: 0px;");
         str = str.replace("margin: 20px 0;", "margin: 50px 0 20px;");
+//        str = str.replace("content { color: #444;", "content { color: #039BE5;");//查看知乎讨论
+        str = str.replace("question-title {\n" +
+                "  line-height: 1.4em;\n" +
+                "  color: #000;", "question-title {\n" +
+                "  line-height: 1.4em;\n" +
+                "  color: #039BE5;");//查看知乎讨论
         return "<style type=\"text/css\">" + str + "</style>" + bean.getBody();
     }
 }

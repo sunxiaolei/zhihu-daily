@@ -20,12 +20,14 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxCompoundButton;
 import com.jakewharton.rxbinding.widget.RxTextSwitcher;
 import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
@@ -73,10 +75,14 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
         return new Colorful.Builder(this)
                 .backgroundDrawable(R.id.root_view_settings, R.attr.background_color)
                 .backgroundColor(R.id.toolbar, R.attr.colorPrimary)
+                .textColor(R.id.tv_setting_clean_cache, R.attr.text_color)
+                .textColor(R.id.tv_setting_cache_size, R.attr.text_color)
+                .textColor(R.id.tv_setting_change_theme, R.attr.text_color)
+                .textColor(R.id.tv_setting_change_pwd, R.attr.text_color)
+                .textColor(R.id.tv_setting_check_update, R.attr.text_color)
+                .textColor(R.id.tv_setting_version, R.attr.text_color)
                 .textColor(R.id.tv_setting_about, R.attr.text_color)
                 .textColor(R.id.tv_setting_feedback, R.attr.text_color)
-                .textColor(R.id.tv_setting_cache_size, R.attr.text_color)
-                .textColor(R.id.tv_setting_version, R.attr.text_color)
                 .create();
     }
 
@@ -90,7 +96,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
         getCacheSize();
         layoutCleanCache.setOnClickListener(this);
 
-        switchTheme.setChecked(spTheme.getBoolean(Constant.SP_THEME_NIGHT));
+        switchTheme.setChecked(spTheme.getBoolean(Constant.SP_THEME_NIGHT, false));
         switchTheme.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 mColorful.setTheme(R.style.AppThemeNight);
