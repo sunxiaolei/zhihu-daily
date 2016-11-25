@@ -1,6 +1,5 @@
 package xiaolei.sun.zhihu_daily.ui.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
@@ -22,10 +21,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.functions.Action1;
+import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.utils.SPUtils;
 import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurActionBarDrawerToggle;
 import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout;
+import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView;
 import xiaolei.sun.zhihu_daily.widget.quickadapter.container.RotationFooter;
@@ -47,7 +48,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private RecyclerView recyclerView;
     private StoriesRecyclerAdapter adapter;
     private FloatingActionButton btnCalendar;
-    //    private BeautifulRefreshLayout refreshLayout;
     private SpringView refreshLayout;
 
     private BottomSheetDialog mBottomSheetDialog;
@@ -61,14 +61,32 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private TextView tvSet;
     private TextView tvFavorite;
 
+    private Colorful mColorful;
+    private SPUtils spTheme;
+
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter();
     }
 
+    private Colorful initColorful() {
+        return new Colorful.Builder(this)
+                .backgroundColor(R.id.root_view_main, R.attr.background_color)
+                .backgroundColor(R.id.toolbar, R.attr.colorPrimary)
+                .textColor(R.id.tv_setting_clean_cache, R.attr.text_color)
+                .create();
+    }
+
     @Override
     public void init() {
         mPresenter.login();
+        mColorful = initColorful();
+        spTheme = new SPUtils(this, Constant.SP_THEME);
+        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
+            mColorful.setTheme(R.style.AppThemeNight);
+        } else {
+            mColorful.setTheme(R.style.AppThemeDay);
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
