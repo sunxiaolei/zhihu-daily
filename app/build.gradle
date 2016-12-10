@@ -15,6 +15,11 @@ android {
         versionCode 3
         versionName "0.9.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // dex分包
+        multiDexEnabled true
+        multiDexKeepProguard file('multiDexKeep.pro')
+        multiDexKeepFile file('multiDexKeep.txt')
     }
     signingConfigs {
         release {
@@ -82,7 +87,9 @@ dependencies {
     compile 'cn.leancloud.android:avoscloud-sns:v3.+@aar'
     compile 'cn.leancloud.android:qq-sdk:1.6.1-leancloud'
     // 目前新浪微博官方只提供 jar 包的集成方式
+
     // 请手动下载新浪微博 SDK 的 jar 包，将其放在 libs 目录下进行集成
+
     // LeanCloud 应用内搜索包
     compile 'cn.leancloud.android:avoscloud-search:v3.+@aar'
     //数据库
@@ -101,6 +108,7 @@ dependencies {
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
     compile project(path: ':expandableview')
+    compile project(':IMKit')
+    compile project(':IMLib')
 }
