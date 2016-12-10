@@ -1,16 +1,18 @@
 package xiaolei.sun.zhihu_daily;
 
-import android.app.Application;
+import android.support.multidex.MultiDex;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.orhanobut.logger.LogAdapter;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePalApplication;
 
+import io.rong.imkit.RongIM;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
+
+import static com.orhanobut.logger.Logger.init;
 
 /**
  * Description: <br>
@@ -29,9 +31,11 @@ public class ZhihuDailyApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
 
         Fresco.initialize(this);
         AVOSCloud.initialize(this, Constant.LEAN_CLOUD_ID, Constant.LEAN_CLOUD_KEY);
+        RongIM.init(this);
 
         Logger
                 .init("ZhiHu")

@@ -81,12 +81,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     public void init() {
         mPresenter.login();
         mColorful = initColorful();
-        spTheme = new SPUtils(this, Constant.SP_THEME);
-        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
-            mColorful.setTheme(R.style.AppThemeNight);
-        } else {
-            mColorful.setTheme(R.style.AppThemeDay);
-        }
+//        spTheme = new SPUtils(this, Constant.SP_THEME);
+//        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
+//            mColorful.setTheme(R.style.AppThemeNight);
+//        } else {
+//            mColorful.setTheme(R.style.AppThemeDay);
+//        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
