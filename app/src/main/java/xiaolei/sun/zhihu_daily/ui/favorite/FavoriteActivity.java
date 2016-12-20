@@ -37,11 +37,6 @@ public class FavoriteActivity extends BaseSwipeBackActivity<FavoritPresenter> im
     }
 
     @Override
-    public Colorful initColorful() {
-        return null;
-    }
-
-    @Override
     public void init() {
 
         storyId = getIntent().getStringExtra("STORY_ID");

@@ -120,6 +120,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
             @Override
             public void onLoadmore() {
                 showToast("no more");
+                refreshLayout.onFinishFreshAndLoad();
             }
         });
 
@@ -174,7 +175,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 mBottomSheetDialog.dismiss();
             }
         });
-        mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.MATCH_PARENT);
+        mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.WRAP_CONTENT);
         mBottomSheetDialog.contentView(v)
                 .show();
     }
