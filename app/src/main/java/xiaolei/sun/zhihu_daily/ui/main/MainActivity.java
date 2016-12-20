@@ -3,6 +3,8 @@ package xiaolei.sun.zhihu_daily.ui.main;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +23,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.utils.SPUtils;
-import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurActionBarDrawerToggle;
-import xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout;
 import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView;
@@ -42,8 +41,8 @@ import xiaolei.sun.zhihu_daily.ui.settings.SettingsActivity;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements View.OnClickListener, MainContract.View {
 
-    private BlurDrawerLayout drawerLayout;
-    private BlurActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private StoriesRecyclerAdapter adapter;
@@ -90,10 +89,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        drawerLayout = (BlurDrawerLayout) findViewById(R.id.dl_activity_main);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawerLayout = (DrawerLayout) findViewById(R.id.dl_activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.rv_activity_main);
-        toggle = new BlurActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
+        toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
         toolbar.setNavigationOnClickListener(v -> {
@@ -103,7 +103,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
             else
                 drawerLayout.openDrawer(GravityCompat.START);
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnCalendar = (FloatingActionButton) findViewById(R.id.btn_main_calendar);
         btnCalendar.setOnClickListener(view -> showBottomSheet());

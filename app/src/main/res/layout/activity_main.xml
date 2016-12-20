@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_view_main"
     android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:titleTextColor="@color/text_white"
             app:titleTextColor="@color/text_white"/>
 
-        <xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout
+        <android.support.v4.widget.DrawerLayout
             android:id="@+id/dl_activity_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,9 +43,9 @@
 
             <include
                 android:id="@+id/left_drawer_main_menu"
-                layout="@layout/view_main_drawere_menu" />
+                layout="@layout/view_main_drawere_menu"/>
 
-        </xiaolei.sun.zhihu_daily.widget.blurdrawer.BlurDrawerLayout>
+        </android.support.v4.widget.DrawerLayout>
 
     </LinearLayout>
 
@@ -56,5 +57,5 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_calendar"
-        app:backgroundTint="@color/colorPrimaryDay" />
+        app:backgroundTint="@color/colorPrimaryDay"/>
 </android.support.design.widget.CoordinatorLayout>
