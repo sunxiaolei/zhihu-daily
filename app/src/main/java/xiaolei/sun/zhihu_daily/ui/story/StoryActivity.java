@@ -134,12 +134,6 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
     }
 
     @Override
-    public Colorful initColorful() {
-        return new Colorful.Builder(this)
-                .create();
-    }
-
-    @Override
     public void setImageUrl(String url) {
         image.setImageURI(url);
     }

@@ -68,11 +68,6 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
     }
 
     @Override
-    public Colorful initColorful() {
-        return null;
-    }
-
-    @Override
     public void showRegisterSheet() {
         mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.BottomSheetDialog);
         registerView = LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_register, null);

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.expandable.view.ExpandableView
+    <xiaolei.sun.zhihu_daily.widget.ExpandableView
         android:id="@+id/ev_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

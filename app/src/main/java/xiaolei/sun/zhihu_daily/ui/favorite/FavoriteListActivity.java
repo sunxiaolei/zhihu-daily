@@ -9,27 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.expandable.view.ExpandableView;
 import com.google.gson.JsonObject;
-import com.trello.rxlifecycle.LifecycleTransformer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-
-import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.db.DbManager;
-import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.ui.story.StoryActivity;
+import xiaolei.sun.zhihu_daily.widget.ExpandableView;
 import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 
 /**
@@ -52,11 +45,6 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
     @Override
     public int setContentViewId() {
         return R.layout.activity_favorite_list;
-    }
-
-    @Override
-    public Colorful initColorful() {
-        return null;
     }
 
     @Override

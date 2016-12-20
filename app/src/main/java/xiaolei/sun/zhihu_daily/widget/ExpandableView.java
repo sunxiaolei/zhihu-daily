@@ -1,4 +1,4 @@
-package com.expandable.view;
+package xiaolei.sun.zhihu_daily.widget;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import xiaolei.sun.zhihu_daily.R;
 
 /**
  * ExpandableView is a View showing only a visible content and when clicked on it, it displays more content in a fashion way.

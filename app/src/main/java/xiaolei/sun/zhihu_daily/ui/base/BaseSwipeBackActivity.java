@@ -57,13 +57,6 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
         mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView(this);
         ButterKnife.bind(this);
-        mColorful = initColorful();
-        spTheme = new SPUtils(this, Constant.SP_THEME);
-        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
-            mColorful.setTheme(R.style.AppThemeNight);
-        } else {
-            mColorful.setTheme(R.style.AppThemeDay);
-        }
         init();
     }
 
@@ -77,8 +70,6 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     }
 
     public abstract int setContentViewId();
-
-    public abstract Colorful initColorful();
 
     public abstract void init();
 

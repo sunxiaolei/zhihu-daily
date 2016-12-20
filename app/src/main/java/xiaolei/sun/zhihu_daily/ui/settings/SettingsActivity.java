@@ -70,7 +70,6 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
         return R.layout.activity_setting;
     }
 
-    @Override
     public Colorful initColorful() {
         return new Colorful.Builder(this)
                 .backgroundDrawable(R.id.root_view_settings, R.attr.background_color)
@@ -88,6 +87,13 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
 
     @Override
     public void init() {
+        mColorful = initColorful();
+        spTheme = new SPUtils(this, Constant.SP_THEME);
+        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
+            mColorful.setTheme(R.style.AppThemeNight);
+        } else {
+            mColorful.setTheme(R.style.AppThemeDay);
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.set_title);
         setSupportActionBar(toolbar);
