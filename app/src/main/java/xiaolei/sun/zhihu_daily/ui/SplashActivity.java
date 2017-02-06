@@ -56,6 +56,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
+                tvCopyright.setText("图片加载错误");
+                Observable.timer(2, TimeUnit.SECONDS)
+                        .subscribe(aLong -> {
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            SplashActivity.this.finish();
+                        });
             }
 
             @Override
