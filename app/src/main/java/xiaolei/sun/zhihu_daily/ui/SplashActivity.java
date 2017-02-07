@@ -1,12 +1,14 @@
 package xiaolei.sun.zhihu_daily.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.concurrent.TimeUnit;
@@ -56,7 +58,9 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                tvCopyright.setText("图片加载错误");
+                Uri uri = Uri.parse("res://drawable/" + R.drawable.bg_login);
+                img.setImageURI(uri);
+                tvCopyright.setText("欢迎");
                 Observable.timer(2, TimeUnit.SECONDS)
                         .subscribe(aLong -> {
                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
