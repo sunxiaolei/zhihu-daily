@@ -12,14 +12,10 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.db.DbManager;
-import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
-import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
-import xiaolei.sun.zhihu_daily.network.api.ApiNews;
+import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteResponse;
@@ -36,7 +32,6 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
     public static final int FAVORITE_FAILED = 1;
     public static final int FAVORITE_YET = 2;//已收藏
 
-    private ApiNews api;
     private StoryBean bean;
 
     public StoryPresenter(StoryContract.View view) {
@@ -45,8 +40,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
 
     @Override
     public void getNews(int storyId) {
-        api = new ApiNews();
-        api.getNews(storyId, new Subscriber<StoryBean>() {
+        ZhihuDailyRequest.getNews(storyId, new Subscriber<StoryBean>() {
             @Override
             public void onCompleted() {
 
@@ -76,7 +70,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         String[] strs2 = strs[1].split("=");
         Map<String, String> params = new HashMap<>();
         params.put(strs2[0], strs2[1]);
-        api.getCss(params, new Subscriber<String>() {
+        ZhihuDailyRequest.getCss(params, new Subscriber<String>() {
             @Override
             public void onCompleted() {
             }

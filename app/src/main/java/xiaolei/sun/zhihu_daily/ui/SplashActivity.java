@@ -13,10 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
+import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.network.api.ApiStartImage;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
 import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
 
@@ -48,8 +47,7 @@ public class SplashActivity extends AppCompatActivity {
         img = (SimpleDraweeView) findViewById(R.id.img_activity_splash);
         tvCopyright = (TextView) findViewById(R.id.tv_activity_splash);
 
-        ApiStartImage apiStartImage = new ApiStartImage();
-        apiStartImage.getStartImage(new Subscriber<StartImageBean>() {
+        ZhihuDailyRequest.getStartImage(new Subscriber<StartImageBean>() {
             @Override
             public void onCompleted() {
             }

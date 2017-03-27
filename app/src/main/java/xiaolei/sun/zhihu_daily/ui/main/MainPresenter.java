@@ -9,8 +9,7 @@ import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
-import xiaolei.sun.zhihu_daily.network.api.ApiNewsDate;
-import xiaolei.sun.zhihu_daily.network.api.ApiNewsLasted;
+import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.NewsBean;
@@ -55,8 +54,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
     @Override
     public void getNewsLasted() {
-        ApiNewsLasted api = new ApiNewsLasted();
-        api.getNewsLasted(new Subscriber<NewsBean>() {
+        ZhihuDailyRequest.getNewsLasted(new Subscriber<NewsBean>() {
             @Override
             public void onCompleted() {
             }
@@ -75,9 +73,8 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     @Override
     public void getNewsByDate(CalendarDay date) {
         //20131119
-        String dateFomat = DateUtils.getFormatDate(date.getDate(),"yyyyMMdd");
-        ApiNewsDate api = new ApiNewsDate();
-        api.getNewsLasted(dateFomat, new Subscriber<NewsBean>() {
+        String dateFomat = DateUtils.getFormatDate(date.getDate(), "yyyyMMdd");
+        ZhihuDailyRequest.getNewsLasted(dateFomat, new Subscriber<NewsBean>() {
             @Override
             public void onCompleted() {
 
