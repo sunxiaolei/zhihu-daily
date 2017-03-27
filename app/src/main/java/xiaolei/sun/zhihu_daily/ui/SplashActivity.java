@@ -15,13 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action1;
 import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.network.api.ApiStartImage;
-import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
-import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
 import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
 
