@@ -19,9 +19,6 @@ import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
-import xiaolei.sun.zhihu_daily.Constant;
-import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.utils.SPUtils;
 import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.LoadingDialog;
 import xiaolei.sun.zhihu_daily.widget.swipebacklayout.SwipeBackActivity;
@@ -46,7 +43,6 @@ public abstract class BaseSwipeBackActivity<T extends IPresenter> extends SwipeB
     protected abstract T createPresenter();
 
     protected Colorful mColorful;
-    protected SPUtils spTheme;
 
     @Override
     @CallSuper

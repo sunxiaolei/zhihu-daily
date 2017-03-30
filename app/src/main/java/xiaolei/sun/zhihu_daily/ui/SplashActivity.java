@@ -8,18 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
+import sunxl8.myutils.NetworkUtils;
 import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.network.entity.zhihu.StartImageBean;
-import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
 
 /**
  * Description: <br>
@@ -38,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (!AndroidUtils.isConnected(this)) {
+        if (!NetworkUtils.isConnected()) {
             Toast.makeText(this, "请检查网络", Toast.LENGTH_SHORT).show();
             Observable.timer(1, TimeUnit.SECONDS)
                     .subscribe(aLong -> {

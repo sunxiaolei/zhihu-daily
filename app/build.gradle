@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "xiaolei.sun.zhihu_daily"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 4
         versionName "0.9.4"
@@ -106,4 +106,6 @@ dependencies {
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //utils
+    compile 'com.github.sunxiaolei:my-utils:1.0.1'
 }

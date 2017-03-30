@@ -9,9 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import sunxl8.myutils.RegexUtils;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.utils.RegexUtils;
-import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;

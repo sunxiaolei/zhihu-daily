@@ -13,7 +13,7 @@ import java.util.Map;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.ZhihuDailyRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
@@ -100,7 +100,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         JsonObject obj1 = new JsonObject();
         JsonObject obj2 = new JsonObject();
         JsonArray arr = new JsonArray();
-        obj1.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        obj1.addProperty("userId", BaseApplication.user.getObjectId());
         obj2.addProperty("storyId", storyId + "");
         arr.add(obj1);
         arr.add(obj2);
@@ -131,7 +131,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         request = new FavoriteRequest();
         request.setCategory(category);
         request.setStoryId(bean.getId() + "");
-        request.setUserId(ZhihuDailyApplication.user.getObjectId());
+        request.setUserId(BaseApplication.user.getObjectId());
         request.setStoryTitle(bean.getTitle());
         LeanCloudRequest.getFavoriteRelation(map)
                 .flatMap(new Func1<FavoriteRelationResponse, Observable<FavoriteResponse>>() {
@@ -186,7 +186,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         FavoriteRequest request = new FavoriteRequest();
         request.setCategory(category);
         request.setStoryId(storyId);
-        request.setUserId(ZhihuDailyApplication.user.getObjectId());
+        request.setUserId(BaseApplication.user.getObjectId());
         LeanCloudRequest.doFavorite(request)
                 .subscribe(new Subscriber<FavoriteResponse>() {
                     @Override
@@ -212,7 +212,7 @@ public class StoryPresenter extends RxPresenter<StoryContract.View> implements S
         //符合查询
         Map<String, String> map = new HashMap<>();
         JsonObject obj = new JsonObject();
-        obj.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        obj.addProperty("userId", BaseApplication.user.getObjectId());
         map.put("where", obj.toString());
         LeanCloudRequest.getFavoriteRelation(map)
                 .subscribe(new Subscriber<FavoriteRelationResponse>() {

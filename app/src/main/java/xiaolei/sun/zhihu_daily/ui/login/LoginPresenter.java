@@ -1,18 +1,15 @@
 package xiaolei.sun.zhihu_daily.ui.login;
 
 
-import android.content.Context;
-
 import rx.Subscriber;
+import sunxl8.myutils.SPUtils;
 import xiaolei.sun.zhihu_daily.Constant;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.network.LeanCloudManager;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.RegisterResponse;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
-import xiaolei.sun.zhihu_daily.utils.SPUtils;
 
 /**
  * Created by sunxl8 on 2016/9/26.
@@ -64,11 +61,10 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
 
                     @Override
                     public void onNext(LoginResponse loginResponse) {
-                        ZhihuDailyApplication.isLogin = true;
-                        ZhihuDailyApplication.user = loginResponse;
-                        SPUtils sp = new SPUtils((Context) mView, Constant.SP_USER);
-                        sp.putString(Constant.SP_USER_NAME, username);
-                        sp.putString(Constant.SP_USER_PASSWORD, password);
+                        BaseApplication.isLogin = true;
+                        BaseApplication.user = loginResponse;
+                        SPUtils.getInstance(Constant.SP_USER).put(Constant.SP_USER_NAME, username);
+                        SPUtils.getInstance(Constant.SP_USER).put(Constant.SP_USER_PASSWORD, password);
                         mView.showResult(LOGIN_STATE_SUCCESS);
                     }
                 });
@@ -108,11 +104,10 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
 
                     @Override
                     public void onNext(RegisterResponse response) {
-                        ZhihuDailyApplication.isLogin = true;
-                        ZhihuDailyApplication.sessionToken = response.getSessionToken();
-                        SPUtils sp = new SPUtils((Context) mView, Constant.SP_USER);
-                        sp.putString(Constant.SP_USER_NAME, username);
-                        sp.putString(Constant.SP_USER_PASSWORD, password);
+                        BaseApplication.isLogin = true;
+                        BaseApplication.sessionToken = response.getSessionToken();
+                        SPUtils.getInstance(Constant.SP_USER).put(Constant.SP_USER_NAME, username);
+                        SPUtils.getInstance(Constant.SP_USER).put(Constant.SP_USER_PASSWORD, password);
                         mView.showResult(REGISTER_STATE_SUCCESS);
                     }
                 });

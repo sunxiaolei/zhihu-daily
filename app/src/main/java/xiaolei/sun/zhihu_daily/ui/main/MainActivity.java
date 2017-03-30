@@ -23,8 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.utils.SPUtils;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.widget.quickadapter.SpringView;
@@ -61,7 +60,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private TextView tvFavorite;
 
     private Colorful mColorful;
-    private SPUtils spTheme;
 
     @Override
     protected MainPresenter createPresenter() {
@@ -184,7 +182,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_drawer_head:
-                if (!ZhihuDailyApplication.isLogin) {
+                if (!BaseApplication.isLogin) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
                 break;
@@ -192,7 +190,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.tv_drawer_favorite:
-                if (ZhihuDailyApplication.isLogin) {
+                if (BaseApplication.isLogin) {
                     startActivity(new Intent(MainActivity.this, FavoriteListActivity.class));
                 } else {
                     showToast("请先登录");

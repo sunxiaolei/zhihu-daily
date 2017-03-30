@@ -9,6 +9,7 @@ import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePalApplication;
 
+import sunxl8.myutils.Utils;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 
 import static com.orhanobut.logger.Logger.init;
@@ -20,7 +21,7 @@ import static com.orhanobut.logger.Logger.init;
  * Email：xiaoleisun92@gmail.com
  */
 
-public class ZhihuDailyApplication extends LitePalApplication {
+public class BaseApplication extends LitePalApplication {
 
     public static boolean isLogin = false;
     public static String userId;
@@ -31,6 +32,8 @@ public class ZhihuDailyApplication extends LitePalApplication {
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
+
+        Utils.init(this);
 
         Fresco.initialize(this);
         AVOSCloud.initialize(this, Constant.LEAN_CLOUD_ID, Constant.LEAN_CLOUD_KEY);

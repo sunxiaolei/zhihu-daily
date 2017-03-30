@@ -16,14 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.network.LeanCloudRequest;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.FavoriteRelationResponse;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
 import xiaolei.sun.zhihu_daily.ui.story.StoryActivity;
 import xiaolei.sun.zhihu_daily.widget.ExpandableView;
-import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 
 /**
  * Created by sunxl8 on 2016/9/30.
@@ -64,7 +63,7 @@ public class FavoriteListActivity extends BaseSwipeBackActivity {
         showLoading();
         Map<String, String> map = new HashMap<>();
         JsonObject obj = new JsonObject();
-        obj.addProperty("userId", ZhihuDailyApplication.user.getObjectId());
+        obj.addProperty("userId", BaseApplication.user.getObjectId());
         map.put("where", obj.toString());
         LeanCloudRequest.getFavoriteRelation(map)
                 .subscribe(response -> {

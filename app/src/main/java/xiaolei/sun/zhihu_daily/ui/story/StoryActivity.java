@@ -6,11 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,10 +19,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
-import xiaolei.sun.zhihu_daily.db.DbManager;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
-import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 
 /**
@@ -103,7 +99,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 //                } else {
 //                    showBottomSheet();
 //                }
-            if (ZhihuDailyApplication.isLogin) {
+            if (BaseApplication.isLogin) {
                 showBottomSheet();
             } else {
                 showToast("请先登录");

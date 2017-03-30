@@ -1,11 +1,8 @@
 package xiaolei.sun.zhihu_daily.ui.settings;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -16,25 +13,20 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.feedback.FeedbackAgent;
-import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.widget.RxCompoundButton;
-import com.jakewharton.rxbinding.widget.RxTextSwitcher;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
 
 import butterknife.BindView;
-import rx.functions.Action1;
+import sunxl8.myutils.AppUtils;
+import sunxl8.myutils.CleanUtils;
+import sunxl8.myutils.FileUtils;
+import sunxl8.myutils.SPUtils;
 import xiaolei.sun.zhihu_daily.Constant;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.ZhihuDailyApplication;
+import xiaolei.sun.zhihu_daily.BaseApplication;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.base.IPresenter;
-import xiaolei.sun.zhihu_daily.utils.AndroidUtils;
-import xiaolei.sun.zhihu_daily.utils.SPUtils;
 import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 
 /**
@@ -88,8 +80,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
     @Override
     public void init() {
         mColorful = initColorful();
-        spTheme = new SPUtils(this, Constant.SP_THEME);
-        if (spTheme.getBoolean(Constant.SP_THEME_NIGHT)) {
+        if (SPUtils.getInstance(Constant.SP_THEME).getBoolean(Constant.SP_THEME_NIGHT)) {
             mColorful.setTheme(R.style.AppThemeNight);
         } else {
             mColorful.setTheme(R.style.AppThemeDay);
@@ -102,21 +93,21 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
         getCacheSize();
         layoutCleanCache.setOnClickListener(this);
 
-        switchTheme.setChecked(spTheme.getBoolean(Constant.SP_THEME_NIGHT, false));
+        switchTheme.setChecked(SPUtils.getInstance(Constant.SP_THEME).getBoolean(Constant.SP_THEME_NIGHT, false));
         switchTheme.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 mColorful.setTheme(R.style.AppThemeNight);
-                spTheme.putBoolean(Constant.SP_THEME_NIGHT, true);
+                SPUtils.getInstance(Constant.SP_THEME).put(Constant.SP_THEME_NIGHT, true);
             } else {
                 mColorful.setTheme(R.style.AppThemeDay);
-                spTheme.putBoolean(Constant.SP_THEME_NIGHT, false);
+                SPUtils.getInstance(Constant.SP_THEME).put(Constant.SP_THEME_NIGHT, false);
             }
 
         });
 
         tvFeedback.setOnClickListener(this);
         tvAbout.setOnClickListener(this);
-        tvVersion.setText(AndroidUtils.getAppVersion(getApplicationContext()));
+        tvVersion.setText(AppUtils.getAppVersionName());
         layoutCheckUpdate.setOnClickListener(this);
         layoutLogout.setOnClickListener(this);
 
@@ -127,7 +118,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
      */
     private void getCacheSize() {
         try {
-            String size = AndroidUtils.getCacheSize(this.getCacheDir());
+            String size = FileUtils.getDirSize(this.getCacheDir());
             if (size.startsWith("0.0")) {
                 tvCacheSize.setText(null);
             } else {
@@ -142,7 +133,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_setting_clean_cache:
-                AndroidUtils.cleanInternalCache(getApplicationContext());
+                CleanUtils.cleanInternalCache();
                 showDialog(null, "清理成功");
                 getCacheSize();
                 break;
@@ -156,7 +147,7 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
             case R.id.layout_setting_check_update:
                 String newestVersion = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_NEWESTVERSION_KEY);
                 String updateInfo = AVAnalytics.getConfigParams(getApplicationContext(), Constant.LEAN_CLOUD_PARAMS_UPDATEINFO_KEY);
-                if (!AndroidUtils.getAppVersion(getApplicationContext()).equals(newestVersion)) {
+                if (!AppUtils.getAppVersionName().equals(newestVersion)) {
                     showDialog("提示", "有更新\n最新版本:" + newestVersion + "\n" + updateInfo, getString(R.string.download),
                             (dialogInterface, i) -> getApkUrl());
                 } else {
@@ -165,9 +156,8 @@ public class SettingsActivity extends BaseSwipeBackActivity implements View.OnCl
                 break;
             case R.id.rl_setting_logout:
                 showDialog("确认退出", null, "确定", (dialogInterface, i) -> {
-                    SPUtils sp = new SPUtils(SettingsActivity.this, Constant.SP_USER);
-                    sp.clear();
-                    ZhihuDailyApplication.isLogin = false;
+                    SPUtils.getInstance(Constant.SP_USER).clear();
+                    BaseApplication.isLogin = false;
                 });
                 break;
         }
