@@ -6,6 +6,8 @@ import com.avos.avoscloud.AVOSCloud;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.litepal.LitePalApplication;
 
@@ -27,19 +29,17 @@ public class BaseApplication extends LitePalApplication {
     public static String userId;
     public static String sessionToken;
     public static LoginResponse user;
+    private RefWatcher mRefWatcher;
 
     @Override
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
-
+        mRefWatcher = LeakCanary.install(this);
         Utils.init(this);
-
         Fresco.initialize(this);
         AVOSCloud.initialize(this, Constant.LEAN_CLOUD_ID, Constant.LEAN_CLOUD_KEY);
-
-        Logger
-                .init("ZhiHu")
+        Logger.init("ZhiHu")
                 .methodCount(3)
                 .hideThreadInfo()
                 .logLevel(LogLevel.FULL)
