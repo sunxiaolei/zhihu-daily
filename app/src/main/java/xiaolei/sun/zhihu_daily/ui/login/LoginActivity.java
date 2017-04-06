@@ -45,7 +45,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         btnLogin.setOnClickListener(view -> {
             String name = etName.getText().toString();
             String password = etPassword.getText().toString();
-            if (name == null || password == null || name.equals("") || password.equals("")) {
+            if (name.equals("") || password.equals("")) {
                 showToast("用户名或密码不能为空！");
                 return;
             }
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         btnRegisterSubmit.setOnClickListener(view -> {
             String username = etRegisterUsername.getText().toString();
             String password = etRegisterPassword.getText().toString();
-            if (username == null || password == null || username.equals("") || password.equals("")) {
+            if (username.equals("") || password.equals("")) {
                 showToast("用户名或密码不能为空！");
                 return;
             }

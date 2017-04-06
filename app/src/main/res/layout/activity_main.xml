@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDay"
-            android:titleTextColor="@color/text_white"
             app:titleTextColor="@color/text_white"/>
 
         <android.support.v4.widget.DrawerLayout

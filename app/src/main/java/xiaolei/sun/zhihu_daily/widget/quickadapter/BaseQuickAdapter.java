@@ -163,7 +163,7 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
     }
 
     public interface OnRecyclerViewItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public void setOnRecyclerViewItemLongClickListener(OnRecyclerViewItemLongClickListener onRecyclerViewItemLongClickListener) {
@@ -171,7 +171,7 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
     }
 
     public interface OnRecyclerViewItemLongClickListener {
-        public boolean onItemLongClick(View view, int position);
+        boolean onItemLongClick(View view, int position);
     }
 
     private OnRecyclerViewItemChildClickListener mChildClickListener;

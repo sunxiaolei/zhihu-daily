@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/ali_frame"
@@ -16,7 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/ali_footer_text"
             android:layout_toStartOf="@+id/ali_footer_text"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/ali_footer_arrow"
@@ -26,18 +27,19 @@
             android:layout_toLeftOf="@+id/ali_footer_text"
             android:layout_toStartOf="@+id/ali_footer_text"
             android:adjustViewBounds="true"
-            android:rotation="180"/>
+            android:rotation="180"
+            tools:ignore="ContentDescription"/>
 
 
         <TextView
             android:id="@+id/ali_footer_text"
-            android:layout_marginLeft="10dp"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:gravity="left"
-            android:text="上拉加载" />
+            android:text="上拉加载"/>
     </RelativeLayout>
 
     <ImageView
@@ -46,5 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        tools:ignore="ContentDescription"/>
 </LinearLayout>

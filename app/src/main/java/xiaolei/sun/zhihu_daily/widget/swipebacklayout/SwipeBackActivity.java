@@ -6,7 +6,7 @@ import android.view.View;
 
 import xiaolei.sun.zhihu_daily.ui.base.RxLifeActivity;
 
-public class SwipeBackActivity extends RxLifeActivity implements SwipeBackActivityBase {
+public abstract class SwipeBackActivity extends RxLifeActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
 
     @Override

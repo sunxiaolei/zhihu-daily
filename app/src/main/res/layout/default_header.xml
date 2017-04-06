@@ -1,67 +1,62 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="bottom" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:gravity="bottom">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="70dp" >
+    <LinearLayout
+        android:id="@+id/default_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/default_header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="下拉刷新"
+            android:textColor="#777777"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:id="@+id/default_header_text">
+            android:layout_marginTop="3dp">
 
             <TextView
-                android:id="@+id/default_header_title"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#777777"
-                android:text="下拉刷新" />
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp" >
+                android:text="上次更新时间："
+                android:textColor="#777777"
+                android:textSize="12sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上次更新时间："
-                    android:textColor="#777777"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/default_header_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#777777"
-                    android:text="刚刚"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/default_header_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="刚刚"
+                android:textColor="#777777"
+                android:textSize="12sp"/>
         </LinearLayout>
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/default_header_arrow"
-            android:layout_width="20dp"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@id/default_header_text"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="-35dp"/>
+    <ImageView
+        android:id="@+id/default_header_arrow"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/default_header_text"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="-35dp"
+        tools:ignore="ContentDescription"/>
 
-        <ProgressBar
-            android:id="@+id/default_header_progressbar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignLeft="@id/default_header_text"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="-40dp"
-            android:visibility="invisible" />
-    </RelativeLayout>
-
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/default_header_progressbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@id/default_header_text"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="-40dp"
+        android:visibility="invisible"/>
+</RelativeLayout>

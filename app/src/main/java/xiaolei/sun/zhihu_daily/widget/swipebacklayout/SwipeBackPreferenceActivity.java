@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.View;
 
-public class SwipeBackPreferenceActivity extends PreferenceActivity implements SwipeBackActivityBase {
+public abstract class SwipeBackPreferenceActivity extends PreferenceActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
 
     @Override

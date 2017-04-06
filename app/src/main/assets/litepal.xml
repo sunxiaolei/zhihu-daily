@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="zh_db" ></dbname>
+    <dbname value="zh_db"/>
 
-    <version value="1" ></version>
+    <version value="1"/>
 
     <list>
-        <mapping class="xiaolei.sun.zhihu_daily.db.bean.DbStory"></mapping>
-        <mapping class="xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory"></mapping>
+        <mapping class="xiaolei.sun.zhihu_daily.db.bean.DbStory"/>
+        <mapping class="xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory"/>
     </list>
 </litepal>

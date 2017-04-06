@@ -1,5 +1,6 @@
 package xiaolei.sun.zhihu_daily.ui.story;
 
+import android.annotation.SuppressLint;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -49,6 +50,7 @@ public class StoryActivity extends BaseSwipeBackActivity<StoryPresenter> impleme
 
     private boolean isFavorite = false;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

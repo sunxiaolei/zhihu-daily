@@ -1,19 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_view_settings"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_day"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              android:id="@+id/root_view_settings"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background_day"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDay"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <!-- basic -->
     <LinearLayout
@@ -27,7 +25,7 @@
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDay" />
+            android:background="@color/colorPrimaryDay"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +33,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_basic"
             android:textColor="@color/colorPrimaryDarkDay"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -52,7 +50,7 @@
             android:minHeight="50dp"
             android:paddingLeft="20dp"
             android:text="@string/set_clean_cache"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_setting_cache_size"
@@ -63,15 +61,15 @@
             android:minHeight="50dp"
             android:paddingRight="20dp"
             android:text="2MB"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <RelativeLayout
         android:id="@+id/layout_setting_change_theme"
@@ -87,22 +85,22 @@
             android:minHeight="50dp"
             android:paddingLeft="20dp"
             android:text="@string/set_change_theme"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <Switch
             android:id="@+id/switch_setting_change_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <!-- account -->
     <LinearLayout
@@ -116,7 +114,7 @@
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDay" />
+            android:background="@color/colorPrimaryDay"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,7 +122,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_account"
             android:textColor="@color/colorPrimaryDarkDay"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <TextView
@@ -136,13 +134,13 @@
         android:minHeight="50dp"
         android:paddingLeft="20dp"
         android:text="@string/set_change_pwd"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <!-- help -->
     <LinearLayout
@@ -156,7 +154,7 @@
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDay" />
+            android:background="@color/colorPrimaryDay"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,7 +162,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_help"
             android:textColor="@color/colorPrimaryDarkDay"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -181,7 +179,7 @@
             android:minHeight="50dp"
             android:paddingLeft="20dp"
             android:text="@string/set_check_update"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_setting_version"
@@ -191,15 +189,15 @@
             android:gravity="center_vertical"
             android:minHeight="50dp"
             android:paddingRight="20dp"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <TextView
         android:id="@+id/tv_setting_about"
@@ -210,13 +208,13 @@
         android:minHeight="50dp"
         android:paddingLeft="20dp"
         android:text="@string/set_about"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <TextView
         android:id="@+id/tv_setting_feedback"
@@ -227,13 +225,13 @@
         android:minHeight="50dp"
         android:paddingLeft="20dp"
         android:text="@string/set_feedback"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/text_secondary_day" />
+        android:background="@color/text_secondary_day"/>
 
     <RelativeLayout
         android:id="@+id/rl_setting_logout"
@@ -248,21 +246,21 @@
             android:layout_centerInParent="true"
             android:text="@string/logout"
             android:textColor="@color/colorPrimaryDarkDay"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <View
-            android:layout_width="2px"
+            android:layout_width="0.3dp"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@id/tv_setting_logout"
-            android:background="@color/colorPrimaryDarkDay" />
+            android:background="@color/colorPrimaryDarkDay"/>
 
         <View
-            android:layout_width="2px"
+            android:layout_width="0.3dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/tv_setting_logout"
-            android:background="@color/colorPrimaryDarkDay" />
+            android:background="@color/colorPrimaryDarkDay"/>
 
     </RelativeLayout>
 

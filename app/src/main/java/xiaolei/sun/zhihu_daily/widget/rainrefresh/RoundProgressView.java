@@ -83,7 +83,7 @@ public class RoundProgressView extends View {
 
     public interface Prolistener
     {
-        public void onFinish();
+        void onFinish();
     }
 
     @Override

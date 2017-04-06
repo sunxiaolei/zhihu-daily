@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_login">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,13 +26,13 @@
                 android:gravity="center"
                 android:hint="@string/login_hint_account"
                 android:textColorHint="@color/textWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
+                android:layout_height="0.3dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/lineWhite" />
+                android:background="@color/lineWhite"/>
 
             <EditText
                 android:id="@+id/et_login_password"
@@ -43,13 +44,13 @@
                 android:hint="@string/login_hint_password"
                 android:inputType="textPassword"
                 android:textColorHint="@color/textWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
+                android:layout_height="0.3dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/lineWhite" />
+                android:background="@color/lineWhite"/>
 
         </LinearLayout>
 
@@ -63,7 +64,7 @@
             android:text="@string/login"
             android:textColor="@color/textWhite"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_login_register"
@@ -74,7 +75,7 @@
             android:minHeight="25dp"
             android:text="@string/register_now"
             android:textColor="@color/textWhite"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
@@ -90,35 +91,38 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_action_share_weibo" />
+            android:src="@drawable/ic_action_share_weibo"
+            tools:ignore="ContentDescription"/>
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/lineWhite" />
+            android:background="@color/lineWhite"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_action_share_wechat" />
+            android:src="@drawable/ic_action_share_wechat"
+            tools:ignore="ContentDescription"/>
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/lineWhite" />
+            android:background="@color/lineWhite"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_action_share_qq" />
+            android:src="@drawable/ic_action_share_qq"
+            tools:ignore="ContentDescription"/>
     </LinearLayout>
 
 </RelativeLayout>

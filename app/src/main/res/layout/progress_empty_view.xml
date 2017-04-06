@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/emptyStateRelativeLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/emptyStateRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/emptyViewRelativeLayout"
@@ -19,7 +19,7 @@
             android:layout_height="108dp"
             android:layout_gravity="center_horizontal"
             tools:background="#000000"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/emptyStateTitleTextView"
@@ -30,8 +30,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
             android:textSize="15sp"
-            android:textStyle="bold"
-            tools:text="@string/progressActivityEmptyTitlePlaceholder" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/emptyStateContentTextView"
@@ -43,8 +42,7 @@
             android:layout_marginRight="56dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:lineSpacingExtra="5.5dp"
-            tools:text="@string/progressActivityEmptyContentPlaceholder" />
+            android:lineSpacingExtra="5.5dp"/>
 
     </LinearLayout>
 

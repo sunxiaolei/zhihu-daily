@@ -20,7 +20,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.3dp"
         android:background="#333d3d3d" />
 
 </LinearLayout>

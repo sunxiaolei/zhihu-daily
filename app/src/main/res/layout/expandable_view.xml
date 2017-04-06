@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/expandable_view_clickable_content"
@@ -14,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/activity_vertical_margin" />
+            android:layout_marginLeft="20dp"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/expandable_view_title"
@@ -25,7 +27,7 @@
             android:layout_toRightOf="@id/expandable_view_image"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/expandable_view_right_icon"
@@ -33,15 +35,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:src="@drawable/ic_expandable_view_plus" />
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_expandable_view_plus"
+            tools:ignore="ContentDescription"/>
 
         <View
             android:id="@+id/expandable_view_separator"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -49,5 +52,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/expandable_view_clickable_content"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"/>
 </merge>

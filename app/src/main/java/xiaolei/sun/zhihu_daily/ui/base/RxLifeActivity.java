@@ -20,7 +20,7 @@ import rx.subjects.BehaviorSubject;
  * Created by sunxl8 on 2016/10/17.
  */
 
-public class RxLifeActivity extends AppCompatActivity implements LifecycleProvider<ActivityEvent> {
+public abstract class RxLifeActivity extends AppCompatActivity implements LifecycleProvider<ActivityEvent> {
 
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
