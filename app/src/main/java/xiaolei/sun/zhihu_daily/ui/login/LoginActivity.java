@@ -3,15 +3,15 @@ package xiaolei.sun.zhihu_daily.ui.login;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
+
 import sunxl8.myutils.RegexUtils;
 import xiaolei.sun.zhihu_daily.R;
-import xiaolei.sun.zhihu_daily.widget.dialog.BottomSheetDialog;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
 import xiaolei.sun.zhihu_daily.ui.main.MainActivity;
 
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
     private EditText etRegisterPassword;
     private Button btnRegisterSubmit;
 
-    private BottomSheetDialog mBottomSheetDialog;
+    private BottomSheetLayout mBottomSheetLayout;
 
     @Override
     public void init() {
@@ -41,6 +41,8 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
         etPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (TextView) findViewById(R.id.tv_login_login);
         btnRegister = (TextView) findViewById(R.id.tv_login_register);
+
+        mBottomSheetLayout = (BottomSheetLayout) findViewById(R.id.sheet_layout);
 
         btnLogin.setOnClickListener(view -> {
             String name = etName.getText().toString();
@@ -68,8 +70,8 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
 
     @Override
     public void showRegisterSheet() {
-        mBottomSheetDialog = new BottomSheetDialog(LoginActivity.this, R.style.BottomSheetDialog);
         registerView = LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_register, null);
+        mBottomSheetLayout.showWithSheetView(registerView);
 
         etRegisterUsername = (EditText) registerView.findViewById(R.id.et_register_phone);
         etRegisterPassword = (EditText) registerView.findViewById(R.id.et_register_password);
@@ -90,9 +92,6 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
             mPresenter.register(username, password);
         });
 
-        mBottomSheetDialog.heightParam(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mBottomSheetDialog.contentView(registerView)
-                .show();
     }
 
     @Override

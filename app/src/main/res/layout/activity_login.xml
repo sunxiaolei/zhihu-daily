@@ -1,128 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_login">
+<com.flipboard.bottomsheet.BottomSheetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sheet_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_login">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
-            android:orientation="vertical"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_login_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="@string/login_hint_account"
-                android:textColorHint="@color/textWhite"
-                android:textSize="14sp"/>
+                android:layout_marginTop="130dp"
+                android:orientation="vertical"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/lineWhite"/>
+                <EditText
+                    android:id="@+id/et_login_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/login_hint_account"
+                    android:textColorHint="@color/textWhite"
+                    android:textSize="14sp"/>
 
-            <EditText
-                android:id="@+id/et_login_password"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/lineWhite"/>
+
+                <EditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/login_hint_password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/textWhite"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/lineWhite"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_login_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@null"
                 android:gravity="center"
-                android:hint="@string/login_hint_password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/textWhite"
-                android:textSize="14sp"/>
+                android:minHeight="30dp"
+                android:text="@string/login"
+                android:textColor="@color/textWhite"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
-            <View
+            <TextView
+                android:id="@+id/tv_login_register"
                 android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/lineWhite"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:minHeight="25dp"
+                android:text="@string/register_now"
+                android:textColor="@color/textWhite"
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_login_login"
+        <LinearLayout
+            android:id="@+id/layout_login_sdk_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:minHeight="30dp"
-            android:text="@string/login"
-            android:textColor="@color/textWhite"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_login_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:minHeight="25dp"
-            android:text="@string/register_now"
-            android:textColor="@color/textWhite"
-            android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_share_weibo"
+                tools:ignore="ContentDescription"/>
 
-    </LinearLayout>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lineWhite"/>
 
-    <LinearLayout
-        android:id="@+id/layout_login_sdk_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_share_wechat"
+                tools:ignore="ContentDescription"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/ic_action_share_weibo"
-            tools:ignore="ContentDescription"/>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lineWhite"/>
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineWhite"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_share_qq"
+                tools:ignore="ContentDescription"/>
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/ic_action_share_wechat"
-            tools:ignore="ContentDescription"/>
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineWhite"/>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/ic_action_share_qq"
-            tools:ignore="ContentDescription"/>
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</com.flipboard.bottomsheet.BottomSheetLayout>
