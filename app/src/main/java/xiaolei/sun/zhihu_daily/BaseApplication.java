@@ -14,8 +14,6 @@ import org.litepal.LitePalApplication;
 import sunxl8.myutils.Utils;
 import xiaolei.sun.zhihu_daily.network.entity.leancloud.LoginResponse;
 
-import static com.orhanobut.logger.Logger.init;
-
 /**
  * Description: <br>
  * author: sun<br>

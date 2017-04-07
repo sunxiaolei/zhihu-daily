@@ -7,7 +7,6 @@ import java.util.List;
 
 import xiaolei.sun.zhihu_daily.db.bean.DbFavoriteCategory;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
-import xiaolei.sun.zhihu_daily.ui.base.ProgressActivity;
 
 /**
  * Created by sunxl8 on 2016/10/24.

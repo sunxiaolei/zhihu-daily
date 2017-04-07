@@ -1,10 +1,6 @@
 package xiaolei.sun.zhihu_daily.ui.favorite;
 
 
-import java.util.List;
-
-import xiaolei.sun.zhihu_daily.db.DbManager;
-import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.ui.base.RxPresenter;
 import xiaolei.sun.zhihu_daily.ui.favorite.FavoriteContract.Presenter;
 

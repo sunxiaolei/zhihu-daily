@@ -3,17 +3,13 @@ package xiaolei.sun.zhihu_daily.ui.favorite;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.List;
-
 import xiaolei.sun.zhihu_daily.R;
 import xiaolei.sun.zhihu_daily.db.bean.DbStory;
 import xiaolei.sun.zhihu_daily.ui.base.BaseSwipeBackActivity;
-import xiaolei.sun.zhihu_daily.widget.colorful.Colorful;
 
 /**
  * Created by sunxl8 on 2016/9/29.

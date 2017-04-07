@@ -1,7 +1,5 @@
 package xiaolei.sun.zhihu_daily.network;
 
-import android.util.Log;
-
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
@@ -15,8 +13,6 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-import xiaolei.sun.zhihu_daily.Constant;
 
 /**
  * Description: <br>
